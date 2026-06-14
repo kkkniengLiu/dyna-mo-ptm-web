@@ -94,8 +94,36 @@ test("home to browse to system detail flow", async ({ page }) => {
     waitUntil: "domcontentloaded",
   });
   await expect(page.getByText("Input AF3 structure")).toBeVisible();
-  await expect(page.getByText("pLDDT coloring")).toBeVisible();
-  await page.waitForTimeout(1200);
+  await expect(page.getByText("pLDDT cartoon")).toBeVisible();
+  await expect(page.getByText("raw.pdb loaded")).toBeVisible({
+    timeout: 15000,
+  });
+  await page.waitForTimeout(300);
+  const viewer = page.getByLabel("NGL structure viewer");
+  await expect(viewer).toBeVisible();
+  await viewer.scrollIntoViewIfNeeded();
+  const viewerBox = await viewer.boundingBox();
+  expect(viewerBox).not.toBeNull();
+  if (!viewerBox) {
+    throw new Error("NGL structure viewer has no bounding box");
+  }
+  const beforeDrag = await viewer.screenshot();
+  await page.mouse.move(
+    viewerBox.x + viewerBox.width * 0.45,
+    viewerBox.y + viewerBox.height * 0.5,
+  );
+  await page.mouse.down();
+  await page.mouse.move(
+    viewerBox.x + viewerBox.width * 0.68,
+    viewerBox.y + viewerBox.height * 0.42,
+    { steps: 8 },
+  );
+  await page.mouse.up();
+  await page.waitForTimeout(300);
+  const afterDrag = await viewer.screenshot();
+  expect(Buffer.compare(beforeDrag, afterDrag)).not.toBe(0);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(100);
   await page.screenshot({
     path: "screenshots/system-local-pdb.png",
     fullPage: true,
@@ -116,4 +144,17 @@ test("static api files are generated", async () => {
   ).toBeTruthy();
   await expect(fs.existsSync(path.resolve("public/sitemap.xml"))).toBeTruthy();
   await expect(fs.existsSync(path.resolve("public/robots.txt"))).toBeTruthy();
+  await expect(
+    /[\u4e00-\u9fff]/.test(
+      fs.readFileSync(path.resolve("public/data/master_table.json"), "utf8"),
+    ),
+  ).toBeFalsy();
+  await expect(
+    /[\u4e00-\u9fff]/.test(
+      fs.readFileSync(
+        path.resolve("public/data/master_table_all_v2.csv"),
+        "utf8",
+      ),
+    ),
+  ).toBeFalsy();
 });

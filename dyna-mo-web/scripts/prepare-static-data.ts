@@ -107,6 +107,9 @@ const PTM_COLORS: Record<string, string> = {
   phos_T: "#9467bd",
   phos_Y: "#8c564b",
 };
+const RAW_VALUE_TRANSLATIONS: Record<string, string> = {
+  ["\u5404\u6307\u6807\u53ef\u63a5\u53d7"]: "All QC metrics acceptable",
+};
 
 fs.mkdirSync(dataDir, { recursive: true });
 fs.mkdirSync(apiSystemDir, { recursive: true });
@@ -163,7 +166,11 @@ const payload: StaticPayload = {
 };
 
 fs.writeFileSync(staticDataPath, JSON.stringify(payload), "utf8");
-fs.copyFileSync(csvPath, path.join(dataDir, "master_table_all_v2.csv"));
+fs.writeFileSync(
+  path.join(dataDir, "master_table_all_v2.csv"),
+  sanitizeCsvText(csvText),
+  "utf8",
+);
 writeApiFiles(payload);
 writeSeoFiles(systems);
 
@@ -232,8 +239,26 @@ function normalizeSystem(row: CsvRecord): PublicSystem {
     has_structure: hasStructure,
     structure_path: structurePath,
     zenodo_url: `https://doi.org/__ZENODO_DOI__?system=${encodeURIComponent(id)}`,
-    raw: row,
+    raw: sanitizeRawRecord(row),
   };
+}
+
+function sanitizeRawRecord(row: CsvRecord): CsvRecord {
+  return Object.fromEntries(
+    Object.entries(row).map(([key, value]) => [key, translateRawValue(value)]),
+  );
+}
+
+function translateRawValue(value: string) {
+  const trimmed = value.trim();
+  return RAW_VALUE_TRANSLATIONS[trimmed] ?? value;
+}
+
+function sanitizeCsvText(text: string) {
+  return Object.entries(RAW_VALUE_TRANSLATIONS).reduce(
+    (current, [source, target]) => current.split(source).join(target),
+    text,
+  );
 }
 
 function normalizePtm(value: string) {

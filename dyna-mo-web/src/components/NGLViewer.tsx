@@ -24,6 +24,10 @@ export function NGLViewer({
   const stageRef = useRef<{ autoView: () => void } | null>(null);
   const [colorMode, setColorMode] = useState<ColorMode>("plddt");
   const [status, setStatus] = useState("Loading structure viewer");
+  const siteSelection = useMemo(
+    () => buildSiteSelection(siteResid, siteResname),
+    [siteResid, siteResname],
+  );
   const fallbackPdb = useMemo(
     () => buildFallbackPdb(siteResid, siteResname, sitePlddt),
     [sitePlddt, siteResid, siteResname],
@@ -47,6 +51,10 @@ export function NGLViewer({
 
       const stage = new ngl.Stage(element, {
         backgroundColor: "white",
+        mousePreset: "pymol",
+        panSpeed: 1.2,
+        rotateSpeed: 2,
+        zoomSpeed: 1.2,
       });
       stageRef.current = stage as unknown as { autoView: () => void };
       cleanup = () => stage.dispose();
@@ -60,18 +68,29 @@ export function NGLViewer({
       const component = await stage.loadFile(source, { ext: "pdb" });
       const colorScheme = colorMode === "plddt" ? "bfactor" : "sstruc";
       component.addRepresentation("cartoon", {
+        sele: "polymer",
         colorScheme,
+        aspectRatio: 5,
+        radiusScale: 0.85,
         smoothSheet: true,
+        subdiv: 18,
       });
       component.addRepresentation("licorice", {
-        sele: `resno ${siteResid}`,
+        sele: siteSelection,
         color: "element",
-        radius: 0.25,
+        multipleBond: true,
+        radius: 0.18,
       });
-      component.addRepresentation("spacefill", {
-        sele: `resno ${siteResid}`,
-        color: "teal",
-        radiusScale: 0.55,
+      component.addRepresentation("label", {
+        sele: `${siteSelection} and .CA`,
+        labelType: "format",
+        labelFormat: `${siteResname} ${siteResid}`,
+        color: "#0f172a",
+        backgroundColor: "white",
+        backgroundOpacity: 0.75,
+        borderColor: "#cbd5e1",
+        borderWidth: 1,
+        zOffset: 2,
       });
       component.autoView();
       setStatus(
@@ -97,7 +116,7 @@ export function NGLViewer({
       disposed = true;
       cleanup?.();
     };
-  }, [colorMode, fallbackPdb, pdbUrl, siteResid]);
+  }, [colorMode, fallbackPdb, pdbUrl, siteResid, siteResname, siteSelection]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -115,7 +134,8 @@ export function NGLViewer({
         <div>
           <div className="text-sm text-muted-foreground">{status}</div>
           <div className="mt-1 text-xs text-slate-500">
-            Drag to rotate, scroll to zoom; press R to reset view.
+            Left-drag to rotate, Shift-drag to pan, scroll to zoom; press R to
+            reset view.
           </div>
         </div>
         <div className="flex gap-2">
@@ -125,7 +145,7 @@ export function NGLViewer({
             size="sm"
             onClick={() => setColorMode("plddt")}
           >
-            pLDDT coloring
+            pLDDT cartoon
           </Button>
           <Button
             type="button"
@@ -133,7 +153,7 @@ export function NGLViewer({
             size="sm"
             onClick={() => setColorMode("secondary")}
           >
-            Secondary structure
+            Secondary-structure cartoon
           </Button>
           <Button
             type="button"
@@ -147,7 +167,7 @@ export function NGLViewer({
           </Button>
         </div>
       </div>
-      <div className="relative h-[420px] overflow-hidden rounded-lg border bg-white">
+      <div className="relative h-[420px] touch-none overflow-hidden rounded-lg border bg-white">
         {status === "Loading structure viewer" ? (
           <div className="absolute inset-0 z-10 grid place-items-center bg-fine-grid">
             <div className="rounded-lg border bg-white/88 p-5 text-center shadow-sm">
@@ -162,7 +182,7 @@ export function NGLViewer({
         ) : null}
         <div
           ref={containerRef}
-          className="h-full w-full"
+          className="h-full w-full cursor-grab active:cursor-grabbing"
           aria-label="NGL structure viewer"
         />
       </div>
@@ -181,6 +201,16 @@ async function resolvePdbSource(pdbUrl: string, fallbackPdb: string) {
   }
 
   return new Blob([fallbackPdb], { type: "chemical/x-pdb" });
+}
+
+function buildSiteSelection(siteResid: number, siteResname: string) {
+  const ccdCode = siteResname
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "");
+  return ccdCode && ccdCode !== "UNK"
+    ? `resname ${ccdCode}`
+    : `resno ${siteResid}`;
 }
 
 function buildFallbackPdb(
