@@ -73,7 +73,7 @@ type CitationFormat = "bibtex" | "ris" | "endnote";
 const CITATION_TEXT: Record<CitationFormat, string> = {
   bibtex: `@article{liu2027dynamopt,
   title   = {Dyna-MO PTM: a unified molecular dynamics resource for post-translationally modified proteins},
-  author  = {Liu, Kaining and Chi, Ying},
+  author  = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Chi, Ying},
   journal = {Nucleic Acids Research},
   year    = {2027},
   doi     = {__PAPER_DOI__}
@@ -82,6 +82,9 @@ const CITATION_TEXT: Record<CitationFormat, string> = {
 ID  - liu2027dynamopt
 TI  - Dyna-MO PTM: a unified molecular dynamics resource for post-translationally modified proteins
 AU  - Liu, Kaining
+AU  - Qian, Qiuting
+AU  - Peng, Jiahua
+AU  - Ma, Dongge
 AU  - Chi, Ying
 JO  - Nucleic Acids Research
 PY  - 2027
@@ -91,6 +94,9 @@ ER  -`,
 %F liu2027dynamopt
 %T Dyna-MO PTM: a unified molecular dynamics resource for post-translationally modified proteins
 %A Liu, Kaining
+%A Qian, Qiuting
+%A Peng, Jiahua
+%A Ma, Dongge
 %A Chi, Ying
 %J Nucleic Acids Research
 %D 2027
@@ -350,7 +356,7 @@ function HomePage({
                 <FileText className="h-4 w-4" />
               </button>
             </div>
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+            <div className="hidden grid-cols-1 gap-3 lg:grid lg:grid-cols-3">
               <ReleaseMetric
                 label="Systems"
                 value={dataset.stats.systems.toLocaleString()}
@@ -1178,6 +1184,16 @@ function AboutPage() {
           </code>{" "}
           for full descriptor rows.
         </p>
+        <div className="mt-4 grid gap-3">
+          <pre className="overflow-auto rounded-lg border bg-slate-950 p-4 text-sm leading-6 text-slate-100">
+            {`curl -L ${window.location.origin}${BASE}api/systems.json
+curl -L ${window.location.origin}${BASE}api/system/a6nhq2_k76_acetyl.json`}
+          </pre>
+          <p className="text-sm leading-6 text-slate-500">
+            These endpoints are static JSON files. They can be mirrored, cached,
+            or queried directly from scripts without running a backend service.
+          </p>
+        </div>
         <h2 id="faq" className="mt-8 scroll-mt-24 text-2xl font-semibold">
           FAQ
         </h2>
@@ -1186,6 +1202,50 @@ function AboutPage() {
           K/R-PTM subset. Phosphorylation-system structure files remain linked
           through the deposition workflow and are labelled as the v0.3 subset.
         </p>
+        <dl className="mt-4 grid gap-3">
+          <div className="rounded-lg border bg-white/75 p-4">
+            <dt className="font-semibold">How should I cite this resource?</dt>
+            <dd className="mt-1 text-sm leading-6 text-slate-600">
+              Use the placeholder citation below before acceptance; replace the
+              DOI field after the NAR record is assigned.
+            </dd>
+          </div>
+          <div className="rounded-lg border bg-white/75 p-4">
+            <dt className="font-semibold">How do I download trajectories?</dt>
+            <dd className="mt-1 text-sm leading-6 text-slate-600">
+              Use the per-system Zenodo link from each system page. The web
+              build keeps trajectories off-site to keep GitHub Pages static and
+              lightweight.
+            </dd>
+          </div>
+          <div className="rounded-lg border bg-white/75 p-4">
+            <dt className="font-semibold">What is cv_fold?</dt>
+            <dd className="mt-1 text-sm leading-6 text-slate-600">
+              The descriptor table preserves cross-validation fold annotations
+              for reproducible downstream modelling and stratified analysis.
+            </dd>
+          </div>
+          <div className="rounded-lg border bg-white/75 p-4">
+            <dt className="font-semibold">
+              How is Dyna-MO PTM related to ATLAS?
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-slate-600">
+              ATLAS is a broad protein flexibility resource. Dyna-MO PTM is a
+              PTM-focused complement with modified-residue descriptors and
+              uniform short MD replicas.
+            </dd>
+          </div>
+          <div className="rounded-lg border bg-white/75 p-4">
+            <dt className="font-semibold">
+              How is this different from PhosphoSitePlus?
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-slate-600">
+              PhosphoSitePlus catalogues curated PTM sites and annotations.
+              Dyna-MO PTM adds structure-based and MD-derived descriptors for
+              simulated modified protein systems.
+            </dd>
+          </div>
+        </dl>
         <h2 className="mt-8 text-2xl font-semibold">Citation</h2>
         <pre className="mt-3 overflow-auto rounded-lg border bg-slate-50 p-4 text-sm text-slate-700">
           {CITATION_TEXT.bibtex}
