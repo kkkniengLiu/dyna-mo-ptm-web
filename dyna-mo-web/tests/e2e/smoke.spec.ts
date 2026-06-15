@@ -33,6 +33,13 @@ test("home to browse to system detail flow", async ({ page }) => {
       exact: true,
     }),
   ).toBeVisible();
+  await expect(
+    page.getByText("Manuscript in preparation, 2026.", { exact: false }),
+  ).toBeVisible();
+  await expect(page.locator("body")).not.toContainText(
+    "Nucleic Acids Research",
+  );
+  await expect(page.locator("body")).not.toContainText("NAR");
   await page.waitForTimeout(800);
   await page.screenshot({ path: "screenshots/home.png", fullPage: true });
 
@@ -144,6 +151,36 @@ test("home to browse to system detail flow", async ({ page }) => {
   await expect(
     page.getByText("PDB file unavailable; showing residue placeholder"),
   ).toHaveCount(0);
+  const largeViewer = page.getByLabel("NGL structure viewer");
+  await largeViewer.scrollIntoViewIfNeeded();
+  await page
+    .getByRole("button", { name: "Secondary-structure cartoon" })
+    .click();
+  await expect(page.getByText("raw.pdb loaded")).toBeVisible();
+  await expect(page.getByText("Loading structure viewer")).toHaveCount(0);
+  await page.getByRole("button", { name: "Reset view" }).click();
+  const largeViewerBox = await largeViewer.boundingBox();
+  expect(largeViewerBox).not.toBeNull();
+  if (!largeViewerBox) {
+    throw new Error(
+      "NGL structure viewer has no bounding box after color mode switch",
+    );
+  }
+  const beforeSecondaryDrag = await largeViewer.screenshot();
+  await page.mouse.move(
+    largeViewerBox.x + largeViewerBox.width * 0.42,
+    largeViewerBox.y + largeViewerBox.height * 0.54,
+  );
+  await page.mouse.down();
+  await page.mouse.move(
+    largeViewerBox.x + largeViewerBox.width * 0.7,
+    largeViewerBox.y + largeViewerBox.height * 0.38,
+    { steps: 8 },
+  );
+  await page.mouse.up();
+  await page.waitForTimeout(300);
+  const afterSecondaryDrag = await largeViewer.screenshot();
+  expect(Buffer.compare(beforeSecondaryDrag, afterSecondaryDrag)).not.toBe(0);
 });
 
 test("static api files are generated", async () => {

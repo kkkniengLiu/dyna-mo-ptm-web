@@ -117,7 +117,7 @@ Before public release, replace these placeholders in `src/App.tsx` and
 ```text
 __ZENODO_DOI__
 __GITHUB_URL__
-__PAPER_DOI__
+publication citation metadata
 ```
 
 The descriptor CSV and code are static assets; trajectory downloads should stay

@@ -44,7 +44,7 @@ export default function Home() {
         <div className="container relative grid gap-8 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-16">
           <div className="space-y-7">
             <div className="flex flex-wrap gap-2">
-              <StatusPill>NAR Database issue target</StatusPill>
+              <StatusPill>Manuscript in preparation</StatusPill>
               <StatusPill className="border-border bg-background/70 text-muted-foreground">
                 paper v1 · 907 PASS systems
               </StatusPill>
@@ -181,11 +181,11 @@ export default function Home() {
         <GlowCard className="p-5">
           <h2 className="text-xl font-semibold">Citation</h2>
           <pre className="mt-4 overflow-auto rounded-md border bg-background/70 p-3 text-xs text-muted-foreground">
-            {`@article{dynamo_ptm_pending,
-  title = {Dyna-MO PTM},
-  journal = {Nucleic Acids Research},
-  year = {pending},
-  doi = {pending}
+            {`@article{dynamoptm2026,
+  title = {Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins},
+  author = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Chi, Ying},
+  note = {Manuscript in preparation},
+  year = {2026}
 }`}
           </pre>
         </GlowCard>

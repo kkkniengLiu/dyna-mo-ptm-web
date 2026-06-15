@@ -70,37 +70,37 @@ const visibleColumns: Array<{
 
 type CitationFormat = "bibtex" | "ris" | "endnote";
 
+const DISPLAY_CITATION =
+  "Liu K., Qian Q., et al. Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins. Manuscript in preparation, 2026.";
+
 const CITATION_TEXT: Record<CitationFormat, string> = {
-  bibtex: `@article{liu2027dynamopt,
-  title   = {Dyna-MO PTM: a unified molecular dynamics resource for post-translationally modified proteins},
+  bibtex: `@article{dynamoptm2026,
+  title   = {Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins},
   author  = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Chi, Ying},
-  journal = {Nucleic Acids Research},
-  year    = {2027},
-  doi     = {__PAPER_DOI__}
+  note    = {Manuscript in preparation},
+  year    = {2026}
 }`,
-  ris: `TY  - JOUR
-ID  - liu2027dynamopt
-TI  - Dyna-MO PTM: a unified molecular dynamics resource for post-translationally modified proteins
+  ris: `TY  - GEN
+ID  - dynamoptm2026
+TI  - Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins
 AU  - Liu, Kaining
 AU  - Qian, Qiuting
 AU  - Peng, Jiahua
 AU  - Ma, Dongge
 AU  - Chi, Ying
-JO  - Nucleic Acids Research
-PY  - 2027
-DO  - __PAPER_DOI__
+N1  - Manuscript in preparation
+PY  - 2026
 ER  -`,
-  endnote: `%0 Journal Article
-%F liu2027dynamopt
-%T Dyna-MO PTM: a unified molecular dynamics resource for post-translationally modified proteins
+  endnote: `%0 Generic
+%F dynamoptm2026
+%T Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins
 %A Liu, Kaining
 %A Qian, Qiuting
 %A Peng, Jiahua
 %A Ma, Dongge
 %A Chi, Ying
-%J Nucleic Acids Research
-%D 2027
-%R __PAPER_DOI__`,
+%Z Manuscript in preparation
+%D 2026`,
 };
 
 export default function App() {
@@ -438,8 +438,10 @@ function HomePage({
               </p>
               <h2 className="mt-2 text-2xl font-semibold">Cite Dyna-MO PTM</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-                Placeholder record for manuscript drafting. Replace
-                __PAPER_DOI__ after acceptance.
+                Pre-publication citation record for manuscript drafting.
+              </p>
+              <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-slate-800">
+                {DISPLAY_CITATION}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -473,6 +475,10 @@ function HomePage({
           <pre className="mt-4 max-h-72 overflow-auto rounded-lg border bg-slate-950 p-4 text-sm leading-6 text-slate-100">
             {CITATION_TEXT[citationFormat]}
           </pre>
+          <p className="mt-2 text-[9pt] leading-5 text-slate-500">
+            The final citation including DOI and journal information will be
+            updated upon publication.
+          </p>
         </div>
       </section>
 
@@ -1207,7 +1213,7 @@ curl -L ${window.location.origin}${BASE}api/system/a6nhq2_k76_acetyl.json`}
             <dt className="font-semibold">How should I cite this resource?</dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
               Use the placeholder citation below before acceptance; replace the
-              DOI field after the NAR record is assigned.
+              DOI and journal fields after publication.
             </dd>
           </div>
           <div className="rounded-lg border bg-white/75 p-4">
@@ -1365,7 +1371,7 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <MiniCapability
           icon={BarChart3}
           label="Figures"
-          text="NAR draft assets"
+          text="Manuscript assets"
         />
       </div>
     </div>

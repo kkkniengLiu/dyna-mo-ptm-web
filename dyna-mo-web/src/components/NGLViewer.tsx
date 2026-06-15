@@ -14,6 +14,25 @@ type NGLViewerProps = {
   sitePlddt: number;
 };
 
+type NglComponent = {
+  addRepresentation: (
+    type: string,
+    options: Record<string, unknown>,
+  ) => unknown;
+  removeAllRepresentations: () => void;
+  autoView: () => void;
+};
+
+type NglStage = {
+  dispose: () => void;
+  handleResize: () => void;
+  removeAllComponents: () => void;
+  loadFile: (
+    source: string | Blob,
+    options: { ext: "pdb" },
+  ) => Promise<NglComponent>;
+};
+
 export function NGLViewer({
   pdbUrl,
   siteResid,
@@ -21,7 +40,9 @@ export function NGLViewer({
   sitePlddt,
 }: NGLViewerProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const stageRef = useRef<{ autoView: () => void } | null>(null);
+  const stageRef = useRef<NglStage | null>(null);
+  const componentRef = useRef<NglComponent | null>(null);
+  const colorModeRef = useRef<ColorMode>("plddt");
   const [colorMode, setColorMode] = useState<ColorMode>("plddt");
   const [status, setStatus] = useState("Loading structure viewer");
   const siteSelection = useMemo(
@@ -55,9 +76,13 @@ export function NGLViewer({
         panSpeed: 1.2,
         rotateSpeed: 2,
         zoomSpeed: 1.2,
-      });
-      stageRef.current = stage as unknown as { autoView: () => void };
-      cleanup = () => stage.dispose();
+      }) as unknown as NglStage;
+      stageRef.current = stage;
+      cleanup = () => {
+        stageRef.current = null;
+        componentRef.current = null;
+        stage.dispose();
+      };
 
       stage.removeAllComponents();
       const { component, isFallback } = await loadStructureWithFallback(
@@ -69,21 +94,12 @@ export function NGLViewer({
         return;
       }
 
-      const colorScheme = colorMode === "plddt" ? "bfactor" : "sstruc";
-      component.addRepresentation("cartoon", {
-        sele: "polymer",
-        colorScheme,
-        aspectRatio: 5,
-        radiusScale: 0.85,
-        smoothSheet: true,
-        subdiv: 18,
-      });
-      component.addRepresentation("licorice", {
-        sele: siteSelection,
-        color: "element",
-        multipleBond: true,
-        radius: 0.18,
-      });
+      componentRef.current = component;
+      applyStructureRepresentations(
+        component,
+        colorModeRef.current,
+        siteSelection,
+      );
       component.autoView();
       setStatus(
         isFallback
@@ -96,6 +112,7 @@ export function NGLViewer({
       cleanup = () => {
         window.removeEventListener("resize", onResize);
         stageRef.current = null;
+        componentRef.current = null;
         stage.dispose();
       };
     }
@@ -108,12 +125,21 @@ export function NGLViewer({
       disposed = true;
       cleanup?.();
     };
-  }, [colorMode, fallbackPdb, pdbUrl, siteResid, siteResname, siteSelection]);
+  }, [fallbackPdb, pdbUrl, siteSelection]);
+
+  useEffect(() => {
+    colorModeRef.current = colorMode;
+    const component = componentRef.current;
+    if (!component) {
+      return;
+    }
+    applyStructureRepresentations(component, colorMode, siteSelection);
+  }, [colorMode, siteSelection]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key.toLowerCase() === "r") {
-        stageRef.current?.autoView();
+        componentRef.current?.autoView();
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -153,7 +179,7 @@ export function NGLViewer({
             size="icon"
             aria-label="Reset view"
             title="Reset 3D view"
-            onClick={() => stageRef.current?.autoView()}
+            onClick={() => componentRef.current?.autoView()}
           >
             <RotateCcw className="h-4 w-4" />
           </Button>
@@ -183,18 +209,7 @@ export function NGLViewer({
 }
 
 async function loadStructureWithFallback(
-  stage: {
-    loadFile: (
-      source: string | Blob,
-      options: { ext: "pdb" },
-    ) => Promise<{
-      addRepresentation: (
-        type: string,
-        options: Record<string, unknown>,
-      ) => void;
-      autoView: () => void;
-    }>;
-  },
+  stage: NglStage,
   pdbUrl: string,
   fallbackPdb: string,
 ) {
@@ -212,6 +227,29 @@ async function loadStructureWithFallback(
       isFallback: true,
     };
   }
+}
+
+function applyStructureRepresentations(
+  component: NglComponent,
+  colorMode: ColorMode,
+  siteSelection: string,
+) {
+  const colorScheme = colorMode === "plddt" ? "bfactor" : "sstruc";
+  component.removeAllRepresentations();
+  component.addRepresentation("cartoon", {
+    sele: "polymer",
+    colorScheme,
+    aspectRatio: 5,
+    radiusScale: 0.85,
+    smoothSheet: true,
+    subdiv: 18,
+  });
+  component.addRepresentation("licorice", {
+    sele: siteSelection,
+    color: "element",
+    multipleBond: true,
+    radius: 0.18,
+  });
 }
 
 function buildSiteSelection(siteResid: number, siteResname: string) {
