@@ -17,6 +17,9 @@ const dataset = JSON.parse(
   fs.readFileSync(path.resolve("public/data/master_table.json"), "utf8"),
 ) as StaticDataset;
 const localSystem = dataset.systems.find((system) => system.has_structure);
+const knownLargeLocalSystem = dataset.systems.find(
+  (system) => system.id === "o14983_k35_acetyl",
+);
 const filterProbe =
   dataset.systems.find(
     (system) => system.n_residues !== null && system.site_ss_dominant,
@@ -128,6 +131,19 @@ test("home to browse to system detail flow", async ({ page }) => {
     path: "screenshots/system-local-pdb.png",
     fullPage: true,
   });
+
+  if (!knownLargeLocalSystem) {
+    throw new Error("Expected o14983_k35_acetyl in static dataset");
+  }
+  await page.goto(`/system/${encodeURIComponent(knownLargeLocalSystem.id)}`, {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page.getByText("raw.pdb loaded")).toBeVisible({
+    timeout: 15000,
+  });
+  await expect(
+    page.getByText("PDB file unavailable; showing residue placeholder"),
+  ).toHaveCount(0);
 });
 
 test("static api files are generated", async () => {

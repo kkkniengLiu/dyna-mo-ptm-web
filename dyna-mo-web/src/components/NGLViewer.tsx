@@ -59,13 +59,16 @@ export function NGLViewer({
       stageRef.current = stage as unknown as { autoView: () => void };
       cleanup = () => stage.dispose();
 
-      const source = await resolvePdbSource(pdbUrl, fallbackPdb);
+      stage.removeAllComponents();
+      const { component, isFallback } = await loadStructureWithFallback(
+        stage,
+        pdbUrl,
+        fallbackPdb,
+      );
       if (disposed) {
         return;
       }
 
-      stage.removeAllComponents();
-      const component = await stage.loadFile(source, { ext: "pdb" });
       const colorScheme = colorMode === "plddt" ? "bfactor" : "sstruc";
       component.addRepresentation("cartoon", {
         sele: "polymer",
@@ -81,21 +84,10 @@ export function NGLViewer({
         multipleBond: true,
         radius: 0.18,
       });
-      component.addRepresentation("label", {
-        sele: `${siteSelection} and .CA`,
-        labelType: "format",
-        labelFormat: `${siteResname} ${siteResid}`,
-        color: "#0f172a",
-        backgroundColor: "white",
-        backgroundOpacity: 0.75,
-        borderColor: "#cbd5e1",
-        borderWidth: 1,
-        zOffset: 2,
-      });
       component.autoView();
       setStatus(
-        source instanceof Blob
-          ? "Using generated placeholder PDB until raw.pdb is mounted"
+        isFallback
+          ? "PDB file unavailable; showing residue placeholder"
           : "raw.pdb loaded",
       );
 
@@ -190,17 +182,36 @@ export function NGLViewer({
   );
 }
 
-async function resolvePdbSource(pdbUrl: string, fallbackPdb: string) {
+async function loadStructureWithFallback(
+  stage: {
+    loadFile: (
+      source: string | Blob,
+      options: { ext: "pdb" },
+    ) => Promise<{
+      addRepresentation: (
+        type: string,
+        options: Record<string, unknown>,
+      ) => void;
+      autoView: () => void;
+    }>;
+  },
+  pdbUrl: string,
+  fallbackPdb: string,
+) {
   try {
-    const response = await fetch(pdbUrl, { method: "HEAD" });
-    if (response.ok) {
-      return pdbUrl;
-    }
+    return {
+      component: await stage.loadFile(pdbUrl, { ext: "pdb" }),
+      isFallback: false,
+    };
   } catch {
-    return new Blob([fallbackPdb], { type: "chemical/x-pdb" });
+    return {
+      component: await stage.loadFile(
+        new Blob([fallbackPdb], { type: "chemical/x-pdb" }),
+        { ext: "pdb" },
+      ),
+      isFallback: true,
+    };
   }
-
-  return new Blob([fallbackPdb], { type: "chemical/x-pdb" });
 }
 
 function buildSiteSelection(siteResid: number, siteResname: string) {
