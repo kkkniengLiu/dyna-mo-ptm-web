@@ -44,6 +44,7 @@ export type PublicSystem = {
 export type StaticDataset = {
   generated_at: string;
   source_csv: string;
+  schema_version: string;
   stats: {
     systems: number;
     ptm_types: number;

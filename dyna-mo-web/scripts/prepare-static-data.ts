@@ -46,6 +46,7 @@ type PublicSystemSummary = Omit<PublicSystem, "raw">;
 type StaticPayload = {
   generated_at: string;
   source_csv: string;
+  schema_version: string;
   stats: {
     systems: number;
     ptm_types: number;
@@ -141,6 +142,7 @@ copyFigureAssets();
 extractPdbAssets(allowedStructureIds);
 
 const systems = records.map(normalizeSystem);
+const schemaVersion = inferSchemaVersion(systems);
 const counts = PTM_ORDER.map((ptm) => ({
   ptm_type: ptm,
   label: PTM_LABELS[ptm],
@@ -154,6 +156,7 @@ const lengths = systems
 const payload: StaticPayload = {
   generated_at: new Date().toISOString(),
   source_csv: "submission/master_table_all_v2.csv",
+  schema_version: schemaVersion,
   stats: {
     systems: systems.length,
     ptm_types: counts.length,
@@ -269,11 +272,21 @@ function normalizePtm(value: string) {
 }
 
 function copyFigureAssets() {
+  const sourceFiguresDir = path.dirname(fig1Path);
+  if (!fs.existsSync(sourceFiguresDir)) {
+    return;
+  }
+
+  for (const source of walk(sourceFiguresDir).filter((file) =>
+    /\.(png|pdf)$/i.test(file),
+  )) {
+    const relativePath = path.relative(sourceFiguresDir, source);
+    const target = path.join(figuresDir, relativePath);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(source, target);
+  }
+
   if (fs.existsSync(fig1Path)) {
-    fs.copyFileSync(
-      fig1Path,
-      path.join(figuresDir, "fig1_dataset_overview_v2.png"),
-    );
     fs.copyFileSync(fig1Path, path.join(figuresDir, "fig1_composition_v2.png"));
   }
 }
@@ -422,4 +435,13 @@ function median(values: number[]) {
   return sorted.length % 2 === 0
     ? (sorted[mid - 1] + sorted[mid]) / 2
     : sorted[mid];
+}
+
+function inferSchemaVersion(systems: PublicSystem[]) {
+  const versions = new Set(
+    systems
+      .map((system) => system.schema_version)
+      .filter((version) => version && version !== "not available"),
+  );
+  return versions.size === 1 ? [...versions][0] : [...versions].join(",");
 }

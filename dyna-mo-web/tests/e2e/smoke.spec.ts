@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 type StaticDataset = {
+  generated_at: string;
+  schema_version: string;
   systems: Array<{
     id: string;
     uniprot: string;
@@ -184,6 +186,10 @@ test("home to browse to system detail flow", async ({ page }) => {
 });
 
 test("static api files are generated", async () => {
+  await expect(dataset.schema_version).toBe("v0.2.5");
+  await expect(dataset.generated_at.slice(0, 10)).toBe(
+    new Date().toISOString().slice(0, 10),
+  );
   await expect(
     fs.existsSync(path.resolve("public/api/systems.json")),
   ).toBeTruthy();
@@ -197,6 +203,22 @@ test("static api files are generated", async () => {
   ).toBeTruthy();
   await expect(fs.existsSync(path.resolve("public/sitemap.xml"))).toBeTruthy();
   await expect(fs.existsSync(path.resolve("public/robots.txt"))).toBeTruthy();
+  await expect(
+    fs
+      .readFileSync(path.resolve("public/data/master_table_all_v2.csv"), "utf8")
+      .split(/\r?\n/, 1)[0]
+      .split(","),
+  ).toHaveLength(109);
+  for (const figure of [
+    "fig_supp_S3_within_resource_baseline.pdf",
+    "fig_supp_S3_within_resource_baseline.png",
+    "fig_supp_S4_acet_K_convergence.pdf",
+    "fig_supp_S4_acet_K_convergence.png",
+  ]) {
+    await expect(
+      fs.existsSync(path.resolve("public/figures", figure)),
+    ).toBeTruthy();
+  }
   await expect(
     /[\u4e00-\u9fff]/.test(
       fs.readFileSync(path.resolve("public/data/master_table.json"), "utf8"),

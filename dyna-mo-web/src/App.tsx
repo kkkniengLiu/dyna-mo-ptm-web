@@ -288,7 +288,7 @@ function HomePage({
           >
             <div className="inline-flex items-center gap-2 rounded-md border border-[#10324a]/15 bg-white/80 px-3 py-2 text-sm font-medium text-[#10324a] shadow-sm">
               <span className="h-2 w-2 rounded-full bg-[#2ca02c]" />
-              Dyna-MO PTM v0.2 release
+              Dyna-MO PTM v0.2.5 release
             </div>
             <div>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] text-[#071827] md:text-6xl">
@@ -1148,7 +1148,7 @@ function AboutPage() {
           systems covering acetyl-lysine, methyl-lysine, methyl-arginine,
           phospho-serine, phospho-threonine and phospho-tyrosine. Each system is
           simulated under a unified CHARMM36m + TIP3P protocol with three 10 ns
-          replicas and distributed with a 100-column descriptor table.
+          replicas and distributed with a 109-column descriptor table.
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           <ToolCard
@@ -1302,7 +1302,7 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <div>
           <p className="text-sm font-medium text-slate-500">Dataset release</p>
           <h2 className="mt-1 text-3xl font-semibold text-[#071827]">
-            Dyna-MO PTM v0.2
+            Dyna-MO PTM v0.2.5
           </h2>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
             A static, citable interface for the descriptor table and AF3 input
@@ -1367,7 +1367,7 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
           label="Structures"
           text="754 AF3 inputs; K/R-PTM only"
         />
-        <MiniCapability icon={Table2} label="Descriptors" text="100 columns" />
+        <MiniCapability icon={Table2} label="Descriptors" text="109 columns" />
         <MiniCapability
           icon={BarChart3}
           label="Figures"
@@ -1605,7 +1605,7 @@ function Footer() {
   return (
     <footer className="border-t bg-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-slate-600 md:flex-row md:justify-between">
-        <span>Dyna-MO PTM v0.2 - static molecular dynamics database</span>
+        <span>Dyna-MO PTM v0.2.5 - static molecular dynamics database</span>
         <span>GitHub / Zenodo / Citation details update upon publication</span>
       </div>
     </footer>

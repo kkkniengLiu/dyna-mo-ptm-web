@@ -1,6 +1,7 @@
 # Dyna-MO PTM Web
 
-Static Vite + React interface for the Dyna-MO PTM molecular dynamics database.
+Static Vite + React interface for the Dyna-MO PTM v0.2.5 molecular dynamics
+database.
 The site is designed for GitHub Pages: no Node backend, no SQLite server, and
 all user-facing data is loaded from static assets under `public/`.
 
@@ -8,7 +9,7 @@ all user-facing data is loaded from static assets under `public/`.
 
 - Homepage with GPCRmd-inspired scientific database styling, PTM composition,
   dataset statistics, and the manuscript Fig. 1 overview image.
-- `/browse` descriptor browser for `submission/master_table_all_v2.csv` with
+- `/browse` descriptor browser for the v0.2.5 109-column master table with
   fuzzy search, URL-addressable PTM/length/DSSP filters, sorting, and a
   virtualized 12-column table.
 - `/system/[id]` static system pages with descriptor cards, UniProt/Zenodo
@@ -34,7 +35,7 @@ Open http://127.0.0.1:3000.
 
 ```text
 ../submission/master_table_all_v2.csv
-../submission/figures/fig1_dataset_overview_v2.png
+release figure PNG/PDF assets
 ../inputs/all_ptm_pdbs.tar.gz
 ```
 
@@ -45,7 +46,8 @@ public/data/master_table.json
 public/data/master_table_all_v2.csv
 public/api/systems.json
 public/api/system/*.json
-public/figures/fig1_dataset_overview_v2.png
+public/figures/*.png
+public/figures/*.pdf
 public/structures/*.pdb
 public/robots.txt
 public/sitemap.xml
