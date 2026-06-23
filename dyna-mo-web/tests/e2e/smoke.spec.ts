@@ -55,6 +55,18 @@ test("home to browse to system detail flow", async ({ page }) => {
   await page.waitForTimeout(200);
   await page.screenshot({ path: "screenshots/browse.png", fullPage: true });
 
+  for (const route of [
+    { path: "/browse/", heading: "Browse systems" },
+    { path: "/stats/", heading: "Dataset statistics" },
+    { path: "/download/", heading: "Download data" },
+    { path: "/about/", heading: "About Dyna-MO PTM" },
+  ]) {
+    await page.goto(route.path, { waitUntil: "domcontentloaded" });
+    await expect(
+      page.getByRole("heading", { name: route.heading }),
+    ).toBeVisible();
+  }
+
   const minLength = Math.max(1, (filterProbe.n_residues ?? 1) - 1);
   const maxLength = (filterProbe.n_residues ?? 9999) + 1;
   await page.goto(

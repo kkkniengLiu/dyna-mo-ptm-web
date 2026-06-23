@@ -128,7 +128,7 @@ export default function App() {
   function navigate(path: string) {
     window.history.pushState(null, "", withBase(path));
     const [pathWithoutHash, hash] = path.split("#");
-    setRoute(pathWithoutHash.split("?")[0] || "/");
+    setRoute(normalizeRoutePath(pathWithoutHash.split("?")[0] || "/"));
     window.setTimeout(() => {
       if (hash) {
         document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
@@ -149,7 +149,11 @@ export default function App() {
       ? "browse"
       : route === "/about"
         ? "about"
-        : "home";
+        : route === "/download"
+          ? "download"
+          : route === "/stats"
+            ? "stats"
+            : "home";
   const selectedSystem = systemMatch
     ? dataset.systems.find(
         (system) => system.id === decodeURIComponent(systemMatch[1]),
@@ -163,6 +167,10 @@ export default function App() {
         <BrowsePage dataset={dataset} navigate={navigate} />
       ) : page === "about" ? (
         <AboutPage />
+      ) : page === "download" ? (
+        <DownloadPage />
+      ) : page === "stats" ? (
+        <StatsPage dataset={dataset} />
       ) : page === "system" && selectedSystem ? (
         <SystemPage system={selectedSystem} navigate={navigate} />
       ) : (
@@ -183,6 +191,8 @@ function Header({
   const links = [
     { path: "/", label: "Overview" },
     { path: "/browse", label: "Browse" },
+    { path: "/stats", label: "Stats" },
+    { path: "/download", label: "Download" },
     { path: "/about#methods", label: "Methods" },
     { path: "/about#api", label: "API" },
     { path: "/about#faq", label: "FAQ" },
@@ -1138,6 +1148,131 @@ function SystemPage({
   );
 }
 
+function DownloadPage() {
+  const downloads = [
+    {
+      label: "Descriptor CSV",
+      detail: "v0.2.5 master table, 1,095 rows and 109 columns",
+      href: assetUrl("data/master_table_all_v2.csv"),
+    },
+    {
+      label: "Systems API",
+      detail: "Static JSON index for all systems",
+      href: assetUrl("api/systems.json"),
+    },
+    {
+      label: "Supplementary Fig. S3",
+      detail: "Within-resource baseline comparison",
+      href: assetUrl("figures/fig_supp_S3_within_resource_baseline.png"),
+    },
+    {
+      label: "Supplementary Fig. S4",
+      detail: "Acetyl-K convergence analysis",
+      href: assetUrl("figures/fig_supp_S4_acet_K_convergence.png"),
+    },
+  ];
+
+  return (
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <div className="chromatic-card rounded-xl p-6">
+        <p className="text-sm font-medium uppercase text-slate-500">
+          Static release assets
+        </p>
+        <h1 className="mt-2 text-4xl font-semibold">Download data</h1>
+        <p className="mt-4 max-w-3xl leading-7 text-slate-600">
+          The web release serves descriptor tables, static API JSON and
+          manuscript figure assets directly from GitHub Pages. Trajectory
+          bundles remain linked out from each system page.
+        </p>
+        <div className="mt-8 grid gap-3">
+          {downloads.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="flex flex-col gap-1 rounded-lg border bg-white/80 p-4 transition hover:border-[#10324a] hover:shadow-sm sm:flex-row sm:items-center sm:justify-between"
+            >
+              <span>
+                <span className="block font-semibold text-slate-950">
+                  {item.label}
+                </span>
+                <span className="mt-1 block text-sm text-slate-500">
+                  {item.detail}
+                </span>
+              </span>
+              <span className="text-sm font-medium text-[#10324a]">
+                Open asset
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function StatsPage({ dataset }: { dataset: StaticDataset }) {
+  return (
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <div className="chromatic-card rounded-xl p-6">
+        <p className="text-sm font-medium uppercase text-slate-500">
+          Release statistics
+        </p>
+        <h1 className="mt-2 text-4xl font-semibold">Dataset statistics</h1>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <MetricCard label="Systems" value={dataset.stats.systems} />
+          <MetricCard label="PTM classes" value={dataset.stats.ptm_types} />
+          <MetricCard
+            label="Simulation time"
+            value={`${dataset.stats.total_simulation_us} us`}
+          />
+          <MetricCard
+            label="AF3 inputs"
+            value={dataset.stats.local_structures}
+          />
+        </div>
+        <div className="mt-8 space-y-3">
+          {dataset.stats.counts.map((item) => (
+            <div key={item.ptm_type} className="rounded-lg border bg-white p-4">
+              <div className="flex items-center justify-between gap-4">
+                <span className="font-medium">{item.label}</span>
+                <span className="font-mono text-sm text-slate-500">
+                  {item.count}
+                </span>
+              </div>
+              <div className="mt-3 h-2 rounded-full bg-slate-100">
+                <div
+                  className="h-2 rounded-full"
+                  style={{
+                    width: `${(item.count / dataset.stats.systems) * 100}%`,
+                    backgroundColor: item.color,
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function MetricCard({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | number;
+}) {
+  return (
+    <div className="rounded-lg border bg-white p-4">
+      <p className="text-xs font-semibold uppercase text-slate-500">{label}</p>
+      <p className="mt-2 font-mono text-2xl font-semibold text-[#10324a]">
+        {typeof value === "number" ? value.toLocaleString() : value}
+      </p>
+    </div>
+  );
+}
+
 function AboutPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
@@ -1663,9 +1798,16 @@ function getRoutePath() {
   const pathname = window.location.pathname;
   const stripped =
     base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
-  return stripped || "/";
+  return normalizeRoutePath(stripped || "/");
+}
+
+function normalizeRoutePath(path: string) {
+  if (path === "/") {
+    return "/";
+  }
+  return path.replace(/\/+$/, "") || "/";
 }
 
 function routeKey(path: string) {
-  return path.replace("/", "") || "home";
+  return normalizeRoutePath(path).replace("/", "") || "home";
 }
