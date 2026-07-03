@@ -1,0 +1,27 @@
+{
+  "generated_by": "scripts/build_web_trajectories.py",
+  "requested": 2,
+  "available": 2,
+  "failed": 0,
+  "systems": [
+    {
+      "system_id": "a6nhq2_k76_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "a6nhq2_k76_acetyl.pdb",
+      "gro": "a6nhq2_k76_acetyl.gro",
+      "xtc": "a6nhq2_k76_acetyl.xtc",
+      "size_bytes": 722336,
+      "sim_time_ns": 10.0
+    },
+    {
+      "system_id": "a6ndi0_k202_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "a6ndi0_k202_methyl.pdb",
+      "gro": "a6ndi0_k202_methyl.gro",
+      "xtc": "a6ndi0_k202_methyl.xtc",
+      "size_bytes": 1423128,
+      "sim_time_ns": 10.0
+    }
+  ],
+  "failures": []
+}

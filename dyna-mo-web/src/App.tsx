@@ -313,6 +313,10 @@ function HomePage({
                 chemistries, with per-system MD quality, site biophysics, local
                 structural context and AF3 confidence descriptors.
               </p>
+              <div className="mt-4 inline-flex rounded-full border border-[#107f74]/25 bg-[#ecfdf7] px-4 py-2 text-sm font-semibold text-[#0f6b61]">
+                In-browser MD trajectory playback is enabled for hosted .xtc
+                assets in the 3D system viewer.
+              </div>
             </div>
             <form className="hero-search-shell" onSubmit={submitHeroSearch}>
               <Search className="h-5 w-5 text-[#17415a]" />
@@ -415,8 +419,8 @@ function HomePage({
         <FeatureCommand
           index="02"
           icon={Box}
-          title="Inspect 3D"
-          text="Open local K/R-PTM AF3 structures in the NGL viewer."
+          title="Play MD trajectory"
+          text="Open hosted rep1 trajectories with frame-by-frame playback in the NGL viewer."
           onClick={() =>
             navigate(
               `/system/${encodeURIComponent(dataset.systems.find((system) => system.has_structure)?.id ?? dataset.systems[0].id)}`,
@@ -1053,6 +1057,9 @@ function SystemPage({
             {system.has_structure ? (
               <NGLViewer
                 pdbUrl={assetUrl(`structures/${system.id}.pdb`)}
+                topologyUrl={assetUrl(`trajectories/${system.id}.gro`)}
+                trajectoryUrl={assetUrl(`trajectories/${system.id}.xtc`)}
+                trajectoryDurationNs={system.sim_time_ns}
                 siteResid={system.site_num ?? 1}
                 siteResname={system.ccd_code || "UNK"}
                 sitePlddt={system.local_pLDDT_8A ?? 0}

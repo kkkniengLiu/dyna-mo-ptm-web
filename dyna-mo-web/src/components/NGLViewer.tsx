@@ -1,14 +1,18 @@
 "use client";
 
-import { RotateCcw } from "lucide-react";
+import { Pause, Play, RotateCcw } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
 type ColorMode = "plddt" | "secondary";
+type Speed = 0.5 | 1 | 2 | 4;
 
 type NGLViewerProps = {
   pdbUrl: string;
+  topologyUrl?: string;
+  trajectoryUrl?: string;
+  trajectoryDurationNs?: number | null;
   siteResid: number;
   siteResname: string;
   sitePlddt: number;
@@ -19,8 +23,24 @@ type NglComponent = {
     type: string,
     options: Record<string, unknown>,
   ) => unknown;
+  addTrajectory: (
+    trajPath?: string | NglFrames,
+    params?: Record<string, unknown>,
+  ) => NglTrajectoryElement;
   removeAllRepresentations: () => void;
   autoView: () => void;
+};
+
+type NglFrames = {
+  type?: string;
+};
+
+type NglModule = {
+  Stage: new (element: HTMLElement, options: Record<string, unknown>) => unknown;
+  autoLoad: (
+    source: string | Blob,
+    options: Record<string, unknown>,
+  ) => Promise<NglFrames>;
 };
 
 type NglStage = {
@@ -29,12 +49,42 @@ type NglStage = {
   removeAllComponents: () => void;
   loadFile: (
     source: string | Blob,
-    options: { ext: "pdb" },
+    options: { ext: "pdb" | "gro" },
   ) => Promise<NglComponent>;
+};
+
+type NglTrajectoryPlayer = {
+  isRunning: boolean;
+  play: () => void;
+  pause: () => void;
+  setParameters: (params: Record<string, unknown>) => void;
+};
+
+type NglSignal = {
+  add: (handler: (...args: unknown[]) => void) => void;
+  remove?: (handler: (...args: unknown[]) => void) => void;
+};
+
+type NglTrajectory = {
+  frameCount: number;
+  currentFrame: number;
+  player: NglTrajectoryPlayer;
+  signals?: {
+    frameChanged?: NglSignal;
+    countChanged?: NglSignal;
+  };
+};
+
+type NglTrajectoryElement = {
+  trajectory: NglTrajectory;
+  setFrame: (frame: number) => void;
 };
 
 export function NGLViewer({
   pdbUrl,
+  topologyUrl,
+  trajectoryUrl,
+  trajectoryDurationNs,
   siteResid,
   siteResname,
   sitePlddt,
@@ -42,9 +92,18 @@ export function NGLViewer({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<NglStage | null>(null);
   const componentRef = useRef<NglComponent | null>(null);
+  const trajectoryRef = useRef<NglTrajectoryElement | null>(null);
   const colorModeRef = useRef<ColorMode>("plddt");
+  const speedRef = useRef<Speed>(1);
+  const loopRef = useRef(true);
   const [colorMode, setColorMode] = useState<ColorMode>("plddt");
   const [status, setStatus] = useState("Loading structure viewer");
+  const [hasTrajectory, setHasTrajectory] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [frame, setFrame] = useState(0);
+  const [frameCount, setFrameCount] = useState(1);
+  const [speed, setSpeed] = useState<Speed>(1);
+  const [loop, setLoop] = useState(true);
   const siteSelection = useMemo(
     () => buildSiteSelection(siteResid, siteResname),
     [siteResid, siteResname],
@@ -53,6 +112,22 @@ export function NGLViewer({
     () => buildFallbackPdb(siteResid, siteResname, sitePlddt),
     [sitePlddt, siteResid, siteResname],
   );
+
+  const durationNs =
+    typeof trajectoryDurationNs === "number" && trajectoryDurationNs > 0
+      ? trajectoryDurationNs
+      : 10;
+  const currentTimeNs =
+    frameCount > 1 ? (frame / (frameCount - 1)) * durationNs : 0;
+
+  useEffect(() => {
+    speedRef.current = speed;
+    applyPlayerParameters(trajectoryRef.current, speed, loop);
+  }, [loop, speed]);
+
+  useEffect(() => {
+    loopRef.current = loop;
+  }, [loop]);
 
   useEffect(() => {
     let disposed = false;
@@ -65,7 +140,11 @@ export function NGLViewer({
       }
 
       setStatus("Loading structure viewer");
-      const ngl = await import("ngl");
+      setHasTrajectory(false);
+      setIsPlaying(false);
+      setFrame(0);
+      setFrameCount(1);
+      const ngl = (await import("ngl")) as unknown as NglModule;
       if (disposed) {
         return;
       }
@@ -81,15 +160,35 @@ export function NGLViewer({
       cleanup = () => {
         stageRef.current = null;
         componentRef.current = null;
+        trajectoryRef.current = null;
         stage.dispose();
       };
 
       stage.removeAllComponents();
-      const { component, isFallback } = await loadStructureWithFallback(
+      const topologyPdbUrl = topologyUrl?.replace(/\.gro($|\?)/, ".pdb$1");
+      const trajectoryAvailable = await hasHostedAsset(trajectoryUrl);
+      const topologyAvailable = await hasHostedAsset(topologyUrl);
+      const topologyPdbAvailable = await hasHostedAsset(topologyPdbUrl);
+      const displayTopologyUrl =
+        topologyPdbAvailable && topologyPdbUrl ? topologyPdbUrl : topologyUrl;
+      const displayTopologyExt = topologyPdbAvailable ? "pdb" : "gro";
+      const trajectoryReady =
+        trajectoryAvailable && topologyAvailable && displayTopologyUrl;
+      const displayStructure = await loadStructureWithFallback(
         stage,
         pdbUrl,
         fallbackPdb,
       );
+      const trajectoryComponent = trajectoryReady
+        ? await stage.loadFile(displayTopologyUrl, {
+            ext: displayTopologyExt,
+          })
+        : null;
+      trajectoryComponent?.removeAllRepresentations();
+      const component = displayStructure.component;
+      const isFallback = displayStructure.isFallback;
+      const source = trajectoryReady ? "trajectory" : displayStructure.source;
+
       if (disposed) {
         return;
       }
@@ -100,12 +199,45 @@ export function NGLViewer({
         colorModeRef.current,
         siteSelection,
       );
+
+      if (source === "trajectory" && trajectoryUrl && trajectoryComponent) {
+        try {
+          const trajectoryBlob = await fetch(trajectoryUrl).then((response) => {
+            if (!response.ok) {
+              throw new Error(`trajectory fetch failed: ${response.status}`);
+            }
+            return response.blob();
+          });
+          const trajectoryFrames = await ngl.autoLoad(trajectoryBlob, {
+            ext: "xtc",
+          });
+          const trajectory = trajectoryComponent.addTrajectory(trajectoryFrames, {
+            superpose: true,
+            removePbc: true,
+            deltaTime: durationNs * 1000,
+          });
+          trajectoryRef.current = trajectory;
+          wireTrajectorySignals(trajectory, setFrame, setFrameCount);
+          applyPlayerParameters(trajectory, speedRef.current, loopRef.current);
+          trajectory.setFrame(0);
+          setFrameCount(Math.max(trajectory.trajectory.frameCount || 1, 1));
+          setHasTrajectory(true);
+          setStatus("Trajectory loaded: rep1 MD playback ready");
+          window.setTimeout(() => component.autoView(), 300);
+        } catch (error) {
+          console.error("Failed to load trajectory", error);
+          setHasTrajectory(false);
+          setStatus("trajectory rendering in preparation");
+        }
+      } else {
+        setStatus(
+          isFallback
+            ? "PDB file unavailable; showing residue placeholder"
+            : "trajectory rendering in preparation; static AF3 input shown",
+        );
+      }
+
       component.autoView();
-      setStatus(
-        isFallback
-          ? "PDB file unavailable; showing residue placeholder"
-          : "raw.pdb loaded",
-      );
 
       const onResize = () => stage.handleResize();
       window.addEventListener("resize", onResize);
@@ -113,6 +245,7 @@ export function NGLViewer({
         window.removeEventListener("resize", onResize);
         stageRef.current = null;
         componentRef.current = null;
+        trajectoryRef.current = null;
         stage.dispose();
       };
     }
@@ -125,7 +258,14 @@ export function NGLViewer({
       disposed = true;
       cleanup?.();
     };
-  }, [fallbackPdb, pdbUrl, siteSelection]);
+  }, [
+    durationNs,
+    fallbackPdb,
+    pdbUrl,
+    siteSelection,
+    topologyUrl,
+    trajectoryUrl,
+  ]);
 
   useEffect(() => {
     colorModeRef.current = colorMode;
@@ -145,6 +285,26 @@ export function NGLViewer({
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  function togglePlayback() {
+    const player = trajectoryRef.current?.trajectory.player;
+    if (!player) {
+      return;
+    }
+    if (player.isRunning) {
+      player.pause();
+      setIsPlaying(false);
+    } else {
+      player.play();
+      setIsPlaying(true);
+    }
+  }
+
+  function setTrajectoryFrame(nextFrame: number) {
+    const boundedFrame = Math.max(0, Math.min(nextFrame, frameCount - 1));
+    trajectoryRef.current?.setFrame(boundedFrame);
+    setFrame(boundedFrame);
+  }
 
   return (
     <div className="space-y-3">
@@ -193,7 +353,7 @@ export function NGLViewer({
                 Preparing structure viewport
               </p>
               <p className="mt-1 text-sm text-slate-500">
-                raw.pdb will render here when mounted
+                raw.pdb or hosted trajectory will render here when mounted
               </p>
             </div>
           </div>
@@ -201,11 +361,97 @@ export function NGLViewer({
         <div
           ref={containerRef}
           className="h-full w-full cursor-grab active:cursor-grabbing"
-          aria-label="NGL structure viewer"
+          aria-label="NGL structure and trajectory viewer"
         />
+      </div>
+      <div className="rounded-lg border bg-white/80 p-3">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+          <Button
+            type="button"
+            variant={hasTrajectory ? "default" : "outline"}
+            size="sm"
+            disabled={!hasTrajectory}
+            onClick={togglePlayback}
+          >
+            {isPlaying ? (
+              <Pause className="mr-2 h-4 w-4" />
+            ) : (
+              <Play className="mr-2 h-4 w-4" />
+            )}
+            {isPlaying ? "Pause" : "Play"}
+          </Button>
+          <label className="flex min-w-0 flex-1 items-center gap-3 text-sm text-slate-600">
+            <span className="whitespace-nowrap">Frame</span>
+            <input
+              type="range"
+              min={0}
+              max={Math.max(frameCount - 1, 0)}
+              value={frame}
+              disabled={!hasTrajectory}
+              onChange={(event) => setTrajectoryFrame(Number(event.target.value))}
+              className="min-w-0 flex-1 accent-[#10324a]"
+            />
+            <span className="whitespace-nowrap font-mono text-xs">
+              {frame}/{Math.max(frameCount - 1, 0)}
+            </span>
+          </label>
+          <div className="font-mono text-xs text-slate-600">
+            {currentTimeNs.toFixed(2)} / {durationNs.toFixed(1)} ns
+          </div>
+        </div>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-1">
+            <span className="mr-1 text-xs font-semibold uppercase text-slate-500">
+              Speed
+            </span>
+            {([0.5, 1, 2, 4] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                disabled={!hasTrajectory}
+                className={`rounded-full border px-2.5 py-1 text-xs font-semibold ${
+                  speed === value
+                    ? "border-[#10324a] bg-[#10324a] text-white"
+                    : "bg-white text-slate-700"
+                } disabled:cursor-not-allowed disabled:opacity-50`}
+                onClick={() => setSpeed(value)}
+              >
+                {value}x
+              </button>
+            ))}
+          </div>
+          <label className="inline-flex items-center gap-2 text-xs font-medium text-slate-600">
+            <input
+              type="checkbox"
+              checked={loop}
+              disabled={!hasTrajectory}
+              onChange={(event) => setLoop(event.target.checked)}
+              className="h-4 w-4 accent-[#10324a]"
+            />
+            Loop playback
+          </label>
+          {!hasTrajectory ? (
+            <span className="text-xs text-slate-500">
+              Hosted .xtc/.gro not found for this system; static AF3 structure
+              remains available.
+            </span>
+          ) : null}
+        </div>
       </div>
     </div>
   );
+}
+
+async function hasHostedAsset(url: string | undefined) {
+  if (!url) {
+    return false;
+  }
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+    return response.ok;
+  } catch {
+    return false;
+  }
 }
 
 async function loadStructureWithFallback(
@@ -217,6 +463,7 @@ async function loadStructureWithFallback(
     return {
       component: await stage.loadFile(pdbUrl, { ext: "pdb" }),
       isFallback: false,
+      source: "pdb" as const,
     };
   } catch {
     return {
@@ -225,6 +472,7 @@ async function loadStructureWithFallback(
         { ext: "pdb" },
       ),
       isFallback: true,
+      source: "fallback" as const,
     };
   }
 }
@@ -249,6 +497,50 @@ function applyStructureRepresentations(
     color: "element",
     multipleBond: true,
     radius: 0.18,
+  });
+}
+
+function wireTrajectorySignals(
+  trajectory: NglTrajectoryElement,
+  setFrame: (frame: number) => void,
+  setFrameCount: (count: number) => void,
+) {
+  const onFrameChanged = (value: unknown) => {
+    if (typeof value === "number") {
+      setFrame(value);
+    } else {
+      setFrame(trajectory.trajectory.currentFrame ?? 0);
+    }
+  };
+  const onCountChanged = (value: unknown) => {
+    if (typeof value === "number") {
+      setFrameCount(Math.max(value, 1));
+    } else {
+      setFrameCount(Math.max(trajectory.trajectory.frameCount || 1, 1));
+    }
+  };
+  trajectory.trajectory.signals?.frameChanged?.add(onFrameChanged);
+  trajectory.trajectory.signals?.countChanged?.add(onCountChanged);
+  window.setTimeout(() => {
+    setFrameCount(Math.max(trajectory.trajectory.frameCount || 1, 1));
+    setFrame(trajectory.trajectory.currentFrame || 0);
+  }, 500);
+}
+
+function applyPlayerParameters(
+  trajectory: NglTrajectoryElement | null,
+  speed: Speed,
+  loop: boolean,
+) {
+  const player = trajectory?.trajectory.player;
+  if (!player) {
+    return;
+  }
+  player.setParameters({
+    step: 1,
+    timeout: Math.max(12, Math.round(90 / speed)),
+    mode: loop ? "loop" : "once",
+    direction: "forward",
   });
 }
 
