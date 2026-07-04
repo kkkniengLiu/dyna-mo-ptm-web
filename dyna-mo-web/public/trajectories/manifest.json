@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/build_web_trajectories.py",
-  "requested": 250,
-  "available": 250,
+  "requested": 375,
+  "available": 375,
   "failed": 0,
   "systems": [
     {
@@ -2501,6 +2501,1256 @@
       "gro": "q9hb90_k25_acetyl.gro",
       "xtc": "q9hb90_k25_acetyl.xtc",
       "size_bytes": 1007348,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9hbh1_k183_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9hbh1_k183_acetyl.pdb",
+      "gro": "q9hbh1_k183_acetyl.gro",
+      "xtc": "q9hbh1_k183_acetyl.xtc",
+      "size_bytes": 621836,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9hcn8_k15_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9hcn8_k15_acetyl.pdb",
+      "gro": "q9hcn8_k15_acetyl.gro",
+      "xtc": "q9hcn8_k15_acetyl.xtc",
+      "size_bytes": 547256,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nqy0_k148_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nqy0_k148_acetyl.pdb",
+      "gro": "q9nqy0_k148_acetyl.gro",
+      "xtc": "q9nqy0_k148_acetyl.xtc",
+      "size_bytes": 780688,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nrf8_k306_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nrf8_k306_acetyl.pdb",
+      "gro": "q9nrf8_k306_acetyl.gro",
+      "xtc": "q9nrf8_k306_acetyl.xtc",
+      "size_bytes": 1709608,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nrv9_k39_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nrv9_k39_acetyl.pdb",
+      "gro": "q9nrv9_k39_acetyl.gro",
+      "xtc": "q9nrv9_k39_acetyl.xtc",
+      "size_bytes": 552124,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nuq9_k317_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nuq9_k317_acetyl.pdb",
+      "gro": "q9nuq9_k317_acetyl.gro",
+      "xtc": "q9nuq9_k317_acetyl.xtc",
+      "size_bytes": 1000592,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nux5_k346_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nux5_k346_acetyl.pdb",
+      "gro": "q9nux5_k346_acetyl.gro",
+      "xtc": "q9nux5_k346_acetyl.xtc",
+      "size_bytes": 1924768,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nv88_k566_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nv88_k566_acetyl.pdb",
+      "gro": "q9nv88_k566_acetyl.gro",
+      "xtc": "q9nv88_k566_acetyl.xtc",
+      "size_bytes": 2001608,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nvh1_k489_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nvh1_k489_acetyl.pdb",
+      "gro": "q9nvh1_k489_acetyl.gro",
+      "xtc": "q9nvh1_k489_acetyl.xtc",
+      "size_bytes": 1688584,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nvr2_k390_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nvr2_k390_acetyl.pdb",
+      "gro": "q9nvr2_k390_acetyl.gro",
+      "xtc": "q9nvr2_k390_acetyl.xtc",
+      "size_bytes": 2237492,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nwx6_k61_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nwx6_k61_acetyl.pdb",
+      "gro": "q9nwx6_k61_acetyl.gro",
+      "xtc": "q9nwx6_k61_acetyl.xtc",
+      "size_bytes": 935900,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nx46_k125_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nx46_k125_acetyl.pdb",
+      "gro": "q9nx46_k125_acetyl.gro",
+      "xtc": "q9nx46_k125_acetyl.xtc",
+      "size_bytes": 1056524,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nxr7_k41_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nxr7_k41_acetyl.pdb",
+      "gro": "q9nxr7_k41_acetyl.gro",
+      "xtc": "q9nxr7_k41_acetyl.xtc",
+      "size_bytes": 1195400,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9nzl9_k209_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9nzl9_k209_acetyl.pdb",
+      "gro": "q9nzl9_k209_acetyl.gro",
+      "xtc": "q9nzl9_k209_acetyl.xtc",
+      "size_bytes": 1024224,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9p2x3_k229_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9p2x3_k229_acetyl.pdb",
+      "gro": "q9p2x3_k229_acetyl.gro",
+      "xtc": "q9p2x3_k229_acetyl.xtc",
+      "size_bytes": 941616,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9ubl3_k147_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9ubl3_k147_acetyl.pdb",
+      "gro": "q9ubl3_k147_acetyl.gro",
+      "xtc": "q9ubl3_k147_acetyl.xtc",
+      "size_bytes": 1604704,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9uee5_k38_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9uee5_k38_acetyl.pdb",
+      "gro": "q9uee5_k38_acetyl.gro",
+      "xtc": "q9uee5_k38_acetyl.xtc",
+      "size_bytes": 1129484,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9uhy1_k80_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9uhy1_k80_acetyl.pdb",
+      "gro": "q9uhy1_k80_acetyl.gro",
+      "xtc": "q9uhy1_k80_acetyl.xtc",
+      "size_bytes": 1485496,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9ui26_k351_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9ui26_k351_acetyl.pdb",
+      "gro": "q9ui26_k351_acetyl.gro",
+      "xtc": "q9ui26_k351_acetyl.xtc",
+      "size_bytes": 3042252,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9uiq6_k519_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9uiq6_k519_acetyl.pdb",
+      "gro": "q9uiq6_k519_acetyl.gro",
+      "xtc": "q9uiq6_k519_acetyl.xtc",
+      "size_bytes": 2853300,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9uj68_k84_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9uj68_k84_acetyl.pdb",
+      "gro": "q9uj68_k84_acetyl.gro",
+      "xtc": "q9uj68_k84_acetyl.xtc",
+      "size_bytes": 621768,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9ujx5_k80_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9ujx5_k80_acetyl.pdb",
+      "gro": "q9ujx5_k80_acetyl.gro",
+      "xtc": "q9ujx5_k80_acetyl.xtc",
+      "size_bytes": 2468800,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9ul25_k34_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9ul25_k34_acetyl.pdb",
+      "gro": "q9ul25_k34_acetyl.gro",
+      "xtc": "q9ul25_k34_acetyl.xtc",
+      "size_bytes": 566732,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9uq80_k337_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9uq80_k337_acetyl.pdb",
+      "gro": "q9uq80_k337_acetyl.gro",
+      "xtc": "q9uq80_k337_acetyl.xtc",
+      "size_bytes": 1141944,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y223_k379_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y223_k379_acetyl.pdb",
+      "gro": "q9y223_k379_acetyl.gro",
+      "xtc": "q9y223_k379_acetyl.xtc",
+      "size_bytes": 2133192,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y2q3_k157_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y2q3_k157_acetyl.pdb",
+      "gro": "q9y2q3_k157_acetyl.gro",
+      "xtc": "q9y2q3_k157_acetyl.xtc",
+      "size_bytes": 681684,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y2s7_k56_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y2s7_k56_acetyl.pdb",
+      "gro": "q9y2s7_k56_acetyl.gro",
+      "xtc": "q9y2s7_k56_acetyl.xtc",
+      "size_bytes": 955724,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y312_k346_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y312_k346_acetyl.pdb",
+      "gro": "q9y312_k346_acetyl.gro",
+      "xtc": "q9y312_k346_acetyl.xtc",
+      "size_bytes": 1157784,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y399_k12_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y399_k12_acetyl.pdb",
+      "gro": "q9y399_k12_acetyl.gro",
+      "xtc": "q9y399_k12_acetyl.xtc",
+      "size_bytes": 730792,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y3b8_k184_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y3b8_k184_acetyl.pdb",
+      "gro": "q9y3b8_k184_acetyl.gro",
+      "xtc": "q9y3b8_k184_acetyl.xtc",
+      "size_bytes": 670104,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y4e8_k267_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y4e8_k267_acetyl.pdb",
+      "gro": "q9y4e8_k267_acetyl.gro",
+      "xtc": "q9y4e8_k267_acetyl.xtc",
+      "size_bytes": 2965204,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y5k8_k20_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y5k8_k20_acetyl.pdb",
+      "gro": "q9y5k8_k20_acetyl.gro",
+      "xtc": "q9y5k8_k20_acetyl.xtc",
+      "size_bytes": 784592,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y6f1_k351_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y6f1_k351_acetyl.pdb",
+      "gro": "q9y6f1_k351_acetyl.gro",
+      "xtc": "q9y6f1_k351_acetyl.xtc",
+      "size_bytes": 1559632,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y6x3_k315_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "q9y6x3_k315_acetyl.pdb",
+      "gro": "q9y6x3_k315_acetyl.gro",
+      "xtc": "q9y6x3_k315_acetyl.xtc",
+      "size_bytes": 1874448,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "a6ndi0_k202_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "a6ndi0_k202_methyl.pdb",
+      "gro": "a6ndi0_k202_methyl.gro",
+      "xtc": "a6ndi0_k202_methyl.xtc",
+      "size_bytes": 1423128,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "a6nl08_k291_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "a6nl08_k291_methyl.pdb",
+      "gro": "a6nl08_k291_methyl.gro",
+      "xtc": "a6nl08_k291_methyl.xtc",
+      "size_bytes": 947244,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "b1al40_k5_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "b1al40_k5_methyl.pdb",
+      "gro": "b1al40_k5_methyl.gro",
+      "xtc": "b1al40_k5_methyl.xtc",
+      "size_bytes": 219296,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "b3kuh8_k55_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "b3kuh8_k55_methyl.pdb",
+      "gro": "b3kuh8_k55_methyl.gro",
+      "xtc": "b3kuh8_k55_methyl.xtc",
+      "size_bytes": 872816,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "e7evs6_k81_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "e7evs6_k81_methyl.pdb",
+      "gro": "e7evs6_k81_methyl.gro",
+      "xtc": "e7evs6_k81_methyl.xtc",
+      "size_bytes": 991184,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbc3_k78_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbc3_k78_methyl.pdb",
+      "gro": "f0nbc3_k78_methyl.gro",
+      "xtc": "f0nbc3_k78_methyl.xtc",
+      "size_bytes": 437704,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbf5_k20_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbf5_k20_methyl.pdb",
+      "gro": "f0nbf5_k20_methyl.gro",
+      "xtc": "f0nbf5_k20_methyl.xtc",
+      "size_bytes": 1530880,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbf9_k70_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbf9_k70_methyl.pdb",
+      "gro": "f0nbf9_k70_methyl.gro",
+      "xtc": "f0nbf9_k70_methyl.xtc",
+      "size_bytes": 1562204,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbg4_k121_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbg4_k121_methyl.pdb",
+      "gro": "f0nbg4_k121_methyl.gro",
+      "xtc": "f0nbg4_k121_methyl.xtc",
+      "size_bytes": 538616,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbh3_k96_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbh3_k96_methyl.pdb",
+      "gro": "f0nbh3_k96_methyl.gro",
+      "xtc": "f0nbh3_k96_methyl.xtc",
+      "size_bytes": 2175336,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbh4_k198_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbh4_k198_methyl.pdb",
+      "gro": "f0nbh4_k198_methyl.gro",
+      "xtc": "f0nbh4_k198_methyl.xtc",
+      "size_bytes": 1815412,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbh5_k110_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbh5_k110_methyl.pdb",
+      "gro": "f0nbh5_k110_methyl.gro",
+      "xtc": "f0nbh5_k110_methyl.xtc",
+      "size_bytes": 973472,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbi6_k78_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbi6_k78_methyl.pdb",
+      "gro": "f0nbi6_k78_methyl.gro",
+      "xtc": "f0nbi6_k78_methyl.xtc",
+      "size_bytes": 417700,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbq6_k165_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbq6_k165_methyl.pdb",
+      "gro": "f0nbq6_k165_methyl.gro",
+      "xtc": "f0nbq6_k165_methyl.xtc",
+      "size_bytes": 1094432,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbt7_k105_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbt7_k105_methyl.pdb",
+      "gro": "f0nbt7_k105_methyl.gro",
+      "xtc": "f0nbt7_k105_methyl.xtc",
+      "size_bytes": 1237800,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbu0_k343_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbu0_k343_methyl.pdb",
+      "gro": "f0nbu0_k343_methyl.gro",
+      "xtc": "f0nbu0_k343_methyl.xtc",
+      "size_bytes": 1462980,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbv3_k116_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbv3_k116_methyl.pdb",
+      "gro": "f0nbv3_k116_methyl.gro",
+      "xtc": "f0nbv3_k116_methyl.xtc",
+      "size_bytes": 437316,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nbw5_k16_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nbw5_k16_methyl.pdb",
+      "gro": "f0nbw5_k16_methyl.gro",
+      "xtc": "f0nbw5_k16_methyl.xtc",
+      "size_bytes": 515832,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nc14_k68_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nc14_k68_methyl.pdb",
+      "gro": "f0nc14_k68_methyl.gro",
+      "xtc": "f0nc14_k68_methyl.xtc",
+      "size_bytes": 1121400,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nc18_k157_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nc18_k157_methyl.pdb",
+      "gro": "f0nc18_k157_methyl.gro",
+      "xtc": "f0nc18_k157_methyl.xtc",
+      "size_bytes": 822084,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nc55_k20_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nc55_k20_methyl.pdb",
+      "gro": "f0nc55_k20_methyl.gro",
+      "xtc": "f0nc55_k20_methyl.xtc",
+      "size_bytes": 190104,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nc68_k2_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nc68_k2_methyl.pdb",
+      "gro": "f0nc68_k2_methyl.gro",
+      "xtc": "f0nc68_k2_methyl.xtc",
+      "size_bytes": 1175528,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ncb2_k485_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ncb2_k485_methyl.pdb",
+      "gro": "f0ncb2_k485_methyl.gro",
+      "xtc": "f0ncb2_k485_methyl.xtc",
+      "size_bytes": 2436972,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ncc9_k110_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ncc9_k110_methyl.pdb",
+      "gro": "f0ncc9_k110_methyl.gro",
+      "xtc": "f0ncc9_k110_methyl.xtc",
+      "size_bytes": 729172,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nci3_k106_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nci3_k106_methyl.pdb",
+      "gro": "f0nci3_k106_methyl.gro",
+      "xtc": "f0nci3_k106_methyl.xtc",
+      "size_bytes": 430528,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nck0_k196_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nck0_k196_methyl.pdb",
+      "gro": "f0nck0_k196_methyl.gro",
+      "xtc": "f0nck0_k196_methyl.xtc",
+      "size_bytes": 795560,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ncu3_k17_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ncu3_k17_methyl.pdb",
+      "gro": "f0ncu3_k17_methyl.gro",
+      "xtc": "f0ncu3_k17_methyl.xtc",
+      "size_bytes": 443972,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ncv2_k80_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ncv2_k80_methyl.pdb",
+      "gro": "f0ncv2_k80_methyl.gro",
+      "xtc": "f0ncv2_k80_methyl.xtc",
+      "size_bytes": 628332,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ncv4_k80_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ncv4_k80_methyl.pdb",
+      "gro": "f0ncv4_k80_methyl.gro",
+      "xtc": "f0ncv4_k80_methyl.xtc",
+      "size_bytes": 1156816,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ncw3_k59_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ncw3_k59_methyl.pdb",
+      "gro": "f0ncw3_k59_methyl.gro",
+      "xtc": "f0ncw3_k59_methyl.xtc",
+      "size_bytes": 908500,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nd56_k244_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nd56_k244_methyl.pdb",
+      "gro": "f0nd56_k244_methyl.gro",
+      "xtc": "f0nd56_k244_methyl.xtc",
+      "size_bytes": 1953784,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nd81_k226_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nd81_k226_methyl.pdb",
+      "gro": "f0nd81_k226_methyl.gro",
+      "xtc": "f0nd81_k226_methyl.xtc",
+      "size_bytes": 1170400,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndd7_k249_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndd7_k249_methyl.pdb",
+      "gro": "f0ndd7_k249_methyl.gro",
+      "xtc": "f0ndd7_k249_methyl.xtc",
+      "size_bytes": 749688,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndi1_k123_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndi1_k123_methyl.pdb",
+      "gro": "f0ndi1_k123_methyl.gro",
+      "xtc": "f0ndi1_k123_methyl.xtc",
+      "size_bytes": 411300,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndj6_k213_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndj6_k213_methyl.pdb",
+      "gro": "f0ndj6_k213_methyl.gro",
+      "xtc": "f0ndj6_k213_methyl.xtc",
+      "size_bytes": 1000440,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndn2_k192_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndn2_k192_methyl.pdb",
+      "gro": "f0ndn2_k192_methyl.gro",
+      "xtc": "f0ndn2_k192_methyl.xtc",
+      "size_bytes": 739556,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndn8_k86_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndn8_k86_methyl.pdb",
+      "gro": "f0ndn8_k86_methyl.gro",
+      "xtc": "f0ndn8_k86_methyl.xtc",
+      "size_bytes": 759412,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nds1_k30_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nds1_k30_methyl.pdb",
+      "gro": "f0nds1_k30_methyl.gro",
+      "xtc": "f0nds1_k30_methyl.xtc",
+      "size_bytes": 1374680,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nds4_k204_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nds4_k204_methyl.pdb",
+      "gro": "f0nds4_k204_methyl.gro",
+      "xtc": "f0nds4_k204_methyl.xtc",
+      "size_bytes": 1677676,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nds7_k221_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nds7_k221_methyl.pdb",
+      "gro": "f0nds7_k221_methyl.gro",
+      "xtc": "f0nds7_k221_methyl.xtc",
+      "size_bytes": 1716540,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndt4_k31_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndt4_k31_methyl.pdb",
+      "gro": "f0ndt4_k31_methyl.gro",
+      "xtc": "f0ndt4_k31_methyl.xtc",
+      "size_bytes": 1046184,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ndw5_k873_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ndw5_k873_methyl.pdb",
+      "gro": "f0ndw5_k873_methyl.gro",
+      "xtc": "f0ndw5_k873_methyl.xtc",
+      "size_bytes": 2812084,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ne65_k291_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ne65_k291_methyl.pdb",
+      "gro": "f0ne65_k291_methyl.gro",
+      "xtc": "f0ne65_k291_methyl.xtc",
+      "size_bytes": 1964184,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0neg0_k232_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0neg0_k232_methyl.pdb",
+      "gro": "f0neg0_k232_methyl.gro",
+      "xtc": "f0neg0_k232_methyl.xtc",
+      "size_bytes": 967808,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nek9_k125_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nek9_k125_methyl.pdb",
+      "gro": "f0nek9_k125_methyl.gro",
+      "xtc": "f0nek9_k125_methyl.xtc",
+      "size_bytes": 410004,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ner4_k103_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ner4_k103_methyl.pdb",
+      "gro": "f0ner4_k103_methyl.gro",
+      "xtc": "f0ner4_k103_methyl.xtc",
+      "size_bytes": 370768,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nes7_k119_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nes7_k119_methyl.pdb",
+      "gro": "f0nes7_k119_methyl.gro",
+      "xtc": "f0nes7_k119_methyl.xtc",
+      "size_bytes": 376612,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0net6_k70_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0net6_k70_methyl.pdb",
+      "gro": "f0net6_k70_methyl.gro",
+      "xtc": "f0net6_k70_methyl.xtc",
+      "size_bytes": 725912,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nev1_k100_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nev1_k100_methyl.pdb",
+      "gro": "f0nev1_k100_methyl.gro",
+      "xtc": "f0nev1_k100_methyl.xtc",
+      "size_bytes": 419124,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nex6_k242_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nex6_k242_methyl.pdb",
+      "gro": "f0nex6_k242_methyl.gro",
+      "xtc": "f0nex6_k242_methyl.xtc",
+      "size_bytes": 772572,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ney0_k137_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ney0_k137_methyl.pdb",
+      "gro": "f0ney0_k137_methyl.gro",
+      "xtc": "f0ney0_k137_methyl.xtc",
+      "size_bytes": 1021320,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nez6_k84_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nez6_k84_methyl.pdb",
+      "gro": "f0nez6_k84_methyl.gro",
+      "xtc": "f0nez6_k84_methyl.xtc",
+      "size_bytes": 628064,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nf22_k217_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nf22_k217_methyl.pdb",
+      "gro": "f0nf22_k217_methyl.gro",
+      "xtc": "f0nf22_k217_methyl.xtc",
+      "size_bytes": 1011136,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfa9_k218_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfa9_k218_methyl.pdb",
+      "gro": "f0nfa9_k218_methyl.gro",
+      "xtc": "f0nfa9_k218_methyl.xtc",
+      "size_bytes": 736080,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfd9_k55_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfd9_k55_methyl.pdb",
+      "gro": "f0nfd9_k55_methyl.gro",
+      "xtc": "f0nfd9_k55_methyl.xtc",
+      "size_bytes": 333508,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfe2_k128_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfe2_k128_methyl.pdb",
+      "gro": "f0nfe2_k128_methyl.gro",
+      "xtc": "f0nfe2_k128_methyl.xtc",
+      "size_bytes": 2307268,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfm5_k57_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfm5_k57_methyl.pdb",
+      "gro": "f0nfm5_k57_methyl.gro",
+      "xtc": "f0nfm5_k57_methyl.xtc",
+      "size_bytes": 1549968,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfn7_k45_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfn7_k45_methyl.pdb",
+      "gro": "f0nfn7_k45_methyl.gro",
+      "xtc": "f0nfn7_k45_methyl.xtc",
+      "size_bytes": 548948,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nft8_k272_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nft8_k272_methyl.pdb",
+      "gro": "f0nft8_k272_methyl.gro",
+      "xtc": "f0nft8_k272_methyl.xtc",
+      "size_bytes": 971140,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfu6_k223_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfu6_k223_methyl.pdb",
+      "gro": "f0nfu6_k223_methyl.gro",
+      "xtc": "f0nfu6_k223_methyl.xtc",
+      "size_bytes": 880944,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfz6_k39_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfz6_k39_methyl.pdb",
+      "gro": "f0nfz6_k39_methyl.gro",
+      "xtc": "f0nfz6_k39_methyl.xtc",
+      "size_bytes": 780312,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nfz8_k321_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nfz8_k321_methyl.pdb",
+      "gro": "f0nfz8_k321_methyl.gro",
+      "xtc": "f0nfz8_k321_methyl.xtc",
+      "size_bytes": 1083396,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ng18_k268_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ng18_k268_methyl.pdb",
+      "gro": "f0ng18_k268_methyl.gro",
+      "xtc": "f0ng18_k268_methyl.xtc",
+      "size_bytes": 849180,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ng23_k287_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ng23_k287_methyl.pdb",
+      "gro": "f0ng23_k287_methyl.gro",
+      "xtc": "f0ng23_k287_methyl.xtc",
+      "size_bytes": 942720,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ng48_k205_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ng48_k205_methyl.pdb",
+      "gro": "f0ng48_k205_methyl.gro",
+      "xtc": "f0ng48_k205_methyl.xtc",
+      "size_bytes": 785252,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ng57_k173_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ng57_k173_methyl.pdb",
+      "gro": "f0ng57_k173_methyl.gro",
+      "xtc": "f0ng57_k173_methyl.xtc",
+      "size_bytes": 677940,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ng60_k102_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ng60_k102_methyl.pdb",
+      "gro": "f0ng60_k102_methyl.gro",
+      "xtc": "f0ng60_k102_methyl.xtc",
+      "size_bytes": 756444,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ng97_k217_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ng97_k217_methyl.pdb",
+      "gro": "f0ng97_k217_methyl.gro",
+      "xtc": "f0ng97_k217_methyl.xtc",
+      "size_bytes": 1076108,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ngb0_k277_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ngb0_k277_methyl.pdb",
+      "gro": "f0ngb0_k277_methyl.gro",
+      "xtc": "f0ngb0_k277_methyl.xtc",
+      "size_bytes": 1682372,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ngb6_k323_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ngb6_k323_methyl.pdb",
+      "gro": "f0ngb6_k323_methyl.gro",
+      "xtc": "f0ngb6_k323_methyl.xtc",
+      "size_bytes": 1029000,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ngg8_k426_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ngg8_k426_methyl.pdb",
+      "gro": "f0ngg8_k426_methyl.gro",
+      "xtc": "f0ngg8_k426_methyl.xtc",
+      "size_bytes": 1258828,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ngt4_k234_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ngt4_k234_methyl.pdb",
+      "gro": "f0ngt4_k234_methyl.gro",
+      "xtc": "f0ngt4_k234_methyl.xtc",
+      "size_bytes": 1135980,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ngu5_k19_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ngu5_k19_methyl.pdb",
+      "gro": "f0ngu5_k19_methyl.gro",
+      "xtc": "f0ngu5_k19_methyl.xtc",
+      "size_bytes": 204304,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0ngv6_k23_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0ngv6_k23_methyl.pdb",
+      "gro": "f0ngv6_k23_methyl.gro",
+      "xtc": "f0ngv6_k23_methyl.xtc",
+      "size_bytes": 576980,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nh33_k456_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nh33_k456_methyl.pdb",
+      "gro": "f0nh33_k456_methyl.gro",
+      "xtc": "f0nh33_k456_methyl.xtc",
+      "size_bytes": 1688428,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhh8_k464_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhh8_k464_methyl.pdb",
+      "gro": "f0nhh8_k464_methyl.gro",
+      "xtc": "f0nhh8_k464_methyl.xtc",
+      "size_bytes": 1417432,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhp3_k183_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhp3_k183_methyl.pdb",
+      "gro": "f0nhp3_k183_methyl.gro",
+      "xtc": "f0nhp3_k183_methyl.xtc",
+      "size_bytes": 743100,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhq2_k51_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhq2_k51_methyl.pdb",
+      "gro": "f0nhq2_k51_methyl.gro",
+      "xtc": "f0nhq2_k51_methyl.xtc",
+      "size_bytes": 1066008,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhq6_k116_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhq6_k116_methyl.pdb",
+      "gro": "f0nhq6_k116_methyl.gro",
+      "xtc": "f0nhq6_k116_methyl.xtc",
+      "size_bytes": 1351220,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhr9_k258_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhr9_k258_methyl.pdb",
+      "gro": "f0nhr9_k258_methyl.gro",
+      "xtc": "f0nhr9_k258_methyl.xtc",
+      "size_bytes": 797476,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhs3_k23_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhs3_k23_methyl.pdb",
+      "gro": "f0nhs3_k23_methyl.gro",
+      "xtc": "f0nhs3_k23_methyl.xtc",
+      "size_bytes": 472564,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nht1_k84_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nht1_k84_methyl.pdb",
+      "gro": "f0nht1_k84_methyl.gro",
+      "xtc": "f0nht1_k84_methyl.xtc",
+      "size_bytes": 275436,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhv6_k25_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhv6_k25_methyl.pdb",
+      "gro": "f0nhv6_k25_methyl.gro",
+      "xtc": "f0nhv6_k25_methyl.xtc",
+      "size_bytes": 422788,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhv7_k35_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhv7_k35_methyl.pdb",
+      "gro": "f0nhv7_k35_methyl.gro",
+      "xtc": "f0nhv7_k35_methyl.xtc",
+      "size_bytes": 625268,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhw1_k62_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhw1_k62_methyl.pdb",
+      "gro": "f0nhw1_k62_methyl.gro",
+      "xtc": "f0nhw1_k62_methyl.xtc",
+      "size_bytes": 1071076,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhw5_k31_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhw5_k31_methyl.pdb",
+      "gro": "f0nhw5_k31_methyl.gro",
+      "xtc": "f0nhw5_k31_methyl.xtc",
+      "size_bytes": 165892,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhz3_k138_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhz3_k138_methyl.pdb",
+      "gro": "f0nhz3_k138_methyl.gro",
+      "xtc": "f0nhz3_k138_methyl.xtc",
+      "size_bytes": 707480,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nhz7_k188_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nhz7_k188_methyl.pdb",
+      "gro": "f0nhz7_k188_methyl.gro",
+      "xtc": "f0nhz7_k188_methyl.xtc",
+      "size_bytes": 1022292,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nia6_k326_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nia6_k326_methyl.pdb",
+      "gro": "f0nia6_k326_methyl.gro",
+      "xtc": "f0nia6_k326_methyl.xtc",
+      "size_bytes": 1582516,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nia8_k16_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nia8_k16_methyl.pdb",
+      "gro": "f0nia8_k16_methyl.gro",
+      "xtc": "f0nia8_k16_methyl.xtc",
+      "size_bytes": 400932,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nie4_k153_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nie4_k153_methyl.pdb",
+      "gro": "f0nie4_k153_methyl.gro",
+      "xtc": "f0nie4_k153_methyl.xtc",
+      "size_bytes": 1382908,
       "sim_time_ns": 10.0,
       "source": "existing"
     }
