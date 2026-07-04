@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/build_web_trajectories.py",
-  "requested": 750,
-  "available": 750,
+  "requested": 754,
+  "available": 754,
   "failed": 0,
   "systems": [
     {
@@ -7501,6 +7501,46 @@
       "gro": "q9y2h1_r441_methyl.gro",
       "xtc": "q9y2h1_r441_methyl.xtc",
       "size_bytes": 1436616,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y2p8_r114_methyl",
+      "ptm_type": "methyl_R",
+      "pdb": "q9y2p8_r114_methyl.pdb",
+      "gro": "q9y2p8_r114_methyl.gro",
+      "xtc": "q9y2p8_r114_methyl.xtc",
+      "size_bytes": 1077408,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y2r4_r27_methyl",
+      "ptm_type": "methyl_R",
+      "pdb": "q9y2r4_r27_methyl.pdb",
+      "gro": "q9y2r4_r27_methyl.gro",
+      "xtc": "q9y2r4_r27_methyl.xtc",
+      "size_bytes": 1834164,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y4e8_r941_methyl",
+      "ptm_type": "methyl_R",
+      "pdb": "q9y4e8_r941_methyl.pdb",
+      "gro": "q9y4e8_r941_methyl.gro",
+      "xtc": "q9y4e8_r941_methyl.xtc",
+      "size_bytes": 2963356,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q9y4r8_r247_methyl",
+      "ptm_type": "methyl_R",
+      "pdb": "q9y4r8_r247_methyl.pdb",
+      "gro": "q9y4r8_r247_methyl.gro",
+      "xtc": "q9y4r8_r247_methyl.xtc",
+      "size_bytes": 2469516,
       "sim_time_ns": 10.0,
       "source": "existing"
     }
