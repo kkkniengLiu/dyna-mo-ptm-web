@@ -13,6 +13,7 @@ import argparse
 import csv
 import json
 import os
+import posixpath
 import shutil
 import subprocess
 import sys
@@ -30,6 +31,7 @@ DEFAULT_REMOTE_RUNS = "/home/liukaining/projects/dyna_mo_ptm/runs"
 class SystemRow:
     system_id: str
     ptm_type: str
+    ccd_code: str
     site_num: int | None
     sim_time_ns: float
 
@@ -54,8 +56,14 @@ def parse_args() -> argparse.Namespace:
         help="Directory receiving <system_id>.gro and <system_id>.xtc.",
     )
     parser.add_argument("--systems", nargs="*", help="Specific system IDs.")
+    parser.add_argument("--systems-file", help="Newline-delimited system IDs.")
     parser.add_argument("--limit", type=int, help="Limit for smoke tests.")
     parser.add_argument("--frames", type=int, default=100)
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="Reuse existing <system_id>.pdb/.gro/.xtc outputs and only refresh manifest metadata.",
+    )
     parser.add_argument(
         "--allow-unprocessed-copy",
         action="store_true",
@@ -69,8 +77,15 @@ def main() -> int:
     args = parse_args()
     project_root = Path.cwd()
     systems = load_systems(project_root / args.manifest, project_root / args.csv)
-    if args.systems:
-        wanted = {item.lower() for item in args.systems}
+    wanted_items = list(args.systems or [])
+    if args.systems_file:
+        wanted_items.extend(
+            item.strip()
+            for item in (project_root / args.systems_file).read_text(encoding="utf-8").splitlines()
+            if item.strip()
+        )
+    if wanted_items:
+        wanted = {item.lower() for item in wanted_items}
         systems = [row for row in systems if row.system_id.lower() in wanted]
     if args.limit:
         systems = systems[: args.limit]
@@ -108,6 +123,7 @@ def main() -> int:
                     frames=args.frames,
                     mdtraj_available=mdtraj_available,
                     allow_unprocessed_copy=args.allow_unprocessed_copy,
+                    skip_existing=args.skip_existing,
                     dry_run=args.dry_run,
                 )
                 manifest.append(result)
@@ -143,6 +159,7 @@ def load_systems(manifest_path: Path, csv_path: Path) -> list[SystemRow]:
             SystemRow(
                 system_id=str(row["id"]),
                 ptm_type=str(row["ptm_type"]),
+                ccd_code=str(row.get("ccd_code") or "").strip().upper(),
                 site_num=as_int(row.get("site_num")),
                 sim_time_ns=as_float(row.get("sim_time_ns"), 10.0),
             )
@@ -154,8 +171,9 @@ def load_systems(manifest_path: Path, csv_path: Path) -> list[SystemRow]:
         reader = csv.DictReader(handle)
         return [
             SystemRow(
-                system_id=row.get("system") or infer_system_id(row),
+                system_id=row.get("system") or row.get("protein_name") or infer_system_id(row),
                 ptm_type=row.get("ptm_type", ""),
+                ccd_code=str(row.get("site_res") or row.get("site_resname") or "").strip().upper(),
                 site_num=as_int(row.get("site_num") or row.get("site_resnum")),
                 sim_time_ns=as_float(row.get("sim_time_ns"), 10.0),
             )
@@ -174,21 +192,52 @@ def build_one(
     frames: int,
     mdtraj_available: bool,
     allow_unprocessed_copy: bool,
+    skip_existing: bool,
     dry_run: bool,
 ) -> dict[str, object]:
     remote_dir = f"{remote_runs}/{row.ptm_type}/{row.system_id}/rep1"
+    out_pdb = out_dir / f"{row.system_id}.pdb"
+    out_gro = out_dir / f"{row.system_id}.gro"
+    out_xtc = out_dir / f"{row.system_id}.xtc"
+    if skip_existing and out_pdb.exists() and out_gro.exists() and out_xtc.exists():
+        return {
+            "system_id": row.system_id,
+            "ptm_type": row.ptm_type,
+            "pdb": out_pdb.name,
+            "gro": out_gro.name,
+            "xtc": out_xtc.name,
+            "size_bytes": out_xtc.stat().st_size,
+            "sim_time_ns": row.sim_time_ns,
+            "source": "existing",
+        }
+
     local_dir = tmp_dir / row.system_id
     if local_dir.exists():
         shutil.rmtree(local_dir)
     local_dir.mkdir()
 
-    gro_remote = first_existing_remote(
-        remote,
-        [f"{remote_dir}/md.gro", f"{remote_dir}/start.gro"],
-    )
-    # Prefer the no-PBC trajectory and fit it locally with mdtraj. The upstream
-    # md_fit.xtc can be atom-stripped in some runs and may not match md.gro.
-    xtc_candidates = [f"{remote_dir}/md_noPBC.xtc", f"{remote_dir}/md.xtc", f"{remote_dir}/md_fit.xtc"]
+    cleanup_remote_dir: str | None = None
+    fit_remote = first_existing_remote(remote, [f"{remote_dir}/md_fit.xtc"])
+    gro_remote = None
+    xtc_candidates = []
+    if fit_remote and row.ccd_code:
+        gro_remote = build_remote_protein_ptm_topology(
+            remote=remote,
+            remote_dir=remote_dir,
+            ccd_code=row.ccd_code,
+        )
+        if gro_remote:
+            cleanup_remote_dir = posixpath.dirname(gro_remote)
+            xtc_candidates = [fit_remote]
+
+    if not gro_remote:
+        gro_remote = first_existing_remote(
+            remote,
+            [f"{remote_dir}/md.gro", f"{remote_dir}/start.gro"],
+        )
+        # Fallback path. These files are larger, but keep the rollout robust
+        # when the upstream fitted trajectory or PTM index group is absent.
+        xtc_candidates = [f"{remote_dir}/md_noPBC.xtc", f"{remote_dir}/md.xtc", f"{remote_dir}/md_fit.xtc"]
     xtc_remote = first_existing_remote(remote, xtc_candidates)
     if not gro_remote or not xtc_remote:
         raise FileNotFoundError(f"missing remote topology or trajectory in {remote_dir}")
@@ -203,12 +252,15 @@ def build_one(
 
     local_gro = local_dir / "input.gro"
     local_xtc = local_dir / "input.xtc"
-    run(["scp", f"{remote}:{gro_remote}", str(local_gro)])
-    run(["scp", f"{remote}:{xtc_remote}", str(local_xtc)])
-
-    out_pdb = out_dir / f"{row.system_id}.pdb"
-    out_gro = out_dir / f"{row.system_id}.gro"
-    out_xtc = out_dir / f"{row.system_id}.xtc"
+    try:
+        run(["scp", f"{remote}:{gro_remote}", str(local_gro)])
+        run(["scp", f"{remote}:{xtc_remote}", str(local_xtc)])
+    finally:
+        if cleanup_remote_dir:
+            subprocess.run(
+                ["ssh", remote, f"rm -rf {shell_quote(cleanup_remote_dir)}"],
+                check=False,
+            )
 
     if mdtraj_available:
         process_with_mdtraj(
@@ -233,6 +285,7 @@ def build_one(
         "xtc": out_xtc.name,
         "size_bytes": out_xtc.stat().st_size,
         "sim_time_ns": row.sim_time_ns,
+        "source": "md_fit" if fit_remote and cleanup_remote_dir else "fallback",
     }
 
 
@@ -272,6 +325,37 @@ def process_with_mdtraj(
     slim[0].save_pdb(str(output_pdb))
     slim[0].save_gro(str(output_gro))
     slim.save_xtc(str(output_xtc))
+
+
+def build_remote_protein_ptm_topology(
+    *,
+    remote: str,
+    remote_dir: str,
+    ccd_code: str,
+) -> str | None:
+    group_name = f"Protein_{ccd_code}"
+    command = (
+        "source ~/software/miniconda3/etc/profile.d/conda.sh 2>/dev/null; "
+        "conda activate md 2>/dev/null; "
+        f"cd {shell_quote(remote_dir)}; "
+        "tmp=$(mktemp -d /tmp/dynamo_web_top_XXXXXX); "
+        "printf '1|13\\nq\\n' | "
+        "gmx_mpi make_ndx -f md.tpr -o \"$tmp/protein_ptm.ndx\" >/dev/null 2>&1; "
+        f"printf {shell_quote(group_name + chr(10))} | "
+        "gmx_mpi trjconv -s md.tpr -f md.gro -n \"$tmp/protein_ptm.ndx\" "
+        "-o \"$tmp/protein_ptm.gro\" >/dev/null 2>&1; "
+        "test -f \"$tmp/protein_ptm.gro\" && echo \"$tmp/protein_ptm.gro\""
+    )
+    result = subprocess.run(
+        ["ssh", remote, command],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode == 0 and result.stdout.strip():
+        return result.stdout.strip().splitlines()[0]
+    return None
 
 
 def first_existing_remote(remote: str, candidates: Iterable[str]) -> str | None:

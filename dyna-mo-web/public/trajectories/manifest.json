@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/build_web_trajectories.py",
-  "requested": 2,
-  "available": 2,
+  "requested": 125,
+  "available": 125,
   "failed": 0,
   "systems": [
     {
@@ -11,16 +11,1248 @@
       "gro": "a6nhq2_k76_acetyl.gro",
       "xtc": "a6nhq2_k76_acetyl.xtc",
       "size_bytes": 722336,
-      "sim_time_ns": 10.0
+      "sim_time_ns": 10.0,
+      "source": "existing"
     },
     {
-      "system_id": "a6ndi0_k202_methyl",
-      "ptm_type": "methyl_K",
-      "pdb": "a6ndi0_k202_methyl.pdb",
-      "gro": "a6ndi0_k202_methyl.gro",
-      "xtc": "a6ndi0_k202_methyl.xtc",
-      "size_bytes": 1423128,
-      "sim_time_ns": 10.0
+      "system_id": "o00178_k466_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o00178_k466_acetyl.pdb",
+      "gro": "o00178_k466_acetyl.gro",
+      "xtc": "o00178_k466_acetyl.xtc",
+      "size_bytes": 1702724,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o00194_k150_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o00194_k150_acetyl.pdb",
+      "gro": "o00194_k150_acetyl.gro",
+      "xtc": "o00194_k150_acetyl.xtc",
+      "size_bytes": 602532,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o14787_k861_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o14787_k861_acetyl.pdb",
+      "gro": "o14787_k861_acetyl.gro",
+      "xtc": "o14787_k861_acetyl.xtc",
+      "size_bytes": 2729860,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o14907_k12_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o14907_k12_acetyl.pdb",
+      "gro": "o14907_k12_acetyl.gro",
+      "xtc": "o14907_k12_acetyl.xtc",
+      "size_bytes": 357752,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o14979_k10_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o14979_k10_acetyl.pdb",
+      "gro": "o14979_k10_acetyl.gro",
+      "xtc": "o14979_k10_acetyl.xtc",
+      "size_bytes": 695136,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o14983_k35_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o14983_k35_acetyl.pdb",
+      "gro": "o14983_k35_acetyl.gro",
+      "xtc": "o14983_k35_acetyl.xtc",
+      "size_bytes": 2930104,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o15305_k76_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o15305_k76_acetyl.pdb",
+      "gro": "o15305_k76_acetyl.gro",
+      "xtc": "o15305_k76_acetyl.xtc",
+      "size_bytes": 764432,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o15327_k84_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o15327_k84_acetyl.pdb",
+      "gro": "o15327_k84_acetyl.gro",
+      "xtc": "o15327_k84_acetyl.xtc",
+      "size_bytes": 2721504,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o15540_k49_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o15540_k49_acetyl.pdb",
+      "gro": "o15540_k49_acetyl.gro",
+      "xtc": "o15540_k49_acetyl.xtc",
+      "size_bytes": 411320,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o43299_k22_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o43299_k22_acetyl.pdb",
+      "gro": "o43299_k22_acetyl.gro",
+      "xtc": "o43299_k22_acetyl.xtc",
+      "size_bytes": 2390752,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o43657_k179_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o43657_k179_acetyl.pdb",
+      "gro": "o43657_k179_acetyl.gro",
+      "xtc": "o43657_k179_acetyl.xtc",
+      "size_bytes": 750384,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o43684_k222_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o43684_k222_acetyl.pdb",
+      "gro": "o43684_k222_acetyl.gro",
+      "xtc": "o43684_k222_acetyl.xtc",
+      "size_bytes": 1007896,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o43865_k276_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o43865_k276_acetyl.pdb",
+      "gro": "o43865_k276_acetyl.gro",
+      "xtc": "o43865_k276_acetyl.xtc",
+      "size_bytes": 1557516,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o75223_k131_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o75223_k131_acetyl.pdb",
+      "gro": "o75223_k131_acetyl.gro",
+      "xtc": "o75223_k131_acetyl.xtc",
+      "size_bytes": 551936,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o75365_k9_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o75365_k9_acetyl.pdb",
+      "gro": "o75365_k9_acetyl.gro",
+      "xtc": "o75365_k9_acetyl.xtc",
+      "size_bytes": 509376,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o75600_k175_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o75600_k175_acetyl.pdb",
+      "gro": "o75600_k175_acetyl.gro",
+      "xtc": "o75600_k175_acetyl.xtc",
+      "size_bytes": 1189988,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o75648_k101_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o75648_k101_acetyl.pdb",
+      "gro": "o75648_k101_acetyl.gro",
+      "xtc": "o75648_k101_acetyl.xtc",
+      "size_bytes": 1257780,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o75818_k19_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o75818_k19_acetyl.pdb",
+      "gro": "o75818_k19_acetyl.gro",
+      "xtc": "o75818_k19_acetyl.xtc",
+      "size_bytes": 1129604,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95202_k47_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95202_k47_acetyl.pdb",
+      "gro": "o95202_k47_acetyl.gro",
+      "xtc": "o95202_k47_acetyl.xtc",
+      "size_bytes": 1910092,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95274_k48_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95274_k48_acetyl.pdb",
+      "gro": "o95274_k48_acetyl.gro",
+      "xtc": "o95274_k48_acetyl.xtc",
+      "size_bytes": 650336,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95340_k292_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95340_k292_acetyl.pdb",
+      "gro": "o95340_k292_acetyl.gro",
+      "xtc": "o95340_k292_acetyl.xtc",
+      "size_bytes": 1813856,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95379_k136_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95379_k136_acetyl.pdb",
+      "gro": "o95379_k136_acetyl.gro",
+      "xtc": "o95379_k136_acetyl.xtc",
+      "size_bytes": 592608,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95394_k220_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95394_k220_acetyl.pdb",
+      "gro": "o95394_k220_acetyl.gro",
+      "xtc": "o95394_k220_acetyl.xtc",
+      "size_bytes": 1612716,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95445_k171_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95445_k171_acetyl.pdb",
+      "gro": "o95445_k171_acetyl.gro",
+      "xtc": "o95445_k171_acetyl.xtc",
+      "size_bytes": 580076,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95487_k447_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95487_k447_acetyl.pdb",
+      "gro": "o95487_k447_acetyl.gro",
+      "xtc": "o95487_k447_acetyl.xtc",
+      "size_bytes": 2604688,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95551_k187_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95551_k187_acetyl.pdb",
+      "gro": "o95551_k187_acetyl.gro",
+      "xtc": "o95551_k187_acetyl.xtc",
+      "size_bytes": 1065724,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95619_k211_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95619_k211_acetyl.pdb",
+      "gro": "o95619_k211_acetyl.gro",
+      "xtc": "o95619_k211_acetyl.xtc",
+      "size_bytes": 726384,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95782_k371_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "o95782_k371_acetyl.pdb",
+      "gro": "o95782_k371_acetyl.gro",
+      "xtc": "o95782_k371_acetyl.xtc",
+      "size_bytes": 2904500,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p00338_k317_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p00338_k317_acetyl.pdb",
+      "gro": "p00338_k317_acetyl.gro",
+      "xtc": "p00338_k317_acetyl.xtc",
+      "size_bytes": 998408,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p00491_k208_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p00491_k208_acetyl.pdb",
+      "gro": "p00491_k208_acetyl.gro",
+      "xtc": "p00491_k208_acetyl.xtc",
+      "size_bytes": 867560,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p01034_k83_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p01034_k83_acetyl.pdb",
+      "gro": "p01034_k83_acetyl.gro",
+      "xtc": "p01034_k83_acetyl.xtc",
+      "size_bytes": 345716,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p01111_k147_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p01111_k147_acetyl.pdb",
+      "gro": "p01111_k147_acetyl.gro",
+      "xtc": "p01111_k147_acetyl.xtc",
+      "size_bytes": 576152,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p01137_k275_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p01137_k275_acetyl.pdb",
+      "gro": "p01137_k275_acetyl.gro",
+      "xtc": "p01137_k275_acetyl.xtc",
+      "size_bytes": 1115032,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p02656_k71_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p02656_k71_acetyl.pdb",
+      "gro": "p02656_k71_acetyl.gro",
+      "xtc": "p02656_k71_acetyl.xtc",
+      "size_bytes": 308696,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p02749_k59_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p02749_k59_acetyl.pdb",
+      "gro": "p02749_k59_acetyl.gro",
+      "xtc": "p02749_k59_acetyl.xtc",
+      "size_bytes": 994080,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p04216_k60_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p04216_k60_acetyl.pdb",
+      "gro": "p04216_k60_acetyl.gro",
+      "xtc": "p04216_k60_acetyl.xtc",
+      "size_bytes": 496544,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p05120_k147_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p05120_k147_acetyl.pdb",
+      "gro": "p05120_k147_acetyl.gro",
+      "xtc": "p05120_k147_acetyl.xtc",
+      "size_bytes": 1263928,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p05166_k101_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p05166_k101_acetyl.pdb",
+      "gro": "p05166_k101_acetyl.gro",
+      "xtc": "p05166_k101_acetyl.xtc",
+      "size_bytes": 1583396,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p05187_k109_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p05187_k109_acetyl.pdb",
+      "gro": "p05187_k109_acetyl.gro",
+      "xtc": "p05187_k109_acetyl.xtc",
+      "size_bytes": 1488828,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p05452_k154_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p05452_k154_acetyl.pdb",
+      "gro": "p05452_k154_acetyl.gro",
+      "xtc": "p05452_k154_acetyl.xtc",
+      "size_bytes": 530200,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p06737_k9_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p06737_k9_acetyl.pdb",
+      "gro": "p06737_k9_acetyl.gro",
+      "xtc": "p06737_k9_acetyl.xtc",
+      "size_bytes": 2598380,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p07358_k439_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p07358_k439_acetyl.pdb",
+      "gro": "p07358_k439_acetyl.gro",
+      "xtc": "p07358_k439_acetyl.xtc",
+      "size_bytes": 1661584,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p08473_k113_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p08473_k113_acetyl.pdb",
+      "gro": "p08473_k113_acetyl.gro",
+      "xtc": "p08473_k113_acetyl.xtc",
+      "size_bytes": 2249784,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p08567_k69_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p08567_k69_acetyl.pdb",
+      "gro": "p08567_k69_acetyl.gro",
+      "xtc": "p08567_k69_acetyl.xtc",
+      "size_bytes": 1088532,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p09211_k189_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p09211_k189_acetyl.pdb",
+      "gro": "p09211_k189_acetyl.gro",
+      "xtc": "p09211_k189_acetyl.xtc",
+      "size_bytes": 642564,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p09234_k3_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p09234_k3_acetyl.pdb",
+      "gro": "p09234_k3_acetyl.gro",
+      "xtc": "p09234_k3_acetyl.xtc",
+      "size_bytes": 213068,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p09455_k37_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p09455_k37_acetyl.pdb",
+      "gro": "p09455_k37_acetyl.gro",
+      "xtc": "p09455_k37_acetyl.xtc",
+      "size_bytes": 434144,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p09884_k954_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p09884_k954_acetyl.pdb",
+      "gro": "p09884_k954_acetyl.gro",
+      "xtc": "p09884_k954_acetyl.xtc",
+      "size_bytes": 4394480,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p0c0l5_k74_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p0c0l5_k74_acetyl.pdb",
+      "gro": "p0c0l5_k74_acetyl.gro",
+      "xtc": "p0c0l5_k74_acetyl.xtc",
+      "size_bytes": 5170736,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p0dox7_k190_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p0dox7_k190_acetyl.pdb",
+      "gro": "p0dox7_k190_acetyl.gro",
+      "xtc": "p0dox7_k190_acetyl.xtc",
+      "size_bytes": 642996,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p0dp03_k84_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p0dp03_k84_acetyl.pdb",
+      "gro": "p0dp03_k84_acetyl.gro",
+      "xtc": "p0dp03_k84_acetyl.xtc",
+      "size_bytes": 362068,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p10768_k200_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p10768_k200_acetyl.pdb",
+      "gro": "p10768_k200_acetyl.gro",
+      "xtc": "p10768_k200_acetyl.xtc",
+      "size_bytes": 864072,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p11216_k464_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p11216_k464_acetyl.pdb",
+      "gro": "p11216_k464_acetyl.gro",
+      "xtc": "p11216_k464_acetyl.xtc",
+      "size_bytes": 2613992,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p11245_k188_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p11245_k188_acetyl.pdb",
+      "gro": "p11245_k188_acetyl.gro",
+      "xtc": "p11245_k188_acetyl.xtc",
+      "size_bytes": 916724,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p11586_k57_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p11586_k57_acetyl.pdb",
+      "gro": "p11586_k57_acetyl.gro",
+      "xtc": "p11586_k57_acetyl.xtc",
+      "size_bytes": 2752792,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p11908_k280_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p11908_k280_acetyl.pdb",
+      "gro": "p11908_k280_acetyl.gro",
+      "xtc": "p11908_k280_acetyl.xtc",
+      "size_bytes": 946104,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p12004_k164_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p12004_k164_acetyl.pdb",
+      "gro": "p12004_k164_acetyl.gro",
+      "xtc": "p12004_k164_acetyl.xtc",
+      "size_bytes": 765532,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p12955_k183_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p12955_k183_acetyl.pdb",
+      "gro": "p12955_k183_acetyl.gro",
+      "xtc": "p12955_k183_acetyl.xtc",
+      "size_bytes": 1431236,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p12956_k198_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p12956_k198_acetyl.pdb",
+      "gro": "p12956_k198_acetyl.gro",
+      "xtc": "p12956_k198_acetyl.xtc",
+      "size_bytes": 1874292,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p13995_k54_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p13995_k54_acetyl.pdb",
+      "gro": "p13995_k54_acetyl.gro",
+      "xtc": "p13995_k54_acetyl.xtc",
+      "size_bytes": 927612,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p14625_k653_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p14625_k653_acetyl.pdb",
+      "gro": "p14625_k653_acetyl.gro",
+      "xtc": "p14625_k653_acetyl.xtc",
+      "size_bytes": 2287380,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p19823_k421_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p19823_k421_acetyl.pdb",
+      "gro": "p19823_k421_acetyl.gro",
+      "xtc": "p19823_k421_acetyl.xtc",
+      "size_bytes": 2681636,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p19878_k181_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p19878_k181_acetyl.pdb",
+      "gro": "p19878_k181_acetyl.gro",
+      "xtc": "p19878_k181_acetyl.xtc",
+      "size_bytes": 1623092,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p20292_k96_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p20292_k96_acetyl.pdb",
+      "gro": "p20292_k96_acetyl.gro",
+      "xtc": "p20292_k96_acetyl.xtc",
+      "size_bytes": 507724,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p21964_k257_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p21964_k257_acetyl.pdb",
+      "gro": "p21964_k257_acetyl.gro",
+      "xtc": "p21964_k257_acetyl.xtc",
+      "size_bytes": 802484,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p23526_k184_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p23526_k184_acetyl.pdb",
+      "gro": "p23526_k184_acetyl.gro",
+      "xtc": "p23526_k184_acetyl.xtc",
+      "size_bytes": 1285140,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p25398_k99_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p25398_k99_acetyl.pdb",
+      "gro": "p25398_k99_acetyl.gro",
+      "xtc": "p25398_k99_acetyl.xtc",
+      "size_bytes": 401444,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p25786_k39_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p25786_k39_acetyl.pdb",
+      "gro": "p25786_k39_acetyl.gro",
+      "xtc": "p25786_k39_acetyl.xtc",
+      "size_bytes": 706092,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p25787_k52_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p25787_k52_acetyl.pdb",
+      "gro": "p25787_k52_acetyl.gro",
+      "xtc": "p25787_k52_acetyl.xtc",
+      "size_bytes": 680472,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p26440_k115_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p26440_k115_acetyl.pdb",
+      "gro": "p26440_k115_acetyl.gro",
+      "xtc": "p26440_k115_acetyl.xtc",
+      "size_bytes": 1166340,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p27361_k262_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p27361_k262_acetyl.pdb",
+      "gro": "p27361_k262_acetyl.gro",
+      "xtc": "p27361_k262_acetyl.xtc",
+      "size_bytes": 1101888,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p27707_k97_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p27707_k97_acetyl.pdb",
+      "gro": "p27707_k97_acetyl.gro",
+      "xtc": "p27707_k97_acetyl.xtc",
+      "size_bytes": 790572,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p28066_k228_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p28066_k228_acetyl.pdb",
+      "gro": "p28066_k228_acetyl.gro",
+      "xtc": "p28066_k228_acetyl.xtc",
+      "size_bytes": 686312,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p28340_k978_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p28340_k978_acetyl.pdb",
+      "gro": "p28340_k978_acetyl.gro",
+      "xtc": "p28340_k978_acetyl.xtc",
+      "size_bytes": 3265712,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p28347_k138_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p28347_k138_acetyl.pdb",
+      "gro": "p28347_k138_acetyl.gro",
+      "xtc": "p28347_k138_acetyl.xtc",
+      "size_bytes": 1304156,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p28799_k477_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p28799_k477_acetyl.pdb",
+      "gro": "p28799_k477_acetyl.gro",
+      "xtc": "p28799_k477_acetyl.xtc",
+      "size_bytes": 1624496,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p28838_k31_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p28838_k31_acetyl.pdb",
+      "gro": "p28838_k31_acetyl.gro",
+      "xtc": "p28838_k31_acetyl.xtc",
+      "size_bytes": 1429872,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p29762_k39_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p29762_k39_acetyl.pdb",
+      "gro": "p29762_k39_acetyl.gro",
+      "xtc": "p29762_k39_acetyl.xtc",
+      "size_bytes": 429032,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30041_k209_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p30041_k209_acetyl.pdb",
+      "gro": "p30041_k209_acetyl.gro",
+      "xtc": "p30041_k209_acetyl.xtc",
+      "size_bytes": 693564,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30043_k178_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p30043_k178_acetyl.pdb",
+      "gro": "p30043_k178_acetyl.gro",
+      "xtc": "p30043_k178_acetyl.xtc",
+      "size_bytes": 610536,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30044_k64_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p30044_k64_acetyl.pdb",
+      "gro": "p30044_k64_acetyl.gro",
+      "xtc": "p30044_k64_acetyl.xtc",
+      "size_bytes": 471072,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30533_k214_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p30533_k214_acetyl.pdb",
+      "gro": "p30533_k214_acetyl.gro",
+      "xtc": "p30533_k214_acetyl.xtc",
+      "size_bytes": 1101700,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p31321_k361_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p31321_k361_acetyl.pdb",
+      "gro": "p31321_k361_acetyl.gro",
+      "xtc": "p31321_k361_acetyl.xtc",
+      "size_bytes": 1150792,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p31946_k69_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p31946_k69_acetyl.pdb",
+      "gro": "p31946_k69_acetyl.gro",
+      "xtc": "p31946_k69_acetyl.xtc",
+      "size_bytes": 748584,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p32322_k51_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p32322_k51_acetyl.pdb",
+      "gro": "p32322_k51_acetyl.gro",
+      "xtc": "p32322_k51_acetyl.xtc",
+      "size_bytes": 883848,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p33991_k365_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p33991_k365_acetyl.pdb",
+      "gro": "p33991_k365_acetyl.gro",
+      "xtc": "p33991_k365_acetyl.xtc",
+      "size_bytes": 2296204,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p33992_k263_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p33992_k263_acetyl.pdb",
+      "gro": "p33992_k263_acetyl.gro",
+      "xtc": "p33992_k263_acetyl.xtc",
+      "size_bytes": 2198348,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p35270_k224_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p35270_k224_acetyl.pdb",
+      "gro": "p35270_k224_acetyl.gro",
+      "xtc": "p35270_k224_acetyl.xtc",
+      "size_bytes": 756368,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p35858_k195_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p35858_k195_acetyl.pdb",
+      "gro": "p35858_k195_acetyl.gro",
+      "xtc": "p35858_k195_acetyl.xtc",
+      "size_bytes": 1695160,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p36542_k68_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p36542_k68_acetyl.pdb",
+      "gro": "p36542_k68_acetyl.gro",
+      "xtc": "p36542_k68_acetyl.xtc",
+      "size_bytes": 865820,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p36871_k16_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p36871_k16_acetyl.pdb",
+      "gro": "p36871_k16_acetyl.gro",
+      "xtc": "p36871_k16_acetyl.xtc",
+      "size_bytes": 1670876,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p38117_k110_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p38117_k110_acetyl.pdb",
+      "gro": "p38117_k110_acetyl.gro",
+      "xtc": "p38117_k110_acetyl.xtc",
+      "size_bytes": 761812,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p39023_k298_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p39023_k298_acetyl.pdb",
+      "gro": "p39023_k298_acetyl.gro",
+      "xtc": "p39023_k298_acetyl.xtc",
+      "size_bytes": 1253012,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p40429_k157_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p40429_k157_acetyl.pdb",
+      "gro": "p40429_k157_acetyl.gro",
+      "xtc": "p40429_k157_acetyl.xtc",
+      "size_bytes": 646164,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p40616_k157_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p40616_k157_acetyl.pdb",
+      "gro": "p40616_k157_acetyl.gro",
+      "xtc": "p40616_k157_acetyl.xtc",
+      "size_bytes": 560704,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p40926_k308_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p40926_k308_acetyl.pdb",
+      "gro": "p40926_k308_acetyl.gro",
+      "xtc": "p40926_k308_acetyl.xtc",
+      "size_bytes": 906484,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p41567_k30_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p41567_k30_acetyl.pdb",
+      "gro": "p41567_k30_acetyl.gro",
+      "xtc": "p41567_k30_acetyl.xtc",
+      "size_bytes": 280452,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p42336_k862_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p42336_k862_acetyl.pdb",
+      "gro": "p42336_k862_acetyl.gro",
+      "xtc": "p42336_k862_acetyl.xtc",
+      "size_bytes": 3345968,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p43155_k228_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p43155_k228_acetyl.pdb",
+      "gro": "p43155_k228_acetyl.gro",
+      "xtc": "p43155_k228_acetyl.xtc",
+      "size_bytes": 1860128,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p43304_k634_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p43304_k634_acetyl.pdb",
+      "gro": "p43304_k634_acetyl.gro",
+      "xtc": "p43304_k634_acetyl.xtc",
+      "size_bytes": 2159648,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p43405_k399_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p43405_k399_acetyl.pdb",
+      "gro": "p43405_k399_acetyl.gro",
+      "xtc": "p43405_k399_acetyl.xtc",
+      "size_bytes": 1942816,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p46063_k171_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p46063_k171_acetyl.pdb",
+      "gro": "p46063_k171_acetyl.gro",
+      "xtc": "p46063_k171_acetyl.xtc",
+      "size_bytes": 1815584,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p47813_k80_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p47813_k80_acetyl.pdb",
+      "gro": "p47813_k80_acetyl.gro",
+      "xtc": "p47813_k80_acetyl.xtc",
+      "size_bytes": 325212,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p49116_k206_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p49116_k206_acetyl.pdb",
+      "gro": "p49116_k206_acetyl.gro",
+      "xtc": "p49116_k206_acetyl.xtc",
+      "size_bytes": 1749304,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p49368_k517_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p49368_k517_acetyl.pdb",
+      "gro": "p49368_k517_acetyl.gro",
+      "xtc": "p49368_k517_acetyl.xtc",
+      "size_bytes": 1557252,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p49406_k203_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p49406_k203_acetyl.pdb",
+      "gro": "p49406_k203_acetyl.gro",
+      "xtc": "p49406_k203_acetyl.xtc",
+      "size_bytes": 705416,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p49459_k66_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p49459_k66_acetyl.pdb",
+      "gro": "p49459_k66_acetyl.gro",
+      "xtc": "p49459_k66_acetyl.xtc",
+      "size_bytes": 481412,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p49720_k98_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p49720_k98_acetyl.pdb",
+      "gro": "p49720_k98_acetyl.gro",
+      "xtc": "p49720_k98_acetyl.xtc",
+      "size_bytes": 618908,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p50613_k328_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p50613_k328_acetyl.pdb",
+      "gro": "p50613_k328_acetyl.gro",
+      "xtc": "p50613_k328_acetyl.xtc",
+      "size_bytes": 1035748,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p51553_k180_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p51553_k180_acetyl.pdb",
+      "gro": "p51553_k180_acetyl.gro",
+      "xtc": "p51553_k180_acetyl.xtc",
+      "size_bytes": 1024416,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p51784_k484_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p51784_k484_acetyl.pdb",
+      "gro": "p51784_k484_acetyl.gro",
+      "xtc": "p51784_k484_acetyl.xtc",
+      "size_bytes": 2796676,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p52564_k1_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p52564_k1_acetyl.pdb",
+      "gro": "p52564_k1_acetyl.gro",
+      "xtc": "p52564_k1_acetyl.xtc",
+      "size_bytes": 979552,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p53004_k285_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p53004_k285_acetyl.pdb",
+      "gro": "p53004_k285_acetyl.gro",
+      "xtc": "p53004_k285_acetyl.xtc",
+      "size_bytes": 897392,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p54252_k200_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p54252_k200_acetyl.pdb",
+      "gro": "p54252_k200_acetyl.gro",
+      "xtc": "p54252_k200_acetyl.xtc",
+      "size_bytes": 1119468,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p54851_k126_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p54851_k126_acetyl.pdb",
+      "gro": "p54851_k126_acetyl.gro",
+      "xtc": "p54851_k126_acetyl.xtc",
+      "size_bytes": 529312,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p58546_k24_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p58546_k24_acetyl.pdb",
+      "gro": "p58546_k24_acetyl.gro",
+      "xtc": "p58546_k24_acetyl.xtc",
+      "size_bytes": 357352,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p60891_k102_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p60891_k102_acetyl.pdb",
+      "gro": "p60891_k102_acetyl.gro",
+      "xtc": "p60891_k102_acetyl.xtc",
+      "size_bytes": 945132,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p60900_k52_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p60900_k52_acetyl.pdb",
+      "gro": "p60900_k52_acetyl.gro",
+      "xtc": "p60900_k52_acetyl.xtc",
+      "size_bytes": 746636,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p61247_k67_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p61247_k67_acetyl.pdb",
+      "gro": "p61247_k67_acetyl.gro",
+      "xtc": "p61247_k67_acetyl.xtc",
+      "size_bytes": 741708,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p61586_k7_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p61586_k7_acetyl.pdb",
+      "gro": "p61586_k7_acetyl.gro",
+      "xtc": "p61586_k7_acetyl.xtc",
+      "size_bytes": 567596,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p61599_k162_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p61599_k162_acetyl.pdb",
+      "gro": "p61599_k162_acetyl.gro",
+      "xtc": "p61599_k162_acetyl.xtc",
+      "size_bytes": 564692,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p61758_k162_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p61758_k162_acetyl.pdb",
+      "gro": "p61758_k162_acetyl.gro",
+      "xtc": "p61758_k162_acetyl.xtc",
+      "size_bytes": 561188,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p61966_k133_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p61966_k133_acetyl.pdb",
+      "gro": "p61966_k133_acetyl.gro",
+      "xtc": "p61966_k133_acetyl.xtc",
+      "size_bytes": 515704,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p62072_k57_acetyl",
+      "ptm_type": "acet_K",
+      "pdb": "p62072_k57_acetyl.pdb",
+      "gro": "p62072_k57_acetyl.gro",
+      "xtc": "p62072_k57_acetyl.xtc",
+      "size_bytes": 286752,
+      "sim_time_ns": 10.0,
+      "source": "existing"
     }
   ],
   "failures": []
