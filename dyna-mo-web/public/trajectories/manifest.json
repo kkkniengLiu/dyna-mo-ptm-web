@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/build_web_trajectories.py",
-  "requested": 375,
-  "available": 375,
+  "requested": 500,
+  "available": 500,
   "failed": 0,
   "systems": [
     {
@@ -3751,6 +3751,1256 @@
       "gro": "f0nie4_k153_methyl.gro",
       "xtc": "f0nie4_k153_methyl.xtc",
       "size_bytes": 1382908,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nif7_k281_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nif7_k281_methyl.pdb",
+      "gro": "f0nif7_k281_methyl.gro",
+      "xtc": "f0nif7_k281_methyl.xtc",
+      "size_bytes": 1109344,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nig1_k153_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nig1_k153_methyl.pdb",
+      "gro": "f0nig1_k153_methyl.gro",
+      "xtc": "f0nig1_k153_methyl.xtc",
+      "size_bytes": 825488,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nig6_k333_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nig6_k333_methyl.pdb",
+      "gro": "f0nig6_k333_methyl.gro",
+      "xtc": "f0nig6_k333_methyl.xtc",
+      "size_bytes": 1230352,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nih2_k14_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nih2_k14_methyl.pdb",
+      "gro": "f0nih2_k14_methyl.gro",
+      "xtc": "f0nih2_k14_methyl.xtc",
+      "size_bytes": 1071536,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nij8_k78_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nij8_k78_methyl.pdb",
+      "gro": "f0nij8_k78_methyl.gro",
+      "xtc": "f0nij8_k78_methyl.xtc",
+      "size_bytes": 405276,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nik2_k68_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nik2_k68_methyl.pdb",
+      "gro": "f0nik2_k68_methyl.gro",
+      "xtc": "f0nik2_k68_methyl.xtc",
+      "size_bytes": 405780,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nil8_k595_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nil8_k595_methyl.pdb",
+      "gro": "f0nil8_k595_methyl.gro",
+      "xtc": "f0nil8_k595_methyl.xtc",
+      "size_bytes": 2713556,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f0nil9_k184_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f0nil9_k184_methyl.pdb",
+      "gro": "f0nil9_k184_methyl.gro",
+      "xtc": "f0nil9_k184_methyl.xtc",
+      "size_bytes": 891300,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "f4jtx3_k408_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "f4jtx3_k408_methyl.pdb",
+      "gro": "f4jtx3_k408_methyl.gro",
+      "xtc": "f4jtx3_k408_methyl.xtc",
+      "size_bytes": 1824928,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "h0yns1_k3_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "h0yns1_k3_methyl.pdb",
+      "gro": "h0yns1_k3_methyl.gro",
+      "xtc": "h0yns1_k3_methyl.xtc",
+      "size_bytes": 274312,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "j3kre7_k1016_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "j3kre7_k1016_methyl.pdb",
+      "gro": "j3kre7_k1016_methyl.gro",
+      "xtc": "j3kre7_k1016_methyl.xtc",
+      "size_bytes": 3403888,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "m1bv39_k34_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "m1bv39_k34_methyl.pdb",
+      "gro": "m1bv39_k34_methyl.gro",
+      "xtc": "m1bv39_k34_methyl.xtc",
+      "size_bytes": 713300,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o00299_k163_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o00299_k163_methyl.pdb",
+      "gro": "o00299_k163_methyl.gro",
+      "xtc": "o00299_k163_methyl.xtc",
+      "size_bytes": 730912,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o15105-3_k70_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o15105-3_k70_methyl.pdb",
+      "gro": "o15105-3_k70_methyl.gro",
+      "xtc": "o15105-3_k70_methyl.xtc",
+      "size_bytes": 1263600,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o15182_k51_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o15182_k51_methyl.pdb",
+      "gro": "o15182_k51_methyl.gro",
+      "xtc": "o15182_k51_methyl.xtc",
+      "size_bytes": 532336,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o43684_k50_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o43684_k50_methyl.pdb",
+      "gro": "o43684_k50_methyl.gro",
+      "xtc": "o43684_k50_methyl.xtc",
+      "size_bytes": 995292,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o43776_k506_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o43776_k506_methyl.pdb",
+      "gro": "o43776_k506_methyl.gro",
+      "xtc": "o43776_k506_methyl.xtc",
+      "size_bytes": 1702328,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o59632_k5_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o59632_k5_methyl.pdb",
+      "gro": "o59632_k5_methyl.gro",
+      "xtc": "o59632_k5_methyl.xtc",
+      "size_bytes": 205812,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o60814_k23_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o60814_k23_methyl.pdb",
+      "gro": "o60814_k23_methyl.gro",
+      "xtc": "o60814_k23_methyl.xtc",
+      "size_bytes": 284656,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o64973_k224_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o64973_k224_methyl.pdb",
+      "gro": "o64973_k224_methyl.gro",
+      "xtc": "o64973_k224_methyl.xtc",
+      "size_bytes": 2725464,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o75746_k369_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o75746_k369_methyl.pdb",
+      "gro": "o75746_k369_methyl.gro",
+      "xtc": "o75746_k369_methyl.xtc",
+      "size_bytes": 1983276,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "o95456_k193_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "o95456_k193_methyl.pdb",
+      "gro": "o95456_k193_methyl.gro",
+      "xtc": "o95456_k193_methyl.xtc",
+      "size_bytes": 892208,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p00387_k228_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p00387_k228_methyl.pdb",
+      "gro": "p00387_k228_methyl.gro",
+      "xtc": "p00387_k228_methyl.xtc",
+      "size_bytes": 940320,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p00966_k120_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p00966_k120_methyl.pdb",
+      "gro": "p00966_k120_methyl.gro",
+      "xtc": "p00966_k120_methyl.xtc",
+      "size_bytes": 1261608,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p02749_k283_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p02749_k283_methyl.pdb",
+      "gro": "p02749_k283_methyl.gro",
+      "xtc": "p02749_k283_methyl.xtc",
+      "size_bytes": 999752,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p02986_k12_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p02986_k12_methyl.pdb",
+      "gro": "p02986_k12_methyl.gro",
+      "xtc": "p02986_k12_methyl.xtc",
+      "size_bytes": 284128,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p04179-4_k84_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p04179-4_k84_methyl.pdb",
+      "gro": "p04179-4_k84_methyl.gro",
+      "xtc": "p04179-4_k84_methyl.xtc",
+      "size_bytes": 545388,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p06703_k47_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p06703_k47_methyl.pdb",
+      "gro": "p06703_k47_methyl.gro",
+      "xtc": "p06703_k47_methyl.xtc",
+      "size_bytes": 284632,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p07437_k252_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p07437_k252_methyl.pdb",
+      "gro": "p07437_k252_methyl.gro",
+      "xtc": "p07437_k252_methyl.xtc",
+      "size_bytes": 1343476,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p07737_k91_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p07737_k91_methyl.pdb",
+      "gro": "p07737_k91_methyl.gro",
+      "xtc": "p07737_k91_methyl.xtc",
+      "size_bytes": 412848,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p08253_k44_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p08253_k44_methyl.pdb",
+      "gro": "p08253_k44_methyl.gro",
+      "xtc": "p08253_k44_methyl.xtc",
+      "size_bytes": 1919956,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p0dn25_k112_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p0dn25_k112_methyl.pdb",
+      "gro": "p0dn25_k112_methyl.gro",
+      "xtc": "p0dn25_k112_methyl.xtc",
+      "size_bytes": 820156,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p10155_k270_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p10155_k270_methyl.pdb",
+      "gro": "p10155_k270_methyl.gro",
+      "xtc": "p10155_k270_methyl.xtc",
+      "size_bytes": 1631808,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p10745_k1069_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p10745_k1069_methyl.pdb",
+      "gro": "p10745_k1069_methyl.gro",
+      "xtc": "p10745_k1069_methyl.xtc",
+      "size_bytes": 3678708,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p11142_k569_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p11142_k569_methyl.pdb",
+      "gro": "p11142_k569_methyl.gro",
+      "xtc": "p11142_k569_methyl.xtc",
+      "size_bytes": 1846284,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p11586_k328_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p11586_k328_methyl.pdb",
+      "gro": "p11586_k328_methyl.gro",
+      "xtc": "p11586_k328_methyl.xtc",
+      "size_bytes": 2744052,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p12532_k14_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p12532_k14_methyl.pdb",
+      "gro": "p12532_k14_methyl.gro",
+      "xtc": "p12532_k14_methyl.xtc",
+      "size_bytes": 1148976,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p13233_k8_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p13233_k8_methyl.pdb",
+      "gro": "p13233_k8_methyl.gro",
+      "xtc": "p13233_k8_methyl.xtc",
+      "size_bytes": 1190476,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p14868_k220_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p14868_k220_methyl.pdb",
+      "gro": "p14868_k220_methyl.gro",
+      "xtc": "p14868_k220_methyl.xtc",
+      "size_bytes": 1491548,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p15170_k127_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p15170_k127_methyl.pdb",
+      "gro": "p15170_k127_methyl.gro",
+      "xtc": "p15170_k127_methyl.xtc",
+      "size_bytes": 1309280,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p16870_k392_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p16870_k392_methyl.pdb",
+      "gro": "p16870_k392_methyl.gro",
+      "xtc": "p16870_k392_methyl.xtc",
+      "size_bytes": 1335164,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p20472_k84_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p20472_k84_methyl.pdb",
+      "gro": "p20472_k84_methyl.gro",
+      "xtc": "p20472_k84_methyl.xtc",
+      "size_bytes": 333320,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p23378_k58_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p23378_k58_methyl.pdb",
+      "gro": "p23378_k58_methyl.gro",
+      "xtc": "p23378_k58_methyl.xtc",
+      "size_bytes": 2902576,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p23921_k320_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p23921_k320_methyl.pdb",
+      "gro": "p23921_k320_methyl.gro",
+      "xtc": "p23921_k320_methyl.xtc",
+      "size_bytes": 2430996,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p28749_k680_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p28749_k680_methyl.pdb",
+      "gro": "p28749_k680_methyl.gro",
+      "xtc": "p28749_k680_methyl.xtc",
+      "size_bytes": 3272500,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p29728_k466_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p29728_k466_methyl.pdb",
+      "gro": "p29728_k466_methyl.gro",
+      "xtc": "p29728_k466_methyl.xtc",
+      "size_bytes": 2232704,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30041_k182_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p30041_k182_methyl.pdb",
+      "gro": "p30041_k182_methyl.gro",
+      "xtc": "p30041_k182_methyl.xtc",
+      "size_bytes": 693672,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30085_k106_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p30085_k106_methyl.pdb",
+      "gro": "p30085_k106_methyl.gro",
+      "xtc": "p30085_k106_methyl.xtc",
+      "size_bytes": 606924,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30086_k76_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p30086_k76_methyl.pdb",
+      "gro": "p30086_k76_methyl.gro",
+      "xtc": "p30086_k76_methyl.xtc",
+      "size_bytes": 578920,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p30273_k80_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p30273_k80_methyl.pdb",
+      "gro": "p30273_k80_methyl.gro",
+      "xtc": "p30273_k80_methyl.xtc",
+      "size_bytes": 271780,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p31040-3_k371_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p31040-3_k371_methyl.pdb",
+      "gro": "p31040-3_k371_methyl.gro",
+      "xtc": "p31040-3_k371_methyl.xtc",
+      "size_bytes": 1444912,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p32322_k47_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p32322_k47_methyl.pdb",
+      "gro": "p32322_k47_methyl.gro",
+      "xtc": "p32322_k47_methyl.xtc",
+      "size_bytes": 847960,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p35293_k45_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p35293_k45_methyl.pdb",
+      "gro": "p35293_k45_methyl.gro",
+      "xtc": "p35293_k45_methyl.xtc",
+      "size_bytes": 569600,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p38144_k14_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p38144_k14_methyl.pdb",
+      "gro": "p38144_k14_methyl.gro",
+      "xtc": "p38144_k14_methyl.xtc",
+      "size_bytes": 3476516,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p39748_k344_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p39748_k344_methyl.pdb",
+      "gro": "p39748_k344_methyl.gro",
+      "xtc": "p39748_k344_methyl.xtc",
+      "size_bytes": 1054224,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p43155_k15_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p43155_k15_methyl.pdb",
+      "gro": "p43155_k15_methyl.gro",
+      "xtc": "p43155_k15_methyl.xtc",
+      "size_bytes": 1872588,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p46460_k709_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p46460_k709_methyl.pdb",
+      "gro": "p46460_k709_methyl.gro",
+      "xtc": "p46460_k709_methyl.xtc",
+      "size_bytes": 2216652,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p47989_k442_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p47989_k442_methyl.pdb",
+      "gro": "p47989_k442_methyl.gro",
+      "xtc": "p47989_k442_methyl.xtc",
+      "size_bytes": 3935544,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p48426-2_k30_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p48426-2_k30_methyl.pdb",
+      "gro": "p48426-2_k30_methyl.gro",
+      "xtc": "p48426-2_k30_methyl.xtc",
+      "size_bytes": 1081468,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p49221_k492_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p49221_k492_methyl.pdb",
+      "gro": "p49221_k492_methyl.gro",
+      "xtc": "p49221_k492_methyl.xtc",
+      "size_bytes": 2073560,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p50398_k269_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p50398_k269_methyl.pdb",
+      "gro": "p50398_k269_methyl.gro",
+      "xtc": "p50398_k269_methyl.xtc",
+      "size_bytes": 1361324,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p50452_k263_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p50452_k263_methyl.pdb",
+      "gro": "p50452_k263_methyl.gro",
+      "xtc": "p50452_k263_methyl.xtc",
+      "size_bytes": 1161856,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p51160_k837_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p51160_k837_methyl.pdb",
+      "gro": "p51160_k837_methyl.gro",
+      "xtc": "p51160_k837_methyl.xtc",
+      "size_bytes": 2654232,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p53254_k1080_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p53254_k1080_methyl.pdb",
+      "gro": "p53254_k1080_methyl.gro",
+      "xtc": "p53254_k1080_methyl.xtc",
+      "size_bytes": 3585696,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p56182_k129_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p56182_k129_methyl.pdb",
+      "gro": "p56182_k129_methyl.gro",
+      "xtc": "p56182_k129_methyl.xtc",
+      "size_bytes": 1169824,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p57737_k627_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p57737_k627_methyl.pdb",
+      "gro": "p57737_k627_methyl.gro",
+      "xtc": "p57737_k627_methyl.xtc",
+      "size_bytes": 2710192,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p60484_k342_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p60484_k342_methyl.pdb",
+      "gro": "p60484_k342_methyl.gro",
+      "xtc": "p60484_k342_methyl.xtc",
+      "size_bytes": 1254500,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p60983_k132_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p60983_k132_methyl.pdb",
+      "gro": "p60983_k132_methyl.gro",
+      "xtc": "p60983_k132_methyl.xtc",
+      "size_bytes": 444140,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p61086_k18_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p61086_k18_methyl.pdb",
+      "gro": "p61086_k18_methyl.gro",
+      "xtc": "p61086_k18_methyl.xtc",
+      "size_bytes": 617856,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p62241_k124_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p62241_k124_methyl.pdb",
+      "gro": "p62241_k124_methyl.gro",
+      "xtc": "p62241_k124_methyl.xtc",
+      "size_bytes": 670720,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p62631_k53_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p62631_k53_methyl.pdb",
+      "gro": "p62631_k53_methyl.gro",
+      "xtc": "p62631_k53_methyl.xtc",
+      "size_bytes": 1368872,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p62937_k118_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p62937_k118_methyl.pdb",
+      "gro": "p62937_k118_methyl.gro",
+      "xtc": "p62937_k118_methyl.xtc",
+      "size_bytes": 497572,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p63241_k55_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p63241_k55_methyl.pdb",
+      "gro": "p63241_k55_methyl.gro",
+      "xtc": "p63241_k55_methyl.xtc",
+      "size_bytes": 427588,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p67870_k208_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p67870_k208_methyl.pdb",
+      "gro": "p67870_k208_methyl.gro",
+      "xtc": "p67870_k208_methyl.xtc",
+      "size_bytes": 670092,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p68371_k252_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p68371_k252_methyl.pdb",
+      "gro": "p68371_k252_methyl.gro",
+      "xtc": "p68371_k252_methyl.xtc",
+      "size_bytes": 1346840,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "p78417_k160_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "p78417_k160_methyl.pdb",
+      "gro": "p78417_k160_methyl.gro",
+      "xtc": "p78417_k160_methyl.xtc",
+      "size_bytes": 753116,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q01081_k39_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q01081_k39_methyl.pdb",
+      "gro": "q01081_k39_methyl.gro",
+      "xtc": "q01081_k39_methyl.xtc",
+      "size_bytes": 689700,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q02252-2_k104_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q02252-2_k104_methyl.pdb",
+      "gro": "q02252-2_k104_methyl.gro",
+      "xtc": "q02252-2_k104_methyl.xtc",
+      "size_bytes": 1491528,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q08499_k82_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q08499_k82_methyl.pdb",
+      "gro": "q08499_k82_methyl.gro",
+      "xtc": "q08499_k82_methyl.xtc",
+      "size_bytes": 1679048,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q09328_k731_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q09328_k731_methyl.pdb",
+      "gro": "q09328_k731_methyl.gro",
+      "xtc": "q09328_k731_methyl.xtc",
+      "size_bytes": 2267836,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q0di31_k81_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q0di31_k81_methyl.pdb",
+      "gro": "q0di31_k81_methyl.gro",
+      "xtc": "q0di31_k81_methyl.xtc",
+      "size_bytes": 340280,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q10567_k139_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q10567_k139_methyl.pdb",
+      "gro": "q10567_k139_methyl.gro",
+      "xtc": "q10567_k139_methyl.xtc",
+      "size_bytes": 2828024,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q12906_k613_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q12906_k613_methyl.pdb",
+      "gro": "q12906_k613_methyl.gro",
+      "xtc": "q12906_k613_methyl.xtc",
+      "size_bytes": 2028084,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q13232_k14_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q13232_k14_methyl.pdb",
+      "gro": "q13232_k14_methyl.gro",
+      "xtc": "q13232_k14_methyl.xtc",
+      "size_bytes": 481656,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q13303_k16_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q13303_k16_methyl.pdb",
+      "gro": "q13303_k16_methyl.gro",
+      "xtc": "q13303_k16_methyl.xtc",
+      "size_bytes": 1064284,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q13425_k164_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q13425_k164_methyl.pdb",
+      "gro": "q13425_k164_methyl.gro",
+      "xtc": "q13425_k164_methyl.xtc",
+      "size_bytes": 1517540,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q13619_k315_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q13619_k315_methyl.pdb",
+      "gro": "q13619_k315_methyl.gro",
+      "xtc": "q13619_k315_methyl.xtc",
+      "size_bytes": 2231076,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q13822_k264_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q13822_k264_methyl.pdb",
+      "gro": "q13822_k264_methyl.gro",
+      "xtc": "q13822_k264_methyl.xtc",
+      "size_bytes": 2514304,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q15695_k2_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q15695_k2_methyl.pdb",
+      "gro": "q15695_k2_methyl.gro",
+      "xtc": "q15695_k2_methyl.xtc",
+      "size_bytes": 1122804,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q16816_k304_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q16816_k304_methyl.pdb",
+      "gro": "q16816_k304_methyl.gro",
+      "xtc": "q16816_k304_methyl.xtc",
+      "size_bytes": 1192860,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q32m84_k259_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q32m84_k259_methyl.pdb",
+      "gro": "q32m84_k259_methyl.gro",
+      "xtc": "q32m84_k259_methyl.xtc",
+      "size_bytes": 1497172,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q3umc0_k78_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q3umc0_k78_methyl.pdb",
+      "gro": "q3umc0_k78_methyl.gro",
+      "xtc": "q3umc0_k78_methyl.xtc",
+      "size_bytes": 2516656,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5gan3_k80_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5gan3_k80_methyl.pdb",
+      "gro": "q5gan3_k80_methyl.gro",
+      "xtc": "q5gan3_k80_methyl.xtc",
+      "size_bytes": 487200,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5h9u9_k477_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5h9u9_k477_methyl.pdb",
+      "gro": "q5h9u9_k477_methyl.gro",
+      "xtc": "q5h9u9_k477_methyl.xtc",
+      "size_bytes": 5350696,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5jt25_k121_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5jt25_k121_methyl.pdb",
+      "gro": "q5jt25_k121_methyl.gro",
+      "xtc": "q5jt25_k121_methyl.xtc",
+      "size_bytes": 552744,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5mnz6_k81_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5mnz6_k81_methyl.pdb",
+      "gro": "q5mnz6_k81_methyl.gro",
+      "xtc": "q5mnz6_k81_methyl.xtc",
+      "size_bytes": 1039304,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5ssj5_k261_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5ssj5_k261_methyl.pdb",
+      "gro": "q5ssj5_k261_methyl.gro",
+      "xtc": "q5ssj5_k261_methyl.xtc",
+      "size_bytes": 903320,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5tgp6_k118_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5tgp6_k118_methyl.pdb",
+      "gro": "q5tgp6_k118_methyl.gro",
+      "xtc": "q5tgp6_k118_methyl.xtc",
+      "size_bytes": 1742908,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q5vte6_k131_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q5vte6_k131_methyl.pdb",
+      "gro": "q5vte6_k131_methyl.gro",
+      "xtc": "q5vte6_k131_methyl.xtc",
+      "size_bytes": 1279220,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q69gy4_k26_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q69gy4_k26_methyl.pdb",
+      "gro": "q69gy4_k26_methyl.gro",
+      "xtc": "q69gy4_k26_methyl.xtc",
+      "size_bytes": 857692,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6ipr1_k79_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6ipr1_k79_methyl.pdb",
+      "gro": "q6ipr1_k79_methyl.gro",
+      "xtc": "q6ipr1_k79_methyl.xtc",
+      "size_bytes": 303320,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6p1k8_k26_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6p1k8_k26_methyl.pdb",
+      "gro": "q6p1k8_k26_methyl.gro",
+      "xtc": "q6p1k8_k26_methyl.xtc",
+      "size_bytes": 1149232,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6p5e8_k716_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6p5e8_k716_methyl.pdb",
+      "gro": "q6p5e8_k716_methyl.gro",
+      "xtc": "q6p5e8_k716_methyl.xtc",
+      "size_bytes": 2560212,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6p7r8_k154_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6p7r8_k154_methyl.pdb",
+      "gro": "q6p7r8_k154_methyl.gro",
+      "xtc": "q6p7r8_k154_methyl.xtc",
+      "size_bytes": 948992,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6uxk5_k386_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6uxk5_k386_methyl.pdb",
+      "gro": "q6uxk5_k386_methyl.gro",
+      "xtc": "q6uxk5_k386_methyl.xtc",
+      "size_bytes": 2131344,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6uxn9_k2_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6uxn9_k2_methyl.pdb",
+      "gro": "q6uxn9_k2_methyl.gro",
+      "xtc": "q6uxn9_k2_methyl.xtc",
+      "size_bytes": 953452,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6zna5_k377_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6zna5_k377_methyl.pdb",
+      "gro": "q6zna5_k377_methyl.gro",
+      "xtc": "q6zna5_k377_methyl.xtc",
+      "size_bytes": 1750520,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q6zv50_k291_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q6zv50_k291_methyl.pdb",
+      "gro": "q6zv50_k291_methyl.gro",
+      "xtc": "q6zv50_k291_methyl.xtc",
+      "size_bytes": 1703836,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q7l2h7_k337_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q7l2h7_k337_methyl.pdb",
+      "gro": "q7l2h7_k337_methyl.gro",
+      "xtc": "q7l2h7_k337_methyl.xtc",
+      "size_bytes": 1136312,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q7lxk4_k44_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q7lxk4_k44_methyl.pdb",
+      "gro": "q7lxk4_k44_methyl.gro",
+      "xtc": "q7lxk4_k44_methyl.xtc",
+      "size_bytes": 324912,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q86sz2_k66_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q86sz2_k66_methyl.pdb",
+      "gro": "q86sz2_k66_methyl.gro",
+      "xtc": "q86sz2_k66_methyl.xtc",
+      "size_bytes": 495236,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q86uy6_k7_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q86uy6_k7_methyl.pdb",
+      "gro": "q86uy6_k7_methyl.gro",
+      "xtc": "q86uy6_k7_methyl.xtc",
+      "size_bytes": 700284,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q86yb8_k85_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q86yb8_k85_methyl.pdb",
+      "gro": "q86yb8_k85_methyl.gro",
+      "xtc": "q86yb8_k85_methyl.xtc",
+      "size_bytes": 1363440,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8bh00_k340_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8bh00_k340_methyl.pdb",
+      "gro": "q8bh00_k340_methyl.gro",
+      "xtc": "q8bh00_k340_methyl.xtc",
+      "size_bytes": 1435124,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8f7k4_k231_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8f7k4_k231_methyl.pdb",
+      "gro": "q8f7k4_k231_methyl.gro",
+      "xtc": "q8f7k4_k231_methyl.xtc",
+      "size_bytes": 1233336,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8iur7_k368_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8iur7_k368_methyl.pdb",
+      "gro": "q8iur7_k368_methyl.gro",
+      "xtc": "q8iur7_k368_methyl.xtc",
+      "size_bytes": 2009476,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8iv33_k712_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8iv33_k712_methyl.pdb",
+      "gro": "q8iv33_k712_methyl.gro",
+      "xtc": "q8iv33_k712_methyl.xtc",
+      "size_bytes": 3952992,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8iyi6_k57_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8iyi6_k57_methyl.pdb",
+      "gro": "q8iyi6_k57_methyl.gro",
+      "xtc": "q8iyi6_k57_methyl.xtc",
+      "size_bytes": 2200624,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8l5x3_k162_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8l5x3_k162_methyl.pdb",
+      "gro": "q8l5x3_k162_methyl.gro",
+      "xtc": "q8l5x3_k162_methyl.xtc",
+      "size_bytes": 567240,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8n136_k340_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8n136_k340_methyl.pdb",
+      "gro": "q8n136_k340_methyl.gro",
+      "xtc": "q8n136_k340_methyl.xtc",
+      "size_bytes": 1239528,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8n1g2_k275_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8n1g2_k275_methyl.pdb",
+      "gro": "q8n1g2_k275_methyl.gro",
+      "xtc": "q8n1g2_k275_methyl.xtc",
+      "size_bytes": 2352024,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8n7r7_k270_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8n7r7_k270_methyl.pdb",
+      "gro": "q8n7r7_k270_methyl.gro",
+      "xtc": "q8n7r7_k270_methyl.xtc",
+      "size_bytes": 940276,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8nb90_k739_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8nb90_k739_methyl.pdb",
+      "gro": "q8nb90_k739_methyl.gro",
+      "xtc": "q8nb90_k739_methyl.xtc",
+      "size_bytes": 2530012,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8ncl4_k444_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8ncl4_k444_methyl.pdb",
+      "gro": "q8ncl4_k444_methyl.gro",
+      "xtc": "q8ncl4_k444_methyl.xtc",
+      "size_bytes": 1894108,
+      "sim_time_ns": 10.0,
+      "source": "existing"
+    },
+    {
+      "system_id": "q8ne79_k139_methyl",
+      "ptm_type": "methyl_K",
+      "pdb": "q8ne79_k139_methyl.pdb",
+      "gro": "q8ne79_k139_methyl.gro",
+      "xtc": "q8ne79_k139_methyl.xtc",
+      "size_bytes": 881968,
       "sim_time_ns": 10.0,
       "source": "existing"
     }
