@@ -34,7 +34,16 @@ type PublicSystem = {
   terminal_proximal: string;
   burial_class: string;
   site_plddt: number | null;
+  site_plddt_wt: number | null;
   local_pLDDT_8A: number | null;
+  af3_ptm: number | null;
+  af3_ranking_score: number | null;
+  af3_fraction_disordered: number | null;
+  af3_has_clash: boolean | null;
+  af3_pae_mean: number | null;
+  af3_pae_at_site: number | null;
+  af3_pae_site_local_8A: number | null;
+  af3_source: string;
   has_structure: boolean;
   structure_path: string;
   zenodo_url: string;
@@ -72,7 +81,7 @@ const apiSystemDir = path.join(apiDir, "system");
 const figuresDir = path.join(publicDir, "figures");
 const structuresDir = path.join(publicDir, "structures");
 const staticDataPath = path.join(dataDir, "master_table.json");
-const csvPath = path.join(root, "submission", "master_table_all_v2.csv");
+const csvPath = resolveCsvPath();
 const fig1Path = path.join(
   root,
   "submission",
@@ -238,7 +247,16 @@ function normalizeSystem(row: CsvRecord): PublicSystem {
     terminal_proximal: first(row.terminal_proximal, row.is_terminal_lt10),
     burial_class: first(row.burial_class, "not available"),
     site_plddt: numberOrNull(first(row.site_plddt, row.plddt_mean)),
+    site_plddt_wt: numberOrNull(row.site_plddt_wt),
     local_pLDDT_8A: numberOrNull(first(row.local_pLDDT_8A, row.local_plddt_8A)),
+    af3_ptm: numberOrNull(row.af3_ptm),
+    af3_ranking_score: numberOrNull(row.af3_ranking_score),
+    af3_fraction_disordered: numberOrNull(row.af3_fraction_disordered),
+    af3_has_clash: booleanOrNull(row.af3_has_clash),
+    af3_pae_mean: numberOrNull(row.af3_pae_mean),
+    af3_pae_at_site: numberOrNull(row.af3_pae_at_site),
+    af3_pae_site_local_8A: numberOrNull(row.af3_pae_site_local_8A),
+    af3_source: first(row.af3_source),
     has_structure: hasStructure,
     structure_path: structurePath,
     zenodo_url: `https://doi.org/__ZENODO_DOI__?system=${encodeURIComponent(id)}`,
@@ -424,6 +442,43 @@ function numberOrNull(value: string | number | undefined | null) {
   }
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
+}
+
+function booleanOrNull(value: string | number | undefined | null) {
+  if (value === undefined || value === null || value === "") {
+    return null;
+  }
+  const normalized = String(value).trim().toLowerCase();
+  if (normalized === "true" || normalized === "1") {
+    return true;
+  }
+  if (normalized === "false" || normalized === "0") {
+    return false;
+  }
+  return null;
+}
+
+function resolveCsvPath() {
+  const candidates = [
+    path.join(root, "submission", "master_table_all_v2.csv"),
+    path.resolve(webRoot, "..", "..", "..", "submission", "master_table_all_v2.csv"),
+  ];
+  const requiredColumns = ["site_plddt_wt", "af3_source"];
+
+  for (const candidate of candidates) {
+    if (!fs.existsSync(candidate)) {
+      continue;
+    }
+    const header = fs.readFileSync(candidate, "utf8").split(/\r?\n/, 1)[0];
+    const columns = parse(header, { bom: true, relax_column_count: true })[0] as
+      | string[]
+      | undefined;
+    if (columns && requiredColumns.every((column) => columns.includes(column))) {
+      return candidate;
+    }
+  }
+
+  return candidates[0];
 }
 
 function median(values: number[]) {
