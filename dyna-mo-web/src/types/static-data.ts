@@ -34,17 +34,49 @@ export type PublicSystem = {
   terminal_proximal: string;
   burial_class: string;
   site_plddt: number | null;
+  site_plddt_wt: number | null;
   local_pLDDT_8A: number | null;
+  af3_ptm: number | null;
+  af3_ranking_score: number | null;
+  af3_fraction_disordered: number | null;
+  af3_has_clash: number | null;
+  af3_pae_mean: number | null;
+  af3_pae_at_site: number | null;
+  af3_pae_site_local_8A: number | null;
+  af3_source: string;
+  input_component: string;
+  md_residue: string;
+  biological_modification: string;
+  rmma_source: string;
+  production_route: string;
+  descriptor_global_source: string;
+  descriptor_site_source: string;
   has_structure: boolean;
   structure_path: string;
-  zenodo_url: string;
+  zenodo_url: string | null;
   raw: Record<string, string>;
 };
 
 export type StaticDataset = {
   generated_at: string;
   source_csv: string;
-  schema_version: string;
+  release: {
+    version: "v0.3.0";
+    schema_version: "v0.3.0";
+    site_url: string;
+    master_sha256: string;
+    rows: number;
+    columns: number;
+    kr_systems: number;
+    methyl_r_systems: number;
+    structure_archive_sha256: string;
+    structure_coverage_percent: number;
+    local_kr_structures: number;
+    local_phosphorylation_structures: number;
+    api_record_fields: 48;
+    public_deployment_status: "pending";
+    deposition_status: "available" | "pending";
+  };
   stats: {
     systems: number;
     ptm_types: number;

@@ -130,7 +130,7 @@ export default function SystemDetailPage({ params }: SystemPageProps) {
                   value={formatNumber(system.sasa_site_mean_nm2, 3)}
                 />
                 <Detail
-                  label="Salt bridges"
+                  label="Ionic-contact proxy count"
                   value={formatNumber(system.n_sb_contacts_mean, 2)}
                 />
                 <Detail

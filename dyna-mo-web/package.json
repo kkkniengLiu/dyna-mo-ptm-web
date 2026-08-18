@@ -1,6 +1,6 @@
 {
   "name": "dyna-mo-web",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "packageManager": "pnpm@11.5.1",
   "scripts": {
@@ -13,9 +13,9 @@
     "lint": "eslint src scripts tests --ext .ts,.tsx",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "tsx scripts/prepare-static-data.ts && vitest run",
     "test:e2e": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-e2e.ps1",
-    "screenshots": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-e2e.ps1 tests/e2e/smoke.spec.ts --project=chromium",
+    "screenshots": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-e2e.ps1 tests/e2e/manuscript-fig7.spec.ts --project=chromium",
     "prepare": "husky"
   },
   "dependencies": {

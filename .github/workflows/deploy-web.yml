@@ -6,7 +6,9 @@ on:
     paths:
       - "dyna-mo-web/**"
       - "submission/master_table_all_v2.csv"
+      - "submission/starting_structure_*.v0.3.0.csv"
       - "submission/figures/**"
+      - "dist/dyna-mo-ptm-v0.3.0-starting-structures.tar.gz"
       - "inputs/all_ptm_pdbs.tar.gz"
       - ".github/workflows/deploy-web.yml"
   workflow_dispatch:

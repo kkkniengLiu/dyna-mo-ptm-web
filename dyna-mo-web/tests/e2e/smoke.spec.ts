@@ -1,10 +1,25 @@
 import { expect, test } from "@playwright/test";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
 type StaticDataset = {
-  generated_at: string;
-  schema_version: string;
+  release: {
+    version: string;
+    schema_version: string;
+    site_url: string;
+    master_sha256: string;
+    rows: number;
+    columns: number;
+    kr_systems: number;
+    methyl_r_systems: number;
+    deposition_status: string;
+  };
+  stats: {
+    systems: number;
+    total_simulation_us: number;
+    local_structures: number;
+  };
   systems: Array<{
     id: string;
     uniprot: string;
@@ -12,6 +27,10 @@ type StaticDataset = {
     n_residues: number | null;
     site_ss_dominant: string;
     has_structure: boolean;
+    schema_version: string;
+    input_component: string;
+    md_residue: string;
+    zenodo_url: string | null;
   }>;
 };
 
@@ -27,7 +46,7 @@ const filterProbe =
     (system) => system.n_residues !== null && system.site_ss_dominant,
   ) ?? dataset.systems[0];
 
-test("home to browse to system detail flow", async ({ page }) => {
+test("home to browse to system detail flow", async ({ page }, testInfo) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(
     page.getByRole("heading", {
@@ -43,7 +62,7 @@ test("home to browse to system detail flow", async ({ page }) => {
   );
   await expect(page.locator("body")).not.toContainText("NAR");
   await page.waitForTimeout(800);
-  await page.screenshot({ path: "screenshots/home.png", fullPage: true });
+  await page.screenshot({ path: testInfo.outputPath("home.png"), fullPage: true });
 
   await page.goto("/browse", { waitUntil: "domcontentloaded" });
   await expect(
@@ -53,19 +72,10 @@ test("home to browse to system detail flow", async ({ page }) => {
   await expect(page.getByTestId("system-row-0")).toContainText("PASS");
   await expect(page.getByTestId("system-row-0")).toContainText("/100");
   await page.waitForTimeout(200);
-  await page.screenshot({ path: "screenshots/browse.png", fullPage: true });
-
-  for (const route of [
-    { path: "/browse/", heading: "Browse systems" },
-    { path: "/stats/", heading: "Dataset statistics" },
-    { path: "/download/", heading: "Download data" },
-    { path: "/about/", heading: "About Dyna-MO PTM" },
-  ]) {
-    await page.goto(route.path, { waitUntil: "domcontentloaded" });
-    await expect(
-      page.getByRole("heading", { name: route.heading }),
-    ).toBeVisible();
-  }
+  await page.screenshot({
+    path: testInfo.outputPath("browse.png"),
+    fullPage: true,
+  });
 
   const minLength = Math.max(1, (filterProbe.n_residues ?? 1) - 1);
   const maxLength = (filterProbe.n_residues ?? 9999) + 1;
@@ -106,7 +116,7 @@ test("home to browse to system detail flow", async ({ page }) => {
   await expect(page.getByTestId("raw-descriptor")).toBeVisible();
   await page.waitForTimeout(800);
   await page.screenshot({
-    path: "screenshots/system-detail.png",
+    path: testInfo.outputPath("system-detail.png"),
     fullPage: true,
   });
 
@@ -149,7 +159,7 @@ test("home to browse to system detail flow", async ({ page }) => {
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(100);
   await page.screenshot({
-    path: "screenshots/system-local-pdb.png",
+    path: testInfo.outputPath("system-local-pdb.png"),
     fullPage: true,
   });
 
@@ -198,10 +208,6 @@ test("home to browse to system detail flow", async ({ page }) => {
 });
 
 test("static api files are generated", async () => {
-  await expect(dataset.schema_version).toBe("v0.2.5");
-  await expect(dataset.generated_at.slice(0, 10)).toBe(
-    new Date().toISOString().slice(0, 10),
-  );
   await expect(
     fs.existsSync(path.resolve("public/api/systems.json")),
   ).toBeTruthy();
@@ -216,22 +222,6 @@ test("static api files are generated", async () => {
   await expect(fs.existsSync(path.resolve("public/sitemap.xml"))).toBeTruthy();
   await expect(fs.existsSync(path.resolve("public/robots.txt"))).toBeTruthy();
   await expect(
-    fs
-      .readFileSync(path.resolve("public/data/master_table_all_v2.csv"), "utf8")
-      .split(/\r?\n/, 1)[0]
-      .split(","),
-  ).toHaveLength(109);
-  for (const figure of [
-    "fig_supp_S3_within_resource_baseline.pdf",
-    "fig_supp_S3_within_resource_baseline.png",
-    "fig_supp_S4_acet_K_convergence.pdf",
-    "fig_supp_S4_acet_K_convergence.png",
-  ]) {
-    await expect(
-      fs.existsSync(path.resolve("public/figures", figure)),
-    ).toBeTruthy();
-  }
-  await expect(
     /[\u4e00-\u9fff]/.test(
       fs.readFileSync(path.resolve("public/data/master_table.json"), "utf8"),
     ),
@@ -244,4 +234,66 @@ test("static api files are generated", async () => {
       ),
     ),
   ).toBeFalsy();
+  await expect(dataset.release).toMatchObject({
+    version: "v0.3.0",
+    schema_version: "v0.3.0",
+    site_url: "https://kkkniengliu.github.io/dyna-mo-ptm-web",
+    master_sha256:
+      "7509810e6febefad3b3d387cd5ee4bdd96b410d5ef683140fdbd99b29e68c965",
+    rows: 1079,
+    columns: 118,
+    kr_systems: 738,
+    methyl_r_systems: 192,
+    api_record_fields: 48,
+    public_deployment_status: "pending",
+    deposition_status: "pending",
+  });
+  await expect(dataset.stats).toMatchObject({
+    systems: 1079,
+    total_simulation_us: 32.37,
+    local_structures: 918,
+  });
+  await expect(
+    fs
+      .readdirSync(path.resolve("public/api/system"))
+      .filter((name) => name.endsWith(".json")),
+  ).toHaveLength(1079);
+  const apiIndex = JSON.parse(
+    fs.readFileSync(path.resolve("public/api/systems.json"), "utf8"),
+  );
+  await expect(apiIndex.count).toBe(1079);
+  await expect(
+    apiIndex.systems.every(
+      (system: Record<string, unknown>) => Object.keys(system).length === 48,
+    ),
+  ).toBe(true);
+  await expect(
+    fs
+      .readdirSync(path.resolve("public/structures"))
+      .filter((name) => name.endsWith(".pdb")),
+  ).toHaveLength(918);
+  const canonicalMaster = fs.readFileSync(
+    path.resolve("../submission/master_table_all_v2.csv"),
+  );
+  await expect(
+    crypto.createHash("sha256").update(canonicalMaster).digest("hex"),
+  ).toBe(dataset.release.master_sha256);
+  const publicContractText = [
+    fs.readFileSync(path.resolve("public/data/master_table.json"), "utf8"),
+    fs.readFileSync(path.resolve("public/api/systems.json"), "utf8"),
+    fs.readFileSync(path.resolve("public/sitemap.xml"), "utf8"),
+    fs.readFileSync(path.resolve("public/robots.txt"), "utf8"),
+  ].join("\n");
+  await expect(publicContractText).not.toMatch(
+    /__ZENODO_DOI__|__GITHUB_URL__|__PAPER_DOI__|example\.org/,
+  );
+  await expect(
+    dataset.systems.filter((system) => system.input_component === "AGM"),
+  ).toHaveLength(192);
+  await expect(
+    dataset.systems.filter((system) => system.md_residue === "RM1"),
+  ).toHaveLength(192);
+  await expect(
+    dataset.systems.every((system) => system.zenodo_url === null),
+  ).toBe(true);
 });

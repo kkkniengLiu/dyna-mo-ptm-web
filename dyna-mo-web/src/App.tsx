@@ -76,7 +76,7 @@ const DISPLAY_CITATION =
 const CITATION_TEXT: Record<CitationFormat, string> = {
   bibtex: `@article{dynamoptm2026,
   title   = {Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins},
-  author  = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Chi, Ying},
+  author  = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Yao, Yifei and Zhao, Jingjing and Chi, Ying},
   note    = {Manuscript in preparation},
   year    = {2026}
 }`,
@@ -87,6 +87,8 @@ AU  - Liu, Kaining
 AU  - Qian, Qiuting
 AU  - Peng, Jiahua
 AU  - Ma, Dongge
+AU  - Yao, Yifei
+AU  - Zhao, Jingjing
 AU  - Chi, Ying
 N1  - Manuscript in preparation
 PY  - 2026
@@ -98,6 +100,8 @@ ER  -`,
 %A Qian, Qiuting
 %A Peng, Jiahua
 %A Ma, Dongge
+%A Yao, Yifei
+%A Zhao, Jingjing
 %A Chi, Ying
 %Z Manuscript in preparation
 %D 2026`,
@@ -128,7 +132,7 @@ export default function App() {
   function navigate(path: string) {
     window.history.pushState(null, "", withBase(path));
     const [pathWithoutHash, hash] = path.split("#");
-    setRoute(normalizeRoutePath(pathWithoutHash.split("?")[0] || "/"));
+    setRoute(pathWithoutHash.split("?")[0] || "/");
     window.setTimeout(() => {
       if (hash) {
         document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
@@ -149,11 +153,7 @@ export default function App() {
       ? "browse"
       : route === "/about"
         ? "about"
-        : route === "/download"
-          ? "download"
-          : route === "/stats"
-            ? "stats"
-            : "home";
+        : "home";
   const selectedSystem = systemMatch
     ? dataset.systems.find(
         (system) => system.id === decodeURIComponent(systemMatch[1]),
@@ -166,11 +166,7 @@ export default function App() {
       {page === "browse" ? (
         <BrowsePage dataset={dataset} navigate={navigate} />
       ) : page === "about" ? (
-        <AboutPage />
-      ) : page === "download" ? (
-        <DownloadPage />
-      ) : page === "stats" ? (
-        <StatsPage dataset={dataset} />
+        <AboutPage dataset={dataset} />
       ) : page === "system" && selectedSystem ? (
         <SystemPage system={selectedSystem} navigate={navigate} />
       ) : (
@@ -191,8 +187,6 @@ function Header({
   const links = [
     { path: "/", label: "Overview" },
     { path: "/browse", label: "Browse" },
-    { path: "/stats", label: "Stats" },
-    { path: "/download", label: "Download" },
     { path: "/about#methods", label: "Methods" },
     { path: "/about#api", label: "API" },
     { path: "/about#faq", label: "FAQ" },
@@ -298,7 +292,7 @@ function HomePage({
           >
             <div className="inline-flex items-center gap-2 rounded-md border border-[#10324a]/15 bg-white/80 px-3 py-2 text-sm font-medium text-[#10324a] shadow-sm">
               <span className="h-2 w-2 rounded-full bg-[#2ca02c]" />
-              Dyna-MO PTM v0.2.5 release
+              Dyna-MO PTM v0.3.0 local review build
             </div>
             <div>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] text-[#071827] md:text-6xl">
@@ -309,14 +303,11 @@ function HomePage({
                 proteins.
               </p>
               <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-                Browse 1,095 uniformly simulated PTM protein systems across six
-                chemistries, with per-system MD quality, site biophysics, local
-                structural context and AF3 confidence descriptors.
+                Browse {dataset.stats.systems.toLocaleString()} PTM protein
+                systems across six chemistries, with per-system MD quality, site
+                biophysics, local structural context and AF3 confidence
+                descriptors.
               </p>
-              <div className="mt-4 inline-flex rounded-full border border-[#107f74]/25 bg-[#ecfdf7] px-4 py-2 text-sm font-semibold text-[#0f6b61]">
-                In-browser MD trajectory playback is enabled for hosted .xtc
-                assets in the 3D system viewer.
-              </div>
             </div>
             <form className="hero-search-shell" onSubmit={submitHeroSearch}>
               <Search className="h-5 w-5 text-[#17415a]" />
@@ -375,7 +366,10 @@ function HomePage({
                 label="Systems"
                 value={dataset.stats.systems.toLocaleString()}
               />
-              <ReleaseMetric label="Simulation" value="32.85 us" />
+              <ReleaseMetric
+                label="Simulation"
+                value={dataset.stats.total_simulation_us.toFixed(2) + " us"}
+              />
               <ReleaseMetric label="PTM classes" value="6" />
             </div>
             <PtmRibbon counts={dataset.stats.counts} />
@@ -400,7 +394,12 @@ function HomePage({
         <StatPanel
           label="AF3 inputs available"
           value={dataset.stats.local_structures.toLocaleString()}
-          note="K/R-PTM only; phospho subset in v0.3"
+          note={
+            dataset.release.local_kr_structures +
+            " K/R and " +
+            dataset.release.local_phosphorylation_structures +
+            " phosphorylation inputs"
+          }
         />
         <StatPanel
           label="Median length"
@@ -419,8 +418,8 @@ function HomePage({
         <FeatureCommand
           index="02"
           icon={Box}
-          title="Play MD trajectory"
-          text="Open hosted rep1 trajectories with frame-by-frame playback in the NGL viewer."
+          title="Inspect 3D"
+          text="Open retained AF3 input structures in the NGL viewer."
           onClick={() =>
             navigate(
               `/system/${encodeURIComponent(dataset.systems.find((system) => system.has_structure)?.id ?? dataset.systems[0].id)}`,
@@ -431,14 +430,14 @@ function HomePage({
           index="03"
           icon={Download}
           title="Download data"
-          text="Use the descriptor CSV or system-level Zenodo links."
+          text="Use the descriptor CSV or system-level deposition links."
           href={assetUrl("data/master_table_all_v2.csv")}
         />
         <FeatureCommand
           index="04"
           icon={FileText}
           title="Cite resource"
-          text="Methods, release notes and placeholder citation live on About."
+          text="Methods, release notes and the pre-publication citation live on About."
           onClick={() => navigate("/about")}
         />
       </section>
@@ -501,9 +500,10 @@ function HomePage({
           <h2 className="text-2xl font-semibold">Publication overview</h2>
           <p className="mt-3 leading-7 text-slate-600">
             Dyna-MO PTM covers acetyl-lysine, methyl-lysine, methyl-arginine,
-            phospho-serine, phospho-threonine and phospho-tyrosine. All systems
-            share a unified CHARMM36m + TIP3P protocol with three 10 ns
-            replicas.
+            phospho-serine, phospho-threonine and phospho-tyrosine. Each row
+            records its preparation and descriptor provenance. The documented
+            production design targets three nominal 10 ns replicas under
+            CHARMM36m, TIP3P and 310 K NPT conditions.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {dataset.stats.counts.map((item) => (
@@ -517,7 +517,7 @@ function HomePage({
         </div>
         <div className="chromatic-card rounded-xl p-4">
           <img
-            src={assetUrl("figures/fig1_dataset_overview_v2.png")}
+            src={assetUrl("figures/fig1_dataset_overview_v3.png")}
             alt="Figure 1 dataset composition and length distribution"
             className="w-full rounded-lg border"
           />
@@ -670,7 +670,12 @@ function BrowsePage({
           <StatPanel
             label="AF3 inputs available"
             value={dataset.stats.local_structures.toLocaleString()}
-            note="K/R-PTM only; phospho subset in v0.3"
+            note={
+              dataset.release.local_kr_structures +
+              " K/R and " +
+              dataset.release.local_phosphorylation_structures +
+              " phosphorylation inputs"
+            }
             compact
           />
         </div>
@@ -927,7 +932,6 @@ function SystemPage({
         system.ptm_label,
         system.uniprot,
       ],
-      license: "https://creativecommons.org/licenses/by/4.0/",
       creator: {
         "@type": "Organization",
         name: "Dyna-MO PTM",
@@ -945,25 +949,49 @@ function SystemPage({
     };
   }, [system]);
 
+  const provenanceItems = [
+    ["System", system.id],
+    ["UniProt", system.uniprot],
+    ["PTM type", system.ptm_label],
+    ["Modified site", system.mod_residue],
+    ["Schema version", system.schema_version],
+    ["Input CCD code", system.ccd_code],
+  ];
+  if (system.ptm_type === "methyl_R") {
+    provenanceItems.push(
+      ["Input component", system.input_component],
+      ["MD residue", system.md_residue],
+      ["Biological modification", system.biological_modification],
+      ["RMMA source", system.rmma_source],
+      ["Production route", "RM1 v0.3; CHARMM36m/TIP3P; NPT 310 K; 3 x 10 ns"],
+      [
+        "Global descriptor source",
+        "GROMACS rep1 legacy QC; Gate2 three-rep; Gate2.5 core/inter-rep",
+      ],
+      [
+        "Site descriptor source",
+        "GROMACS rep1 site QC; Gate2 rep2 RM1 biophysics",
+      ],
+    );
+  }
+  provenanceItems.push(
+    ["Row status", system.status],
+    ["Release flag", system.final_flag],
+    ["Replica count", system.raw.n_rep_ok || system.raw.n_reps || "3"],
+  );
+
   const groups = [
     {
       title: "Provenance",
-      items: [
-        ["System", system.id],
-        ["UniProt", system.uniprot],
-        ["PTM type", system.ptm_label],
-        ["CCD code", system.ccd_code],
-        ["Modified residue", system.mod_residue],
-        ["Row status", system.status],
-        ["Release flag", system.final_flag],
-        ["Schema version", system.schema_version],
-        ["Replica count", system.raw.n_rep_ok || system.raw.n_reps || "3"],
-      ],
+      items: provenanceItems,
     },
     {
       title: "Global QC",
       items: [
-        ["RMSD equil mean", formatNumber(system.rmsd_equil_mean_A, 2, " A")],
+        [
+          "Replicate 1 RMSD mean, final 20 frames",
+          formatNumber(system.rmsd_equil_mean_A, 2, " A"),
+        ],
         ["Rg mean", formatNumber(system.rg_mean_A, 2, " A")],
         ["RMSF mean", formatNumber(system.rmsf_mean_A, 2, " A")],
         ["RMSF max", formatNumber(system.rmsf_max_A, 2, " A")],
@@ -976,7 +1004,10 @@ function SystemPage({
       title: "Site biophysics",
       items: [
         ["Site SASA", formatNumber(system.sasa_site_mean_nm2, 3, " nm2")],
-        ["Salt-bridge contacts", formatNumber(system.n_sb_contacts_mean, 2)],
+        [
+          "Ionic-contact proxy count",
+          formatNumber(system.n_sb_contacts_mean, 2),
+        ],
         ["chi1 dominant", system.chi1_dominant_rotamer || "NA"],
         ["chi2 dominant", system.chi2_dominant_rotamer || "NA"],
         ["Dominant SS", system.site_ss_dominant || "NA"],
@@ -1015,8 +1046,8 @@ function SystemPage({
             </p>
             <p className="mt-3 text-sm text-slate-500">
               {system.has_structure
-                ? "Local AF3 input PDB available. The modified residue is highlighted in the 3D viewer."
-                : "AF3 input PDB pending for this release; descriptor metadata and trajectory links remain available."}
+                ? "Retained AF3 input PDB available. The input-component residue is highlighted in the 3D viewer."
+                : "Input PDB not retained in the v0.3.0 web bundle; the descriptor record remains available."}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -1030,14 +1061,24 @@ function SystemPage({
               UniProt
               <ExternalLink className="h-4 w-4" />
             </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white"
-              href={system.zenodo_url}
-              title="Open trajectory deposition record"
-            >
-              Download trajectories
-              <Download className="h-4 w-4" />
-            </a>
+            {system.zenodo_url ? (
+              <a
+                className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white"
+                href={system.zenodo_url}
+                title="Open trajectory deposition record"
+              >
+                Download trajectories
+                <Download className="h-4 w-4" />
+              </a>
+            ) : (
+              <span
+                className="inline-flex cursor-not-allowed items-center gap-2 rounded-md bg-slate-200 px-4 py-2 text-sm font-medium text-slate-600"
+                title="The deposition DOI has not yet been assigned"
+              >
+                Deposition pending
+                <Download className="h-4 w-4" />
+              </span>
+            )}
             <a
               className="inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium"
               href={assetUrl(`api/system/${system.id}.json`)}
@@ -1057,9 +1098,6 @@ function SystemPage({
             {system.has_structure ? (
               <NGLViewer
                 pdbUrl={assetUrl(`structures/${system.id}.pdb`)}
-                topologyUrl={assetUrl(`trajectories/${system.id}.gro`)}
-                trajectoryUrl={assetUrl(`trajectories/${system.id}.xtc`)}
-                trajectoryDurationNs={system.sim_time_ns}
                 siteResid={system.site_num ?? 1}
                 siteResname={system.ccd_code || "UNK"}
                 sitePlddt={system.local_pLDDT_8A ?? 0}
@@ -1072,16 +1110,21 @@ function SystemPage({
                     PDB not available locally
                   </h3>
                   <p className="mt-2 max-w-md text-sm text-slate-600">
-                    Structure data for phosphorylation systems is hosted at
-                    Zenodo for this release. The static page remains available
-                    and links out to the deposited record.
+                    This input PDB was not retained in the v0.3.0 web bundle.
+                    The descriptor row remains available.
                   </p>
-                  <a
-                    className="mt-4 inline-flex rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white"
-                    href={system.zenodo_url}
-                  >
-                    Open Zenodo record
-                  </a>
+                  {system.zenodo_url ? (
+                    <a
+                      className="mt-4 inline-flex rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white"
+                      href={system.zenodo_url}
+                    >
+                      Open deposition record
+                    </a>
+                  ) : (
+                    <p className="mt-4 text-sm font-medium text-slate-500">
+                      Deposition DOI pending
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -1103,7 +1146,10 @@ function SystemPage({
                       className="rounded-md border bg-white/75 p-3 shadow-sm"
                     >
                       <dt className="text-xs text-slate-500">{label}</dt>
-                      <dd className="mt-1 truncate font-medium">
+                      <dd
+                        className="mt-1 break-words font-medium"
+                        title={String(value || "NA")}
+                      >
                         {value || "NA"}
                       </dd>
                     </div>
@@ -1155,142 +1201,25 @@ function SystemPage({
   );
 }
 
-function DownloadPage() {
-  const downloads = [
-    {
-      label: "Descriptor CSV",
-      detail: "v0.2.5 master table, 1,095 rows and 109 columns",
-      href: assetUrl("data/master_table_all_v2.csv"),
-    },
-    {
-      label: "Systems API",
-      detail: "Static JSON index for all systems",
-      href: assetUrl("api/systems.json"),
-    },
-    {
-      label: "Supplementary Fig. S3",
-      detail: "Within-resource baseline comparison",
-      href: assetUrl("figures/fig_supp_S3_within_resource_baseline.png"),
-    },
-    {
-      label: "Supplementary Fig. S4",
-      detail: "Acetyl-K convergence analysis",
-      href: assetUrl("figures/fig_supp_S4_acet_K_convergence.png"),
-    },
-  ];
+function AboutPage({ dataset }: { dataset: StaticDataset }) {
+  const completionExceptions = dataset.systems.filter(
+    (system) =>
+      typeof system.sim_time_ns === "number" &&
+      Math.abs(system.sim_time_ns - 10) > 0.01,
+  ).length;
 
-  return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
-      <div className="chromatic-card rounded-xl p-6">
-        <p className="text-sm font-medium uppercase text-slate-500">
-          Static release assets
-        </p>
-        <h1 className="mt-2 text-4xl font-semibold">Download data</h1>
-        <p className="mt-4 max-w-3xl leading-7 text-slate-600">
-          The web release serves descriptor tables, static API JSON and
-          manuscript figure assets directly from GitHub Pages. Trajectory
-          bundles remain linked out from each system page.
-        </p>
-        <div className="mt-8 grid gap-3">
-          {downloads.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="flex flex-col gap-1 rounded-lg border bg-white/80 p-4 transition hover:border-[#10324a] hover:shadow-sm sm:flex-row sm:items-center sm:justify-between"
-            >
-              <span>
-                <span className="block font-semibold text-slate-950">
-                  {item.label}
-                </span>
-                <span className="mt-1 block text-sm text-slate-500">
-                  {item.detail}
-                </span>
-              </span>
-              <span className="text-sm font-medium text-[#10324a]">
-                Open asset
-              </span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
-
-function StatsPage({ dataset }: { dataset: StaticDataset }) {
-  return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
-      <div className="chromatic-card rounded-xl p-6">
-        <p className="text-sm font-medium uppercase text-slate-500">
-          Release statistics
-        </p>
-        <h1 className="mt-2 text-4xl font-semibold">Dataset statistics</h1>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <MetricCard label="Systems" value={dataset.stats.systems} />
-          <MetricCard label="PTM classes" value={dataset.stats.ptm_types} />
-          <MetricCard
-            label="Simulation time"
-            value={`${dataset.stats.total_simulation_us} us`}
-          />
-          <MetricCard
-            label="AF3 inputs"
-            value={dataset.stats.local_structures}
-          />
-        </div>
-        <div className="mt-8 space-y-3">
-          {dataset.stats.counts.map((item) => (
-            <div key={item.ptm_type} className="rounded-lg border bg-white p-4">
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-medium">{item.label}</span>
-                <span className="font-mono text-sm text-slate-500">
-                  {item.count}
-                </span>
-              </div>
-              <div className="mt-3 h-2 rounded-full bg-slate-100">
-                <div
-                  className="h-2 rounded-full"
-                  style={{
-                    width: `${(item.count / dataset.stats.systems) * 100}%`,
-                    backgroundColor: item.color,
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
-
-function MetricCard({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | number;
-}) {
-  return (
-    <div className="rounded-lg border bg-white p-4">
-      <p className="text-xs font-semibold uppercase text-slate-500">{label}</p>
-      <p className="mt-2 font-mono text-2xl font-semibold text-[#10324a]">
-        {typeof value === "number" ? value.toLocaleString() : value}
-      </p>
-    </div>
-  );
-}
-
-function AboutPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <div className="chromatic-card rounded-xl p-6">
         <h1 className="text-4xl font-semibold">About Dyna-MO PTM</h1>
         <p className="mt-5 leading-8 text-slate-600">
-          Dyna-MO PTM is a molecular dynamics database of 1,095 modified protein
-          systems covering acetyl-lysine, methyl-lysine, methyl-arginine,
-          phospho-serine, phospho-threonine and phospho-tyrosine. Each system is
-          simulated under a unified CHARMM36m + TIP3P protocol with three 10 ns
-          replicas and distributed with a 109-column descriptor table.
+          This local Dyna-MO PTM v0.3.0 review build contains{" "}
+          {dataset.stats.systems.toLocaleString()} modified-protein systems
+          covering acetyl-lysine, methyl-lysine, methyl-arginine,
+          phospho-serine, phospho-threonine and phospho-tyrosine. The resource
+          follows a three-replica, nominal 10 ns design and provides a{' '}
+          {dataset.release.columns}-column descriptor table with explicit
+          route-level provenance.
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           <ToolCard
@@ -1301,69 +1230,123 @@ function AboutPage() {
           <ToolCard
             icon={FileText}
             title="Data"
-            text="Descriptor CSV and figures are static assets in this site."
+            text="Descriptor CSV and figures are static assets in this local review build."
           />
           <ToolCard
             icon={Filter}
             title="Licences"
-            text="Data CC-BY 4.0; code MIT."
+            text="Data licence pending author confirmation; code MIT."
           />
         </div>
         <h2 id="methods" className="mt-8 scroll-mt-24 text-2xl font-semibold">
           Methods
         </h2>
         <p className="mt-3 leading-7 text-slate-600">
-          Each accepted system is prepared from AlphaFold 3 input structures,
-          parameterised under CHARMM36m + TIP3P, and simulated as three 10 ns
-          replicas. The browser exposes QC, site biophysics, pLDDT confidence
-          and secondary-structure descriptors from the release master table.
+          Retained AlphaFold 3 input structures are parameterised under the
+          documented CHARMM36m and TIP3P workflow, whose production target is
+          three nominal 10 ns replicas at 310 K. Methyl-arginine rows
+          distinguish the AGM input component from the RM1 residue used during
+          MD and record both global and site-level descriptor sources.
         </p>
         <h2 id="api" className="mt-8 scroll-mt-24 text-2xl font-semibold">
-          API
+          Download and static API
         </h2>
+        <div
+          className="mt-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
+          role="status"
+        >
+          Local v0.3.0 review build prepared. Public deployment is pending, so
+          the GitHub Pages endpoint is not yet a v0.3.0 release source.
+          {completionExceptions > 0 ? (
+            <>
+              {" "}The completion-summary gate currently blocks{" "}
+              {completionExceptions.toLocaleString()} inherited row; this
+              build is not release-ready.
+            </>
+          ) : (
+            <>
+              {" "}The observed-file completion gate now covers all 1,079
+              released systems after the isolated O75792 rep-2 repair.
+            </>
+          )}
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-5">
+          <StatPanel label="Release" value={dataset.release.version} compact />
+          <StatPanel
+            label="Descriptor table"
+            value={
+              dataset.release.rows.toLocaleString() +
+              " x " +
+              dataset.release.columns
+            }
+            compact
+          />
+          <StatPanel
+            label="AF3 inputs"
+            value={dataset.stats.local_structures.toLocaleString()}
+            compact
+          />
+          <StatPanel
+            label="Simulation"
+            value={dataset.stats.total_simulation_us.toFixed(2) + " μs"}
+            compact
+          />
+          <StatPanel
+            label="API record"
+            value={dataset.release.api_record_fields + " fields"}
+            compact
+          />
+        </div>
         <p className="mt-3 leading-7 text-slate-600">
-          The static API mirrors the web release: use{" "}
+          The local static API mirrors the prepared review build. Its searchable
+          index is{" "}
           <code className="rounded bg-slate-100 px-1.5 py-0.5">
             /api/systems.json
           </code>{" "}
-          for the searchable index and{" "}
+          and full descriptor records use{" "}
           <code className="rounded bg-slate-100 px-1.5 py-0.5">
             /api/system/&lt;id&gt;.json
-          </code>{" "}
-          for full descriptor rows.
+          </code>
+          .
         </p>
         <div className="mt-4 grid gap-3">
           <pre className="overflow-auto rounded-lg border bg-slate-950 p-4 text-sm leading-6 text-slate-100">
-            {`curl -L ${window.location.origin}${BASE}api/systems.json
-curl -L ${window.location.origin}${BASE}api/system/a6nhq2_k76_acetyl.json`}
+            {`Local review files (1079 records; 48 fields per index record)
+public/api/systems.json
+public/api/system/a6nhq2_k76_acetyl.json
+
+Deployment target after release audit
+${dataset.release.site_url}/api/systems.json`}
           </pre>
           <p className="text-sm leading-6 text-slate-500">
-            These endpoints are static JSON files. They can be mirrored, cached,
-            or queried directly from scripts without running a backend service.
+            Do not use the deployment target as the v0.3.0 source until the
+            public deployment audit passes. The local files are static JSON and
+            require no backend service.
           </p>
         </div>
         <h2 id="faq" className="mt-8 scroll-mt-24 text-2xl font-semibold">
           FAQ
         </h2>
         <p className="mt-3 leading-7 text-slate-600">
-          AF3 input structures bundled in this web build currently cover the
-          K/R-PTM subset. Phosphorylation-system structure files remain linked
-          through the deposition workflow and are labelled as the v0.3 subset.
+          The web build contains {dataset.release.local_kr_structures} K/R-PTM
+          and {dataset.release.local_phosphorylation_structures} phosphorylation
+          input structures. The remaining 161 release systems retain descriptor
+          pages but no bundled PDB.
         </p>
         <dl className="mt-4 grid gap-3">
           <div className="rounded-lg border bg-white/75 p-4">
             <dt className="font-semibold">How should I cite this resource?</dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
-              Use the placeholder citation below before acceptance; replace the
-              DOI and journal fields after publication.
+              Use the pre-publication citation below. DOI and journal metadata
+              remain pending and are not represented by a fabricated link.
             </dd>
           </div>
           <div className="rounded-lg border bg-white/75 p-4">
             <dt className="font-semibold">How do I download trajectories?</dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
-              Use the per-system Zenodo link from each system page. The web
-              build keeps trajectories off-site to keep GitHub Pages static and
-              lightweight.
+              Trajectories remain off-site to keep the web build lightweight.
+              Per-system download controls stay disabled until the deposition
+              DOI is assigned.
             </dd>
           </div>
           <div className="rounded-lg border bg-white/75 p-4">
@@ -1444,11 +1427,11 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <div>
           <p className="text-sm font-medium text-slate-500">Dataset release</p>
           <h2 className="mt-1 text-3xl font-semibold text-[#071827]">
-            Dyna-MO PTM v0.2.5
+            Dyna-MO PTM v0.3.0 local review build
           </h2>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
-            A static, citable interface for the descriptor table and AF3 input
-            structures used in the Dyna-MO PTM submission package.
+            A static interface prepared for the descriptor table and AF3 input
+            structures in the submission package. Public deployment is pending.
           </p>
         </div>
         <span className="rounded-md border bg-slate-50 px-3 py-1.5 font-mono text-xs font-semibold text-slate-700">
@@ -1507,9 +1490,9 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <MiniCapability
           icon={Box}
           label="Structures"
-          text="754 AF3 inputs; K/R-PTM only"
+          text="918 retained AF3 inputs"
         />
-        <MiniCapability icon={Table2} label="Descriptors" text="109 columns" />
+        <MiniCapability icon={Table2} label="Descriptors" text="118 columns" />
         <MiniCapability
           icon={BarChart3}
           label="Figures"
@@ -1747,8 +1730,12 @@ function Footer() {
   return (
     <footer className="border-t bg-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-slate-600 md:flex-row md:justify-between">
-        <span>Dyna-MO PTM v0.2.5 - static molecular dynamics database</span>
-        <span>GitHub / Zenodo / Citation details update upon publication</span>
+        <span>
+          Dyna-MO PTM v0.3.0 - local review build; public deployment pending
+        </span>
+        <span>
+          Existing GitHub Pages serves a prior release; deposition DOI pending
+        </span>
       </div>
     </footer>
   );
@@ -1805,16 +1792,9 @@ function getRoutePath() {
   const pathname = window.location.pathname;
   const stripped =
     base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
-  return normalizeRoutePath(stripped || "/");
-}
-
-function normalizeRoutePath(path: string) {
-  if (path === "/") {
-    return "/";
-  }
-  return path.replace(/\/+$/, "") || "/";
+  return stripped || "/";
 }
 
 function routeKey(path: string) {
-  return normalizeRoutePath(path).replace("/", "") || "home";
+  return path.replace("/", "") || "home";
 }

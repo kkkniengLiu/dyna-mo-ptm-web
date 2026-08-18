@@ -167,9 +167,10 @@ export default function Home() {
           </div>
           <div className="grid gap-5 text-sm leading-7 text-muted-foreground md:grid-cols-2">
             <p>
-              Each PASS system contains three 10 ns replicas with protein-level
-              RMSD, Rg, RMSF, AF3 pLDDT, site burial, secondary structure,
-              side-chain rotamer, and salt-bridge summaries.
+              The production design targets three nominal 10 ns replicas per
+              system, with protein-level RMSD, Rg, RMSF, AF3 pLDDT, site burial,
+              secondary structure, side-chain rotamer, and ionic-contact proxy
+              summaries.
             </p>
             <p>
               Trajectories stay as files and are served on demand. SQLite stores
