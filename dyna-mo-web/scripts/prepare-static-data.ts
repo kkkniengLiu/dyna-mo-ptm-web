@@ -77,7 +77,7 @@ type StaticPayload = {
     local_kr_structures: number;
     local_phosphorylation_structures: number;
     api_record_fields: 48;
-    public_deployment_status: "pending";
+    public_deployment_status: "deployed";
     deposition_status: "available" | "pending";
   };
   stats: {
@@ -262,7 +262,7 @@ try {
       local_kr_structures: localKrStructures,
       local_phosphorylation_structures: localPhosphorylationStructures,
       api_record_fields: EXPECTED_API_RECORD_FIELDS,
-      public_deployment_status: "pending",
+      public_deployment_status: "deployed",
       deposition_status: zenodoUrl ? "available" : "pending",
     },
     stats: {

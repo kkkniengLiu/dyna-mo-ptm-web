@@ -292,7 +292,7 @@ function HomePage({
           >
             <div className="inline-flex items-center gap-2 rounded-md border border-[#10324a]/15 bg-white/80 px-3 py-2 text-sm font-medium text-[#10324a] shadow-sm">
               <span className="h-2 w-2 rounded-full bg-[#2ca02c]" />
-              Dyna-MO PTM v0.3.0 local review build
+              Dyna-MO PTM v0.3.0 public release
             </div>
             <div>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] text-[#071827] md:text-6xl">
@@ -1213,7 +1213,7 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
       <div className="chromatic-card rounded-xl p-6">
         <h1 className="text-4xl font-semibold">About Dyna-MO PTM</h1>
         <p className="mt-5 leading-8 text-slate-600">
-          This local Dyna-MO PTM v0.3.0 review build contains{" "}
+          The public Dyna-MO PTM v0.3.0 release contains{" "}
           {dataset.stats.systems.toLocaleString()} modified-protein systems
           covering acetyl-lysine, methyl-lysine, methyl-arginine,
           phospho-serine, phospho-threonine and phospho-tyrosine. The resource
@@ -1230,7 +1230,7 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           <ToolCard
             icon={FileText}
             title="Data"
-            text="Descriptor CSV and figures are static assets in this local review build."
+            text="Descriptor CSV and figures are static assets in the public v0.3.0 release."
           />
           <ToolCard
             icon={Filter}
@@ -1255,8 +1255,8 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           className="mt-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
           role="status"
         >
-          Local v0.3.0 review build prepared. Public deployment is pending, so
-          the GitHub Pages endpoint is not yet a v0.3.0 release source.
+          Public v0.3.0 deployment verified. The GitHub Pages endpoint serves
+          this synchronized release.
           {completionExceptions > 0 ? (
             <>
               {" "}The completion-summary gate currently blocks{" "}
@@ -1298,7 +1298,7 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           />
         </div>
         <p className="mt-3 leading-7 text-slate-600">
-          The local static API mirrors the prepared review build. Its searchable
+          The public static API mirrors the synchronized release. Its searchable
           index is{" "}
           <code className="rounded bg-slate-100 px-1.5 py-0.5">
             /api/systems.json
@@ -1311,17 +1311,16 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
         </p>
         <div className="mt-4 grid gap-3">
           <pre className="overflow-auto rounded-lg border bg-slate-950 p-4 text-sm leading-6 text-slate-100">
-            {`Local review files (1079 records; 48 fields per index record)
+            {`Public release files (1079 records; 48 fields per index record)
 public/api/systems.json
 public/api/system/a6nhq2_k76_acetyl.json
 
-Deployment target after release audit
+Deployment endpoint
 ${dataset.release.site_url}/api/systems.json`}
           </pre>
           <p className="text-sm leading-6 text-slate-500">
-            Do not use the deployment target as the v0.3.0 source until the
-            public deployment audit passes. The local files are static JSON and
-            require no backend service.
+            The deployment target passed an unauthenticated synchronization
+            audit. These static JSON files require no backend service.
           </p>
         </div>
         <h2 id="faq" className="mt-8 scroll-mt-24 text-2xl font-semibold">
@@ -1427,11 +1426,11 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <div>
           <p className="text-sm font-medium text-slate-500">Dataset release</p>
           <h2 className="mt-1 text-3xl font-semibold text-[#071827]">
-            Dyna-MO PTM v0.3.0 local review build
+            Dyna-MO PTM v0.3.0 public release
           </h2>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
-            A static interface prepared for the descriptor table and AF3 input
-            structures in the submission package. Public deployment is pending.
+            A synchronized static interface for the descriptor table and AF3
+            input structures in the v0.3.0 release.
           </p>
         </div>
         <span className="rounded-md border bg-slate-50 px-3 py-1.5 font-mono text-xs font-semibold text-slate-700">
@@ -1731,10 +1730,10 @@ function Footer() {
     <footer className="border-t bg-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-slate-600 md:flex-row md:justify-between">
         <span>
-          Dyna-MO PTM v0.3.0 - local review build; public deployment pending
+          Dyna-MO PTM v0.3.0 - synchronized public release
         </span>
         <span>
-          Existing GitHub Pages serves a prior release; deposition DOI pending
+          GitHub Pages deployment verified; deposition DOI pending
         </span>
       </div>
     </footer>

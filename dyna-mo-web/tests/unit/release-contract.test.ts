@@ -78,7 +78,7 @@ describe("v0.3.0 static release contract", () => {
       kr_systems: 738,
       methyl_r_systems: 192,
       api_record_fields: 48,
-      public_deployment_status: "pending",
+      public_deployment_status: "deployed",
       deposition_status: "pending",
     });
     expect(payload.stats).toMatchObject({
@@ -159,7 +159,7 @@ describe("v0.3.0 static release contract", () => {
 
     expect(apiIndex.count).toBe(1079);
     expect(apiIndex.release.api_record_fields).toBe(48);
-    expect(apiIndex.release.public_deployment_status).toBe("pending");
+    expect(apiIndex.release.public_deployment_status).toBe("deployed");
     expect(
       apiIndex.systems.every(
         (system: Row) => Object.keys(system).length === 48,

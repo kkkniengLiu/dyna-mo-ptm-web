@@ -245,7 +245,7 @@ test("static api files are generated", async () => {
     kr_systems: 738,
     methyl_r_systems: 192,
     api_record_fields: 48,
-    public_deployment_status: "pending",
+    public_deployment_status: "deployed",
     deposition_status: "pending",
   });
   await expect(dataset.stats).toMatchObject({

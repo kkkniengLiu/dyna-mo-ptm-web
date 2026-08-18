@@ -74,9 +74,9 @@ test("capture Fig. 7c from the v0.3.0 download and API surface", async ({
   await expect(page.getByText("918", { exact: true })).toBeVisible();
   await expect(page.getByText("48 fields", { exact: true })).toBeVisible();
   await expect(
-    page.getByText(/Local v0\.3\.0 review build prepared/),
+    page.getByText(/Public v0\.3\.0 deployment verified/),
   ).toBeVisible();
-  await expect(page.getByText(/Public deployment is pending/)).toBeVisible();
+  await expect(page.getByText(/serves this synchronized release/)).toBeVisible();
   await expect(
     page.getByText(/completion gate now covers all 1,079 released systems/),
   ).toBeVisible();
