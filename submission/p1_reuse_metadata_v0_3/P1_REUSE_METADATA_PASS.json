@@ -1,0 +1,9 @@
+{
+  "artifacts": {
+    "af3_descriptor_associations_v0.3.0.csv": "5dd2e92c29512645486a3d8655172f9509d23f2143202c39700888ac70c80bfe",
+    "descriptor_compatibility_v0.3.0.csv": "9797bc05f41c13f8d95fbab526caf4da4c54d2b8f28808a18bfd622ad1f3d552",
+    "p1_reuse_metadata_v0.3.0.json": "79d0628e4f4de13d17a9facdfdbd631cc4d4ec32744b64a29bafcd14707f27a0"
+  },
+  "source_master_sha256": "7509810e6febefad3b3d387cd5ee4bdd96b410d5ef683140fdbd99b29e68c965",
+  "status": "PASS"
+}

@@ -1,0 +1,20 @@
+{
+  "association_interpretation": "descriptive association only; not causal influence or uncertainty propagation",
+  "association_rows": 8,
+  "association_subset": "738 released acet_K, methyl_K and methyl_R systems",
+  "compatibility_rows": 118,
+  "purpose": "field_level_reuse_compatibility_and_bounded_AF3_descriptor_associations",
+  "schema_version": "v0.3.0",
+  "software": {
+    "numpy": "2.3.3",
+    "pandas": "3.0.3",
+    "python": "3.13.6",
+    "scipy": "1.16.2"
+  },
+  "source_master": "C:\\Users\\lkn\\Desktop\\Dyna-MO PTM\\submission\\master_table_all_v2.csv",
+  "source_master_sha256": "7509810e6febefad3b3d387cd5ee4bdd96b410d5ef683140fdbd99b29e68c965",
+  "source_shape": [
+    1079,
+    118
+  ]
+}

@@ -19,8 +19,23 @@ const quarantinePath = path.join(
   "submission",
   "starting_structure_quarantine_v0.3.0.csv",
 );
+const descriptorCompatibilityPath = path.join(
+  root,
+  "submission",
+  "p1_reuse_metadata_v0_3",
+  "descriptor_compatibility_v0.3.0.csv",
+);
+const af3AssociationsPath = path.join(
+  root,
+  "submission",
+  "p1_reuse_metadata_v0_3",
+  "af3_descriptor_associations_v0.3.0.csv",
+);
 const expectedMasterSha =
   "7509810e6febefad3b3d387cd5ee4bdd96b410d5ef683140fdbd99b29e68c965";
+const expectedZenodoUrl = process.env.ZENODO_DOI
+  ? `https://doi.org/${process.env.ZENODO_DOI}`
+  : null;
 const provenanceFields = [
   "input_component",
   "md_residue",
@@ -48,6 +63,39 @@ function sha256(file: string) {
 }
 
 describe("v0.3.0 static release contract", () => {
+  it("publishes the field-level compatibility and AF3 association companions", () => {
+    const canonical = readCsv(masterPath);
+    const compatibility = readCsv(descriptorCompatibilityPath);
+    const publicCompatibility = readCsv(
+      path.join(publicRoot, "data", "descriptor_compatibility_v0.3.0.csv"),
+    );
+    const associations = readCsv(af3AssociationsPath);
+    const compatibilityApi = JSON.parse(
+      fs.readFileSync(
+        path.join(publicRoot, "api", "descriptor-compatibility.json"),
+        "utf8",
+      ),
+    );
+
+    expect(compatibility).toHaveLength(118);
+    expect(compatibility.map((row) => row.field_name)).toEqual(
+      Object.keys(canonical[0]),
+    );
+    expect(publicCompatibility).toEqual(compatibility);
+    expect(compatibilityApi.count).toBe(118);
+    expect(compatibilityApi.fields).toEqual(compatibility);
+    expect(
+      compatibility
+        .filter((row) => row.comparability_status === "preferred_common")
+        .map((row) => row.field_name)
+        .sort(),
+    ).toEqual(
+      ["rg_mean_3rep_A", "rmsd_equil_mean_3rep_A", "rmsd_mean_3rep_A"].sort(),
+    );
+    expect(associations).toHaveLength(8);
+    expect(associations.every((row) => row.n === "738")).toBe(true);
+  });
+
   it("locks the canonical descriptor release", () => {
     const canonical = readCsv(masterPath);
     const publicCsv = readCsv(
@@ -79,7 +127,7 @@ describe("v0.3.0 static release contract", () => {
       methyl_r_systems: 192,
       api_record_fields: 48,
       public_deployment_status: "deployed",
-      deposition_status: "pending",
+      deposition_status: expectedZenodoUrl ? "available" : "pending",
     });
     expect(payload.stats).toMatchObject({
       systems: 1079,
@@ -171,22 +219,22 @@ describe("v0.3.0 static release contract", () => {
     expect(publicText).not.toMatch(
       /__ZENODO_DOI__|__GITHUB_URL__|__PAPER_DOI__|example\.org/,
     );
-    expect(apiIndex.release.deposition_status).toBe("pending");
+    expect(apiIndex.release.deposition_status).toBe(
+      expectedZenodoUrl ? "available" : "pending",
+    );
     expect(
-      apiIndex.systems.every((system: Row) => system.zenodo_url === null),
+      apiIndex.systems.every(
+        (system: Row) => system.zenodo_url === expectedZenodoUrl,
+      ),
     ).toBe(true);
   });
 
-  it("does not publish an unconfirmed data licence", () => {
+  it("publishes the confirmed data and code licences", () => {
     const appSource = fs.readFileSync(
       path.join(process.cwd(), "src", "App.tsx"),
       "utf8",
     );
-    expect(appSource).toContain(
-      "Data licence pending author confirmation; code MIT.",
-    );
-    expect(appSource).not.toContain("creativecommons.org/licenses/by/4.0");
-    expect(appSource).not.toContain("Data CC-BY 4.0");
+    expect(appSource).toContain("Data CC BY 4.0; repository code MIT.");
     expect(appSource).toContain(
       "The observed-file completion gate now covers all 1,079",
     );

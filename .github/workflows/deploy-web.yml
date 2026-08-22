@@ -6,6 +6,7 @@ on:
     paths:
       - "dyna-mo-web/**"
       - "submission/master_table_all_v2.csv"
+      - "submission/p1_reuse_metadata_v0_3/**"
       - "submission/starting_structure_*.v0.3.0.csv"
       - "submission/figures/**"
       - "dist/dyna-mo-ptm-v0.3.0-starting-structures.tar.gz"
@@ -33,12 +34,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+      - name: Restore locked starting-structure archive
+        working-directory: .
+        run: |
+          mkdir -p dist .release-cache
+          curl --fail --location --retry 3 \
+            "https://zenodo.org/records/22046475/files/dyna-mo-ptm-v0.3.0-lite.tar.gz?download=1" \
+            --output .release-cache/dyna-mo-ptm-v0.3.0-lite.tar.gz
+          tar -xzf .release-cache/dyna-mo-ptm-v0.3.0-lite.tar.gz \
+            dyna-mo-ptm-v0.3.0-lite/data/dyna-mo-ptm-v0.3.0-starting-structures.tar.gz
+          mv dyna-mo-ptm-v0.3.0-lite/data/dyna-mo-ptm-v0.3.0-starting-structures.tar.gz \
+            dist/dyna-mo-ptm-v0.3.0-starting-structures.tar.gz
       - run: corepack enable
       - run: corepack pnpm install --frozen-lockfile
       - run: corepack pnpm build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          ZENODO_DOI: 10.5281/zenodo.22059934
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dyna-mo-web/dist

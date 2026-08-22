@@ -1235,7 +1235,7 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           <ToolCard
             icon={Filter}
             title="Licences"
-            text="Data licence pending author confirmation; code MIT."
+            text="Data CC BY 4.0; repository code MIT."
           />
         </div>
         <h2 id="methods" className="mt-8 scroll-mt-24 text-2xl font-semibold">
@@ -1309,10 +1309,37 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           </code>
           .
         </p>
+        <p className="mt-3 leading-7 text-slate-600">
+          Field compatibility is defined per descriptor rather than per system.
+          Use the machine-readable companion before pooling values across the
+          K/R and phosphorylation production routes. The AF3 association table
+          is descriptive and does not represent causal uncertainty propagation.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <a
+            className="font-medium text-slate-800 underline underline-offset-4"
+            href={assetUrl("data/descriptor_compatibility_v0.3.0.csv")}
+          >
+            Descriptor compatibility CSV
+          </a>
+          <a
+            className="font-medium text-slate-800 underline underline-offset-4"
+            href={assetUrl("data/af3_descriptor_associations_v0.3.0.csv")}
+          >
+            AF3 association CSV
+          </a>
+          <a
+            className="font-medium text-slate-800 underline underline-offset-4"
+            href={assetUrl("api/descriptor-compatibility.json")}
+          >
+            Compatibility JSON API
+          </a>
+        </div>
         <div className="mt-4 grid gap-3">
           <pre className="overflow-auto rounded-lg border bg-slate-950 p-4 text-sm leading-6 text-slate-100">
             {`Public release files (1079 records; 48 fields per index record)
 public/api/systems.json
+public/api/descriptor-compatibility.json
 public/api/system/a6nhq2_k76_acetyl.json
 
 Deployment endpoint

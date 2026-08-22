@@ -107,6 +107,18 @@ const figuresDir = path.join(publicDir, "figures");
 const structuresDir = path.join(publicDir, "structures");
 const staticDataPath = path.join(dataDir, "master_table.json");
 const csvPath = path.join(root, "submission", "master_table_all_v2.csv");
+const descriptorCompatibilityPath = path.join(
+  root,
+  "submission",
+  "p1_reuse_metadata_v0_3",
+  "descriptor_compatibility_v0.3.0.csv",
+);
+const af3AssociationsPath = path.join(
+  root,
+  "submission",
+  "p1_reuse_metadata_v0_3",
+  "af3_descriptor_associations_v0.3.0.csv",
+);
 const fig1Path = path.join(
   root,
   "submission",
@@ -208,6 +220,8 @@ try {
 
   const csvText = readRequiredText(csvPath);
   const records = parseCsv(csvText, csvPath);
+  const descriptorCompatibility = readCsvFile(descriptorCompatibilityPath);
+  const af3Associations = readCsvFile(af3AssociationsPath);
   const structureManifest = readCsvFile(structureManifestPath);
   const structureMissing = readCsvFile(structureMissingPath);
   const structureQuarantine = readCsvFile(structureQuarantinePath);
@@ -218,6 +232,7 @@ try {
     structureMissing,
     structureQuarantine,
   );
+  validateReuseMetadata(records, descriptorCompatibility, af3Associations);
   copyFigureAssets();
   extractPdbAssets(structureManifest);
 
@@ -287,7 +302,15 @@ try {
     sanitizeCsvText(csvText),
     "utf8",
   );
-  writeApiFiles(payload);
+  fs.copyFileSync(
+    descriptorCompatibilityPath,
+    path.join(dataDir, "descriptor_compatibility_v0.3.0.csv"),
+  );
+  fs.copyFileSync(
+    af3AssociationsPath,
+    path.join(dataDir, "af3_descriptor_associations_v0.3.0.csv"),
+  );
+  writeApiFiles(payload, descriptorCompatibility);
   writeSeoFiles(systems);
   verifyStagedPublic(payload);
 
@@ -480,7 +503,10 @@ function extractPdbAssets(structureManifest: CsvRecord[]) {
   }
 }
 
-function writeApiFiles(payload: StaticPayload) {
+function writeApiFiles(
+  payload: StaticPayload,
+  descriptorCompatibility: CsvRecord[],
+) {
   fs.mkdirSync(apiSystemDir, { recursive: true });
   const systemsIndex = {
     generated_at: payload.generated_at,
@@ -495,6 +521,20 @@ function writeApiFiles(payload: StaticPayload) {
     JSON.stringify(systemsIndex, null, 2),
     "utf8",
   );
+  fs.writeFileSync(
+    path.join(apiDir, "descriptor-compatibility.json"),
+    JSON.stringify(
+      {
+        schema_version: RELEASE_VERSION,
+        source_csv: "data/descriptor_compatibility_v0.3.0.csv",
+        count: descriptorCompatibility.length,
+        fields: descriptorCompatibility,
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
 
   for (const system of payload.systems) {
     fs.writeFileSync(
@@ -502,6 +542,39 @@ function writeApiFiles(payload: StaticPayload) {
       JSON.stringify(system, null, 2),
       "utf8",
     );
+  }
+}
+
+function validateReuseMetadata(
+  records: CsvRecord[],
+  descriptorCompatibility: CsvRecord[],
+  af3Associations: CsvRecord[],
+) {
+  assertEqual(
+    descriptorCompatibility.length,
+    EXPECTED_COLUMNS,
+    "descriptor compatibility rows",
+  );
+  const masterFields = Object.keys(records[0] ?? {});
+  const companionFields = descriptorCompatibility.map((row) => row.field_name);
+  if (JSON.stringify(masterFields) !== JSON.stringify(companionFields)) {
+    fail("Descriptor compatibility fields must match the master header in order");
+  }
+  const preferred = descriptorCompatibility
+    .filter((row) => row.comparability_status === "preferred_common")
+    .map((row) => row.field_name)
+    .sort();
+  const expectedPreferred = [
+    "rg_mean_3rep_A",
+    "rmsd_equil_mean_3rep_A",
+    "rmsd_mean_3rep_A",
+  ].sort();
+  if (JSON.stringify(preferred) !== JSON.stringify(expectedPreferred)) {
+    fail("Preferred-common descriptor contract drifted");
+  }
+  assertEqual(af3Associations.length, 8, "AF3 association rows");
+  if (af3Associations.some((row) => row.n !== "738")) {
+    fail("Every AF3 association must use the complete 738-row K/R subset");
   }
 }
 
@@ -725,6 +798,18 @@ function verifyStagedPublic(payload: StaticPayload) {
       .length,
     EXPECTED_ROWS,
     "API detail files",
+  );
+  const compatibilityApi = JSON.parse(
+    fs.readFileSync(
+      path.join(apiDir, "descriptor-compatibility.json"),
+      "utf8",
+    ),
+  );
+  assertEqual(compatibilityApi.count, EXPECTED_COLUMNS, "compatibility API rows");
+  assertEqual(
+    readCsvFile(path.join(dataDir, "af3_descriptor_associations_v0.3.0.csv")).length,
+    8,
+    "public AF3 association rows",
   );
   assertEqual(
     fs.readdirSync(structuresDir).filter((name) => name.endsWith(".pdb"))
