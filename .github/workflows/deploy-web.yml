@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p dist .release-cache
           curl --fail --location --retry 3 \
-            "https://zenodo.org/records/22046475/files/dyna-mo-ptm-v0.3.0-lite.tar.gz?download=1" \
+            "https://zenodo.org/records/22059934/files/dyna-mo-ptm-v0.3.0-lite.tar.gz?download=1" \
             --output .release-cache/dyna-mo-ptm-v0.3.0-lite.tar.gz
           tar -xzf .release-cache/dyna-mo-ptm-v0.3.0-lite.tar.gz \
             dyna-mo-ptm-v0.3.0-lite/data/dyna-mo-ptm-v0.3.0-starting-structures.tar.gz
@@ -51,7 +51,7 @@ jobs:
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-          ZENODO_DOI: 10.5281/zenodo.22059934
+          ZENODO_DOI: 10.5281/zenodo.22049767
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dyna-mo-web/dist

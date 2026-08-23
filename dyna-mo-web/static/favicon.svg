@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Dyna-MO PTM">
+  <rect width="64" height="64" rx="12" fill="#10324a"/>
+  <circle cx="20" cy="21" r="6" fill="#2ca02c"/>
+  <circle cx="44" cy="21" r="6" fill="#d62728"/>
+  <circle cx="32" cy="43" r="6" fill="#9467bd"/>
+  <path d="M24.7 24.8 29 37.2M39.3 24.8 35 37.2M26 21h12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+</svg>

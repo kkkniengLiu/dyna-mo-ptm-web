@@ -3,14 +3,17 @@ import Fuse from "fuse.js";
 import {
   Activity,
   BarChart3,
+  BookOpen,
   Box,
   Database,
   Download,
   ExternalLink,
   FileText,
   Filter,
+  Menu,
   Search,
   Table2,
+  X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
@@ -70,19 +73,42 @@ const visibleColumns: Array<{
 
 type CitationFormat = "bibtex" | "ris" | "endnote";
 
-const DISPLAY_CITATION =
-  "Liu K., Qian Q., et al. Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins. Manuscript in preparation, 2026.";
+type DescriptorField = {
+  field_name: string;
+  field_index: string;
+  descriptor_family: string;
+  value_role: string;
+  comparability_status: string;
+  n_nonblank: string;
+  availability_scope: string;
+  aggregation_or_source: string;
+  recommended_use: string;
+  pooling_policy: string;
+  missingness_policy: string;
+};
+
+const LITE_DOI = "10.5281/zenodo.22059934";
+const FULL_DOI = "10.5281/zenodo.22049767";
+const LITE_URL = `https://doi.org/${LITE_DOI}`;
+const FULL_URL = `https://doi.org/${FULL_DOI}`;
+const GITHUB_URL = "https://github.com/kkkniengLiu/dyna-mo-ptm";
+const MANUSCRIPT_URL = `${GITHUB_URL}/blob/main/submission/manuscript_v3_SciData.pdf`;
+
+const DISPLAY_CITATION = `Liu K., Qian Q., Peng J., Ma D., Yao Y., Zhao J. & Chi Y. Molecular dynamics descriptors and retained starting structures for 1,079 post-translationally modified protein systems. Zenodo ${LITE_DOI} (2026).`;
 
 const CITATION_TEXT: Record<CitationFormat, string> = {
-  bibtex: `@article{dynamoptm2026,
-  title   = {Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins},
+  bibtex: `@dataset{liu2026dynamoptm,
+  title   = {Molecular dynamics descriptors and retained starting structures for 1,079 post-translationally modified protein systems},
   author  = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Yao, Yifei and Zhao, Jingjing and Chi, Ying},
-  note    = {Manuscript in preparation},
+  publisher = {Zenodo},
+  version = {0.3.1-lite},
+  doi     = {${LITE_DOI}},
+  url     = {${LITE_URL}},
   year    = {2026}
 }`,
-  ris: `TY  - GEN
-ID  - dynamoptm2026
-TI  - Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins
+  ris: `TY  - DATA
+ID  - liu2026dynamoptm
+TI  - Molecular dynamics descriptors and retained starting structures for 1,079 post-translationally modified protein systems
 AU  - Liu, Kaining
 AU  - Qian, Qiuting
 AU  - Peng, Jiahua
@@ -90,12 +116,14 @@ AU  - Ma, Dongge
 AU  - Yao, Yifei
 AU  - Zhao, Jingjing
 AU  - Chi, Ying
-N1  - Manuscript in preparation
+DO  - ${LITE_DOI}
+UR  - ${LITE_URL}
+PB  - Zenodo
 PY  - 2026
 ER  -`,
-  endnote: `%0 Generic
-%F dynamoptm2026
-%T Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins
+  endnote: `%0 Dataset
+%F liu2026dynamoptm
+%T Molecular dynamics descriptors and retained starting structures for 1,079 post-translationally modified protein systems
 %A Liu, Kaining
 %A Qian, Qiuting
 %A Peng, Jiahua
@@ -103,7 +131,9 @@ ER  -`,
 %A Yao, Yifei
 %A Zhao, Jingjing
 %A Chi, Ying
-%Z Manuscript in preparation
+%R ${LITE_DOI}
+%U ${LITE_URL}
+%I Zenodo
 %D 2026`,
 };
 
@@ -151,9 +181,17 @@ export default function App() {
     ? "system"
     : route === "/browse"
       ? "browse"
-      : route === "/about"
-        ? "about"
-        : "home";
+      : route === "/statistics"
+        ? "statistics"
+        : route === "/docs"
+          ? "docs"
+          : route === "/descriptors"
+            ? "descriptors"
+            : route === "/downloads"
+              ? "downloads"
+              : route === "/about"
+                ? "about"
+                : "home";
   const selectedSystem = systemMatch
     ? dataset.systems.find(
         (system) => system.id === decodeURIComponent(systemMatch[1]),
@@ -165,6 +203,14 @@ export default function App() {
       <Header page={page} navigate={navigate} />
       {page === "browse" ? (
         <BrowsePage dataset={dataset} navigate={navigate} />
+      ) : page === "statistics" ? (
+        <StatisticsPage dataset={dataset} />
+      ) : page === "docs" ? (
+        <DocsPage dataset={dataset} navigate={navigate} />
+      ) : page === "descriptors" ? (
+        <DescriptorDictionaryPage />
+      ) : page === "downloads" ? (
+        <DownloadsPage />
       ) : page === "about" ? (
         <AboutPage dataset={dataset} />
       ) : page === "system" && selectedSystem ? (
@@ -184,21 +230,28 @@ function Header({
   page: string;
   navigate: (path: string) => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const links = [
     { path: "/", label: "Overview" },
     { path: "/browse", label: "Browse" },
-    { path: "/about#methods", label: "Methods" },
-    { path: "/about#api", label: "API" },
-    { path: "/about#faq", label: "FAQ" },
+    { path: "/statistics", label: "Statistics" },
+    { path: "/descriptors", label: "Descriptors" },
+    { path: "/docs", label: "Docs" },
+    { path: "/downloads", label: "Downloads" },
     { path: "/about", label: "About" },
   ];
+
+  function follow(path: string) {
+    setMenuOpen(false);
+    navigate(path);
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-950/10 bg-[#10324a]/[0.96] text-white shadow-sm backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <button
           className="flex items-center gap-3 font-semibold"
-          onClick={() => navigate("/")}
+          onClick={() => follow("/")}
         >
           <span className="grid h-9 w-9 place-items-center rounded-md bg-white text-sm font-bold text-[#10324a] shadow-sm">
             DM
@@ -207,8 +260,9 @@ function Header({
         </button>
         <nav className="hidden rounded-md border border-white/15 bg-white/[0.08] p-1 shadow-sm md:flex">
           {links.map((link) => (
-            <button
+            <a
               key={link.path}
+              href={withBase(link.path)}
               className={`rounded-full px-4 py-2 text-sm transition ${
                 (
                   link.path === "/"
@@ -218,19 +272,58 @@ function Header({
                   ? "bg-white text-[#10324a]"
                   : "text-slate-300 hover:bg-white/10 hover:text-white"
               }`}
-              onClick={() => navigate(link.path)}
+              onClick={(event) => {
+                event.preventDefault();
+                follow(link.path);
+              }}
             >
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
-        <Button
-          className="bg-[#0f766e] text-white hover:bg-[#0d665f]"
-          onClick={() => navigate("/browse")}
-        >
-          Browse database
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            className="hidden bg-[#0f766e] text-white hover:bg-[#0d665f] sm:inline-flex"
+            onClick={() => follow("/browse")}
+          >
+            Browse database
+          </Button>
+          <button
+            type="button"
+            className="grid h-10 w-10 place-items-center rounded-md border border-white/20 bg-white/10 md:hidden"
+            aria-label={
+              menuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
+      {menuOpen ? (
+        <nav className="border-t border-white/15 bg-[#10324a] px-4 py-3 md:hidden">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-2">
+            {links.map((link) => (
+              <a
+                key={link.path}
+                href={withBase(link.path)}
+                className="rounded-md px-3 py-2 text-left text-sm text-slate-100 hover:bg-white/10"
+                onClick={(event) => {
+                  event.preventDefault();
+                  follow(link.path);
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      ) : null}
     </header>
   );
 }
@@ -292,7 +385,7 @@ function HomePage({
           >
             <div className="inline-flex items-center gap-2 rounded-md border border-[#10324a]/15 bg-white/80 px-3 py-2 text-sm font-medium text-[#10324a] shadow-sm">
               <span className="h-2 w-2 rounded-full bg-[#2ca02c]" />
-              Dyna-MO PTM v0.3.0 public release
+              Descriptor schema v0.3.0 · Lite release v0.3.1
             </div>
             <div>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] text-[#071827] md:text-6xl">
@@ -338,7 +431,7 @@ function HomePage({
                 </button>
               ))}
             </div>
-            <div className="flex flex-col gap-3 md:flex-row">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <button
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-[#10324a] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0b2639]"
                 onClick={() => navigate("/browse")}
@@ -348,16 +441,27 @@ function HomePage({
               </button>
               <a
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-[#10324a] shadow-sm transition hover:border-[#10324a]"
-                href={assetUrl("data/master_table_all_v2.csv")}
+                href={LITE_URL}
+                target="_blank"
+                rel="noreferrer"
               >
-                Download descriptor CSV
-                <Download className="h-4 w-4" />
+                Lite record
+                <ExternalLink className="h-4 w-4" />
+              </a>
+              <a
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-[#10324a] shadow-sm transition hover:border-[#10324a]"
+                href={FULL_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Full trajectories
+                <ExternalLink className="h-4 w-4" />
               </a>
               <button
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-[#10324a] shadow-sm transition hover:border-[#10324a]"
-                onClick={() => navigate("/about")}
+                onClick={() => navigate("/downloads")}
               >
-                Citation / About
+                Download and cite
                 <FileText className="h-4 w-4" />
               </button>
             </div>
@@ -430,15 +534,15 @@ function HomePage({
           index="03"
           icon={Download}
           title="Download data"
-          text="Use the descriptor CSV or system-level deposition links."
-          href={assetUrl("data/master_table_all_v2.csv")}
+          text="Choose the Lite descriptor package or the full trajectory record."
+          onClick={() => navigate("/downloads")}
         />
         <FeatureCommand
           index="04"
           icon={FileText}
           title="Cite resource"
-          text="Methods, release notes and the pre-publication citation live on About."
-          onClick={() => navigate("/about")}
+          text="Copy the published Zenodo dataset citation in BibTeX, RIS or EndNote format."
+          onClick={() => navigate("/downloads#citation")}
         />
       </section>
 
@@ -451,7 +555,8 @@ function HomePage({
               </p>
               <h2 className="mt-2 text-2xl font-semibold">Cite Dyna-MO PTM</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-                Pre-publication citation record for manuscript drafting.
+                Published Lite dataset record. Cite the full record as well when
+                using trajectory files.
               </p>
               <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-slate-800">
                 {DISPLAY_CITATION}
@@ -489,8 +594,8 @@ function HomePage({
             {CITATION_TEXT[citationFormat]}
           </pre>
           <p className="mt-2 text-[9pt] leading-5 text-slate-500">
-            The final citation including DOI and journal information will be
-            updated upon publication.
+            Manuscript citation metadata will be added only after a preprint or
+            journal DOI is assigned. The dataset DOI above is already citable.
           </p>
         </div>
       </section>
@@ -1065,7 +1170,9 @@ function SystemPage({
               <a
                 className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white"
                 href={system.zenodo_url}
-                title="Open trajectory deposition record"
+                target="_blank"
+                rel="noreferrer"
+                title="Open the Full trajectory record on Zenodo"
               >
                 Download trajectories
                 <Download className="h-4 w-4" />
@@ -1073,9 +1180,9 @@ function SystemPage({
             ) : (
               <span
                 className="inline-flex cursor-not-allowed items-center gap-2 rounded-md bg-slate-200 px-4 py-2 text-sm font-medium text-slate-600"
-                title="The deposition DOI has not yet been assigned"
+                title="The Full trajectory record is unavailable"
               >
-                Deposition pending
+                Full record unavailable
                 <Download className="h-4 w-4" />
               </span>
             )}
@@ -1117,12 +1224,14 @@ function SystemPage({
                     <a
                       className="mt-4 inline-flex rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white"
                       href={system.zenodo_url}
+                      target="_blank"
+                      rel="noreferrer"
                     >
-                      Open deposition record
+                      Open Full trajectory record
                     </a>
                   ) : (
                     <p className="mt-4 text-sm font-medium text-slate-500">
-                      Deposition DOI pending
+                      Full trajectory record unavailable
                     </p>
                   )}
                 </div>
@@ -1201,6 +1310,436 @@ function SystemPage({
   );
 }
 
+function StatisticsPage({ dataset }: { dataset: StaticDataset }) {
+  const routeCounts = [
+    {
+      label: "K/R production route",
+      value: dataset.systems.filter((system) => system.ptm_family === "K/R-PTM")
+        .length,
+      color: "#0f766e",
+    },
+    {
+      label: "Phosphorylation archive route",
+      value: dataset.systems.filter(
+        (system) => system.ptm_family === "phosphorylation",
+      ).length,
+      color: "#7c3aed",
+    },
+  ];
+  const lengthBins = [
+    { label: "<200 aa", min: 0, max: 199 },
+    { label: "200-399 aa", min: 200, max: 399 },
+    { label: "400-799 aa", min: 400, max: 799 },
+    { label: "800+ aa", min: 800, max: Number.POSITIVE_INFINITY },
+  ].map((bin) => ({
+    ...bin,
+    value: dataset.systems.filter(
+      (system) =>
+        system.n_residues !== null &&
+        system.n_residues >= bin.min &&
+        system.n_residues <= bin.max,
+    ).length,
+  }));
+  const maxPtm = Math.max(...dataset.stats.counts.map((item) => item.count));
+  const maxLengthBin = Math.max(...lengthBins.map((item) => item.value));
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-10">
+      <p className="text-sm font-semibold uppercase tracking-wide text-[#0f766e]">
+        Release statistics
+      </p>
+      <h1 className="mt-2 text-4xl font-semibold">Dataset overview</h1>
+      <p className="mt-4 max-w-3xl leading-7 text-slate-600">
+        Descriptive counts for the frozen schema v0.3.0 release. These summaries
+        describe resource composition and availability; they are not estimates
+        of PTM prevalence or modification effects.
+      </p>
+
+      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatPanel label="Systems" value="1,079" />
+        <StatPanel label="Completed replicas" value="3,237" />
+        <StatPanel label="Aggregate sampling" value="32.37 μs" />
+        <StatPanel label="Trajectory files" value="9,711" />
+      </section>
+
+      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="chromatic-card rounded-xl p-6">
+          <h2 className="text-2xl font-semibold">PTM composition</h2>
+          <div className="mt-5 space-y-4">
+            {dataset.stats.counts.map((item) => (
+              <DistributionBar
+                key={item.ptm_type}
+                label={item.label}
+                value={item.count}
+                max={maxPtm}
+                color={item.color}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="chromatic-card rounded-xl p-6">
+          <h2 className="text-2xl font-semibold">Protein length</h2>
+          <p className="mt-2 text-sm text-slate-500">
+            Median retained length: {dataset.stats.median_length} amino acids.
+          </p>
+          <div className="mt-5 space-y-4">
+            {lengthBins.map((item) => (
+              <DistributionBar
+                key={item.label}
+                label={item.label}
+                value={item.value}
+                max={maxLengthBin}
+                color="#17415a"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="chromatic-card rounded-xl p-6">
+          <h2 className="text-2xl font-semibold">Production routes</h2>
+          <div className="mt-5 space-y-4">
+            {routeCounts.map((item) => (
+              <DistributionBar
+                key={item.label}
+                label={item.label}
+                value={item.value}
+                max={dataset.stats.systems}
+                color={item.color}
+              />
+            ))}
+          </div>
+          <p className="mt-5 text-sm leading-6 text-slate-600">
+            The two routes share a 118-column schema but retain route-specific
+            aggregation and QC provenance. Consult the descriptor dictionary
+            before pooling fields.
+          </p>
+        </div>
+        <div className="chromatic-card rounded-xl p-6">
+          <h2 className="text-2xl font-semibold">Public structure coverage</h2>
+          <p className="mt-4 text-4xl font-semibold text-[#10324a]">
+            {dataset.stats.local_structures.toLocaleString()}
+          </p>
+          <p className="mt-2 leading-7 text-slate-600">
+            Retained AF3 inputs are available for all 738 K/R systems and 180
+            phosphorylation systems. The 161 unavailable batch-2 inputs are
+            explicitly listed in the Lite record.
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function DocsPage({
+  dataset,
+  navigate,
+}: {
+  dataset: StaticDataset;
+  navigate: (path: string) => void;
+}) {
+  return (
+    <main className="mx-auto max-w-6xl px-4 py-10">
+      <p className="text-sm font-semibold uppercase tracking-wide text-[#0f766e]">
+        Documentation
+      </p>
+      <h1 className="mt-2 text-4xl font-semibold">Use Dyna-MO PTM</h1>
+      <p className="mt-4 max-w-3xl leading-7 text-slate-600">
+        A practical route from dataset discovery to route-aware descriptor reuse
+        and trajectory reanalysis.
+      </p>
+
+      <section className="mt-8 grid gap-4 md:grid-cols-3">
+        <ToolCard
+          icon={Search}
+          title="1. Find a system"
+          text="Search by system ID or UniProt accession and filter by PTM class, length or dominant secondary structure."
+        />
+        <ToolCard
+          icon={Table2}
+          title="2. Check field compatibility"
+          text="Read the field-level pooling policy before comparing K/R and phosphorylation routes."
+        />
+        <ToolCard
+          icon={Download}
+          title="3. Download the right record"
+          text="Use the Lite record for descriptors and structures, and the Full record for XTC/TPR/GRO trajectories."
+        />
+      </section>
+
+      <section className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="chromatic-card rounded-xl p-6">
+          <h2 className="text-2xl font-semibold">Quick start</h2>
+          <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-7 text-slate-600">
+            <li>
+              Open the browser and select a system. Every system page exposes a
+              stable JSON endpoint and, when available, an AF3 input structure.
+            </li>
+            <li>
+              Use the descriptor dictionary to distinguish common,
+              route-specific, context-only and non-harmonized fields.
+            </li>
+            <li>
+              Download the Lite CSV for filtering or modelling. Use accession-
+              aware splits and the provided <code>cv_fold</code> field.
+            </li>
+            <li>
+              Download the Full record only when trajectory-level reanalysis is
+              required; verify parts and files against the supplied manifests.
+            </li>
+          </ol>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button onClick={() => navigate("/browse")}>Browse systems</Button>
+            <Button variant="outline" onClick={() => navigate("/descriptors")}>
+              Descriptor dictionary
+            </Button>
+          </div>
+        </div>
+        <div className="chromatic-card rounded-xl p-6">
+          <h2 className="text-2xl font-semibold">Data architecture</h2>
+          <dl className="mt-5 grid gap-4 sm:grid-cols-2">
+            <Definition
+              label="Descriptor table"
+              value={`${dataset.release.rows.toLocaleString()} rows × ${dataset.release.columns} columns`}
+            />
+            <Definition label="Static index" value="/api/systems.json" />
+            <Definition label="System record" value="/api/system/<id>.json" />
+            <Definition
+              label="Compatibility API"
+              value="/api/descriptor-compatibility.json"
+            />
+            <Definition label="Lite DOI" value={LITE_DOI} />
+            <Definition label="Full DOI" value={FULL_DOI} />
+          </dl>
+        </div>
+      </section>
+
+      <section className="mt-8 chromatic-card rounded-xl p-6">
+        <h2 className="text-2xl font-semibold">Interpretation boundaries</h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <p className="leading-7 text-slate-600">
+            The trajectories characterize finite-window relaxation from AF3-
+            seeded starting structures. They do not establish equilibrium free
+            energies, kinetic rates or modification effects without matched
+            controls and longer sampling.
+          </p>
+          <p className="leading-7 text-slate-600">
+            AF3 confidence fields describe the starting models. Associations
+            between confidence and MD descriptors are descriptive and should not
+            be interpreted as causal uncertainty propagation.
+          </p>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function DescriptorDictionaryPage() {
+  const [fields, setFields] = useState<DescriptorField[]>([]);
+  const [query, setQuery] = useState("");
+  const [family, setFamily] = useState("all");
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    fetch(assetUrl("api/descriptor-compatibility.json"))
+      .then((response) => {
+        if (!response.ok)
+          throw new Error("Failed to load descriptor dictionary");
+        return response.json() as Promise<{ fields: DescriptorField[] }>;
+      })
+      .then((payload) => setFields(payload.fields))
+      .catch(() => setLoadError(true));
+  }, []);
+
+  const families = useMemo(
+    () => [...new Set(fields.map((field) => field.descriptor_family))].sort(),
+    [fields],
+  );
+  const filtered = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    return fields.filter(
+      (field) =>
+        (family === "all" || field.descriptor_family === family) &&
+        (!needle ||
+          [
+            field.field_name,
+            field.descriptor_family,
+            field.recommended_use,
+            field.comparability_status,
+          ].some((value) => value.toLowerCase().includes(needle))),
+    );
+  }, [family, fields, query]);
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-10">
+      <p className="text-sm font-semibold uppercase tracking-wide text-[#0f766e]">
+        Schema v0.3.0
+      </p>
+      <h1 className="mt-2 text-4xl font-semibold">Descriptor dictionary</h1>
+      <p className="mt-4 max-w-4xl leading-7 text-slate-600">
+        Definitions and pooling policies for all 118 fields. Prefer fields
+        marked <strong>preferred_common</strong> for direct cross-route
+        summaries; stratify route-specific fields and do not pool non-harmonized
+        fields.
+      </p>
+
+      <section className="mt-7 grid gap-3 rounded-xl border bg-white p-4 md:grid-cols-[1fr_280px_auto]">
+        <input
+          className="rounded-md border px-3 py-2 text-sm"
+          placeholder="Search field, family or recommended use"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+        <select
+          className="rounded-md border px-3 py-2 text-sm"
+          aria-label="Descriptor family"
+          value={family}
+          onChange={(event) => setFamily(event.target.value)}
+        >
+          <option value="all">All descriptor families</option>
+          {families.map((item) => (
+            <option key={item} value={item}>
+              {item.replaceAll("_", " ")}
+            </option>
+          ))}
+        </select>
+        <span className="self-center text-sm text-slate-500">
+          {filtered.length} / {fields.length || 118} fields
+        </span>
+      </section>
+
+      {loadError ? (
+        <p className="mt-5 rounded-lg border border-red-200 bg-red-50 p-4 text-red-800">
+          Descriptor dictionary could not be loaded. Use the downloadable CSV.
+        </p>
+      ) : (
+        <div className="mt-5 overflow-x-auto rounded-xl border bg-white">
+          <table className="min-w-[1120px] text-left text-sm">
+            <thead className="border-b bg-slate-50 text-slate-700">
+              <tr>
+                <th className="px-4 py-3">Field</th>
+                <th className="px-4 py-3">Family</th>
+                <th className="px-4 py-3">Compatibility</th>
+                <th className="px-4 py-3">Availability</th>
+                <th className="px-4 py-3">Recommended use</th>
+                <th className="px-4 py-3">Pooling policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((field) => (
+                <tr
+                  key={field.field_name}
+                  className="border-b align-top last:border-0"
+                >
+                  <td className="px-4 py-3 font-mono text-xs font-semibold text-slate-900">
+                    {field.field_name}
+                  </td>
+                  <td className="px-4 py-3 text-slate-600">
+                    {field.descriptor_family.replaceAll("_", " ")}
+                  </td>
+                  <td className="px-4 py-3">
+                    <CompatibilityBadge value={field.comparability_status} />
+                  </td>
+                  <td className="px-4 py-3 text-slate-600">
+                    {field.availability_scope.replaceAll("_", " ")}
+                  </td>
+                  <td className="max-w-sm px-4 py-3 leading-6 text-slate-600">
+                    {field.recommended_use}
+                  </td>
+                  <td className="px-4 py-3 text-slate-600">
+                    {field.pooling_policy.replaceAll("_", " ")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </main>
+  );
+}
+
+function DownloadsPage() {
+  return (
+    <main className="mx-auto max-w-6xl px-4 py-10">
+      <p className="text-sm font-semibold uppercase tracking-wide text-[#0f766e]">
+        Data access
+      </p>
+      <h1 className="mt-2 text-4xl font-semibold">Download and cite</h1>
+      <p className="mt-4 max-w-3xl leading-7 text-slate-600">
+        The release is split into a lightweight descriptor-and-structure record
+        and a full trajectory record. Both are public under CC BY 4.0.
+      </p>
+
+      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+        <DownloadCard
+          title="Lite record"
+          version="v0.3.1-lite · schema v0.3.0"
+          description="Master descriptor table, 118-field dictionary, 918 retained AF3 inputs, manifests, figures, source data and analysis scripts."
+          doi={LITE_DOI}
+          href={LITE_URL}
+        />
+        <DownloadCard
+          title="Full trajectory record"
+          version="v0.3.0-full · 133.70 GB"
+          description="3,237 replicas and 9,711 XTC/TPR/GRO files, with part manifests, SHA-256 checks and independent integrity-audit evidence."
+          doi={FULL_DOI}
+          href={FULL_URL}
+        />
+      </section>
+
+      <section className="mt-8 grid gap-4 md:grid-cols-3">
+        <a
+          className="feature-command"
+          href={assetUrl("data/master_table_all_v2.csv")}
+        >
+          <Download className="h-5 w-5 text-[#0f766e]" />
+          <h2 className="mt-4 text-lg font-semibold">Descriptor CSV</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            1,079 rows × 118 columns.
+          </p>
+        </a>
+        <a className="feature-command" href={assetUrl("api/systems.json")}>
+          <Database className="h-5 w-5 text-[#0f766e]" />
+          <h2 className="mt-4 text-lg font-semibold">Static API index</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Searchable system metadata without a backend service.
+          </p>
+        </a>
+        <a
+          className="feature-command"
+          href={MANUSCRIPT_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <BookOpen className="h-5 w-5 text-[#0f766e]" />
+          <h2 className="mt-4 text-lg font-semibold">Author manuscript</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            Submission manuscript without an assigned article or preprint DOI.
+          </p>
+        </a>
+      </section>
+
+      <section
+        id="citation"
+        className="mt-8 scroll-mt-24 chromatic-card rounded-xl p-6"
+      >
+        <h2 className="text-2xl font-semibold">Dataset citation</h2>
+        <p className="mt-3 leading-7 text-slate-600">{DISPLAY_CITATION}</p>
+        <pre className="mt-4 overflow-auto rounded-lg border bg-slate-950 p-4 text-sm leading-6 text-slate-100">
+          {CITATION_TEXT.bibtex}
+        </pre>
+        <p className="mt-3 text-sm leading-6 text-slate-500">
+          Cite the Full record in addition to the Lite record when trajectory
+          files are used. A manuscript citation will be added only after an
+          article or preprint DOI is assigned.
+        </p>
+      </section>
+    </main>
+  );
+}
+
 function AboutPage({ dataset }: { dataset: StaticDataset }) {
   const completionExceptions = dataset.systems.filter(
     (system) =>
@@ -1213,11 +1752,11 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
       <div className="chromatic-card rounded-xl p-6">
         <h1 className="text-4xl font-semibold">About Dyna-MO PTM</h1>
         <p className="mt-5 leading-8 text-slate-600">
-          The public Dyna-MO PTM v0.3.0 release contains{" "}
+          The Dyna-MO PTM descriptor schema v0.3.0 contains{" "}
           {dataset.stats.systems.toLocaleString()} modified-protein systems
           covering acetyl-lysine, methyl-lysine, methyl-arginine,
           phospho-serine, phospho-threonine and phospho-tyrosine. The resource
-          follows a three-replica, nominal 10 ns design and provides a{' '}
+          follows a three-replica, nominal 10 ns design and provides a{" "}
           {dataset.release.columns}-column descriptor table with explicit
           route-level provenance.
         </p>
@@ -1230,7 +1769,7 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           <ToolCard
             icon={FileText}
             title="Data"
-            text="Descriptor CSV and figures are static assets in the public v0.3.0 release."
+            text="Lite v0.3.1 provides descriptors and structures; Full v0.3.0 provides trajectories."
           />
           <ToolCard
             icon={Filter}
@@ -1255,18 +1794,20 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
           className="mt-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
           role="status"
         >
-          Public v0.3.0 deployment verified. The GitHub Pages endpoint serves
-          this synchronized release.
+          Public deployment verified. The website serves descriptor schema
+          v0.3.0, linked to Lite v0.3.1 and Full v0.3.0 Zenodo records.
           {completionExceptions > 0 ? (
             <>
-              {" "}The completion-summary gate currently blocks{" "}
-              {completionExceptions.toLocaleString()} inherited row; this
-              build is not release-ready.
+              {" "}
+              The completion-summary gate currently blocks{" "}
+              {completionExceptions.toLocaleString()} inherited row; this build
+              is not release-ready.
             </>
           ) : (
             <>
-              {" "}The observed-file completion gate now covers all 1,079
-              released systems after the isolated O75792 rep-2 repair.
+              {" "}
+              The observed-file completion gate now covers all 1,079 released
+              systems after the isolated O75792 rep-2 repair.
             </>
           )}
         </div>
@@ -1363,16 +1904,16 @@ ${dataset.release.site_url}/api/systems.json`}
           <div className="rounded-lg border bg-white/75 p-4">
             <dt className="font-semibold">How should I cite this resource?</dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
-              Use the pre-publication citation below. DOI and journal metadata
-              remain pending and are not represented by a fabricated link.
+              Cite the published Lite dataset record ({LITE_DOI}). Cite the Full
+              record ({FULL_DOI}) as well when using trajectories.
             </dd>
           </div>
           <div className="rounded-lg border bg-white/75 p-4">
             <dt className="font-semibold">How do I download trajectories?</dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
               Trajectories remain off-site to keep the web build lightweight.
-              Per-system download controls stay disabled until the deposition
-              DOI is assigned.
+              Use the Full Zenodo record, and follow its part manifests and
+              SHA-256 checks when retrieving the 133.70 GB release.
             </dd>
           </div>
           <div className="rounded-lg border bg-white/75 p-4">
@@ -1403,12 +1944,113 @@ ${dataset.release.site_url}/api/systems.json`}
             </dd>
           </div>
         </dl>
-        <h2 className="mt-8 text-2xl font-semibold">Citation</h2>
+        <h2 className="mt-8 text-2xl font-semibold">Dataset citation</h2>
+        <p className="mt-3 leading-7 text-slate-600">{DISPLAY_CITATION}</p>
         <pre className="mt-3 overflow-auto rounded-lg border bg-slate-50 p-4 text-sm text-slate-700">
           {CITATION_TEXT.bibtex}
         </pre>
       </div>
     </main>
+  );
+}
+
+function DistributionBar({
+  label,
+  value,
+  max,
+  color,
+}: {
+  label: string;
+  value: number;
+  max: number;
+  color: string;
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between gap-3 text-sm">
+        <span className="font-medium text-slate-700">{label}</span>
+        <span className="font-mono text-slate-500">
+          {value.toLocaleString()}
+        </span>
+      </div>
+      <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+        <div
+          className="h-full rounded-full"
+          style={{
+            width: `${max ? (value / max) * 100 : 0}%`,
+            backgroundColor: color,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Definition({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border bg-white/80 p-4">
+      <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+        {label}
+      </dt>
+      <dd className="mt-2 break-words font-mono text-sm text-slate-800">
+        {value}
+      </dd>
+    </div>
+  );
+}
+
+function CompatibilityBadge({ value }: { value: string }) {
+  const tone =
+    value === "preferred_common"
+      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+      : value === "route_specific"
+        ? "border-amber-200 bg-amber-50 text-amber-800"
+        : value === "not_harmonized"
+          ? "border-red-200 bg-red-50 text-red-800"
+          : "border-slate-200 bg-slate-100 text-slate-700";
+  return (
+    <span
+      className={`inline-flex rounded-full border px-2 py-1 text-xs font-semibold ${tone}`}
+    >
+      {value.replaceAll("_", " ")}
+    </span>
+  );
+}
+
+function DownloadCard({
+  title,
+  version,
+  description,
+  doi,
+  href,
+}: {
+  title: string;
+  version: string;
+  description: string;
+  doi: string;
+  href: string;
+}) {
+  return (
+    <article className="chromatic-card rounded-xl p-6">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold">{title}</h2>
+          <p className="mt-1 text-sm font-medium text-[#0f766e]">{version}</p>
+        </div>
+        <Download className="h-6 w-6 text-[#0f766e]" />
+      </div>
+      <p className="mt-4 leading-7 text-slate-600">{description}</p>
+      <p className="mt-4 break-all font-mono text-sm text-slate-700">{doi}</p>
+      <a
+        className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#10324a] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0b2639]"
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Open Zenodo record
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    </article>
   );
 }
 
@@ -1453,11 +2095,11 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <div>
           <p className="text-sm font-medium text-slate-500">Dataset release</p>
           <h2 className="mt-1 text-3xl font-semibold text-[#071827]">
-            Dyna-MO PTM v0.3.0 public release
+            Dyna-MO PTM descriptor schema v0.3.0
           </h2>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
-            A synchronized static interface for the descriptor table and AF3
-            input structures in the v0.3.0 release.
+            A synchronized interface for the Lite v0.3.1 descriptor and AF3
+            structure release, with links to Full v0.3.0 trajectories.
           </p>
         </div>
         <span className="rounded-md border bg-slate-50 px-3 py-1.5 font-mono text-xs font-semibold text-slate-700">
@@ -1756,11 +2398,17 @@ function Footer() {
   return (
     <footer className="border-t bg-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-slate-600 md:flex-row md:justify-between">
-        <span>
-          Dyna-MO PTM v0.3.0 - synchronized public release
-        </span>
-        <span>
-          GitHub Pages deployment verified; deposition DOI pending
+        <span>Dyna-MO PTM · descriptor schema v0.3.0</span>
+        <span className="flex flex-wrap gap-x-4 gap-y-1">
+          <a className="underline underline-offset-4" href={LITE_URL}>
+            Lite {LITE_DOI}
+          </a>
+          <a className="underline underline-offset-4" href={FULL_URL}>
+            Full {FULL_DOI}
+          </a>
+          <a className="underline underline-offset-4" href={GITHUB_URL}>
+            GitHub
+          </a>
         </span>
       </div>
     </footer>

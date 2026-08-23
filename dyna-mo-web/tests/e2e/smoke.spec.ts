@@ -55,14 +55,17 @@ test("home to browse to system detail flow", async ({ page }, testInfo) => {
     }),
   ).toBeVisible();
   await expect(
-    page.getByText("Manuscript in preparation, 2026.", { exact: false }),
+    page.getByText("10.5281/zenodo.22059934", { exact: false }).first(),
   ).toBeVisible();
   await expect(page.locator("body")).not.toContainText(
     "Nucleic Acids Research",
   );
   await expect(page.locator("body")).not.toContainText("NAR");
   await page.waitForTimeout(800);
-  await page.screenshot({ path: testInfo.outputPath("home.png"), fullPage: true });
+  await page.screenshot({
+    path: testInfo.outputPath("home.png"),
+    fullPage: true,
+  });
 
   await page.goto("/browse", { waitUntil: "domcontentloaded" });
   await expect(
@@ -246,7 +249,7 @@ test("static api files are generated", async () => {
     methyl_r_systems: 192,
     api_record_fields: 48,
     public_deployment_status: "deployed",
-    deposition_status: "pending",
+    deposition_status: "available",
   });
   await expect(dataset.stats).toMatchObject({
     systems: 1079,
@@ -294,6 +297,29 @@ test("static api files are generated", async () => {
     dataset.systems.filter((system) => system.md_residue === "RM1"),
   ).toHaveLength(192);
   await expect(
-    dataset.systems.every((system) => system.zenodo_url === null),
+    dataset.systems.every(
+      (system) =>
+        system.zenodo_url === "https://doi.org/10.5281/zenodo.22049767",
+    ),
   ).toBe(true);
+});
+
+test("academic navigation and mobile menu expose the release pages", async ({
+  page,
+}) => {
+  for (const [route, heading] of [
+    ["/statistics", "Dataset overview"],
+    ["/descriptors", "Descriptor dictionary"],
+    ["/docs", "Use Dyna-MO PTM"],
+    ["/downloads", "Download and cite"],
+  ]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: heading })).toBeVisible();
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Open navigation" }).click();
+  await expect(page.getByRole("link", { name: "Descriptors" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Downloads" })).toBeVisible();
 });

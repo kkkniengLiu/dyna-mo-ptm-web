@@ -146,6 +146,7 @@ const structureQuarantinePath = path.join(
   "starting_structure_quarantine_v0.3.0.csv",
 );
 const tmpPdbDir = fs.mkdtempSync(path.join(webRoot, ".pdb-extract-"));
+const faviconPath = path.join(webRoot, "static", "favicon.svg");
 
 const RELEASE_VERSION = "v0.3.0" as const;
 const EXPECTED_MASTER_SHA256 =
@@ -168,6 +169,7 @@ const EXPECTED_QUARANTINE = 16;
 const EXPECTED_API_RECORD_FIELDS = 48;
 const EXPECTED_TOTAL_NS = 32370;
 const DEFAULT_SITE_URL = "https://kkkniengliu.github.io/dyna-mo-ptm-web";
+const DEFAULT_FULL_ZENODO_DOI = "10.5281/zenodo.22049767";
 const PROVENANCE_FIELDS = [
   "input_component",
   "md_residue",
@@ -213,10 +215,13 @@ let zenodoUrl: string | null = null;
 
 try {
   siteUrl = normalizeSiteUrl(process.env.SITE_URL);
-  zenodoUrl = normalizeZenodoUrl(process.env.ZENODO_DOI);
+  zenodoUrl = normalizeZenodoUrl(
+    process.env.ZENODO_DOI ?? DEFAULT_FULL_ZENODO_DOI,
+  );
   for (const dir of [dataDir, apiSystemDir, figuresDir, structuresDir]) {
     fs.mkdirSync(dir, { recursive: true });
   }
+  fs.copyFileSync(faviconPath, path.join(publicDir, "favicon.svg"));
 
   const csvText = readRequiredText(csvPath);
   const records = parseCsv(csvText, csvPath);
@@ -558,7 +563,9 @@ function validateReuseMetadata(
   const masterFields = Object.keys(records[0] ?? {});
   const companionFields = descriptorCompatibility.map((row) => row.field_name);
   if (JSON.stringify(masterFields) !== JSON.stringify(companionFields)) {
-    fail("Descriptor compatibility fields must match the master header in order");
+    fail(
+      "Descriptor compatibility fields must match the master header in order",
+    );
   }
   const preferred = descriptorCompatibility
     .filter((row) => row.comparability_status === "preferred_common")
@@ -589,6 +596,10 @@ function writeSeoFiles(systems: PublicSystem[]) {
   const routes = [
     { loc: "/", priority: "1.0" },
     { loc: "/browse", priority: "0.9" },
+    { loc: "/statistics", priority: "0.8" },
+    { loc: "/descriptors", priority: "0.8" },
+    { loc: "/docs", priority: "0.7" },
+    { loc: "/downloads", priority: "0.8" },
     { loc: "/about", priority: "0.6" },
     ...systems.map((system) => ({
       loc: `/system/${encodeURIComponent(system.id)}`,
@@ -800,14 +811,16 @@ function verifyStagedPublic(payload: StaticPayload) {
     "API detail files",
   );
   const compatibilityApi = JSON.parse(
-    fs.readFileSync(
-      path.join(apiDir, "descriptor-compatibility.json"),
-      "utf8",
-    ),
+    fs.readFileSync(path.join(apiDir, "descriptor-compatibility.json"), "utf8"),
   );
-  assertEqual(compatibilityApi.count, EXPECTED_COLUMNS, "compatibility API rows");
   assertEqual(
-    readCsvFile(path.join(dataDir, "af3_descriptor_associations_v0.3.0.csv")).length,
+    compatibilityApi.count,
+    EXPECTED_COLUMNS,
+    "compatibility API rows",
+  );
+  assertEqual(
+    readCsvFile(path.join(dataDir, "af3_descriptor_associations_v0.3.0.csv"))
+      .length,
     8,
     "public AF3 association rows",
   );
@@ -834,7 +847,7 @@ function verifyStagedPublic(payload: StaticPayload) {
   const sitemap = fs.readFileSync(path.join(publicDir, "sitemap.xml"), "utf8");
   assertEqual(
     (sitemap.match(/<url>/g) ?? []).length,
-    EXPECTED_ROWS + 3,
+    EXPECTED_ROWS + 7,
     "sitemap URL count",
   );
 }

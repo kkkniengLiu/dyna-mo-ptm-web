@@ -73,10 +73,8 @@ test("capture Fig. 7c from the v0.3.0 download and API surface", async ({
   await expect(page.getByText("32.37 μs", { exact: true })).toBeVisible();
   await expect(page.getByText("918", { exact: true })).toBeVisible();
   await expect(page.getByText("48 fields", { exact: true })).toBeVisible();
-  await expect(
-    page.getByText(/Public v0\.3\.0 deployment verified/),
-  ).toBeVisible();
-  await expect(page.getByText(/serves this synchronized release/)).toBeVisible();
+  await expect(page.getByText(/Public deployment verified/)).toBeVisible();
+  await expect(page.getByText(/Lite v0\.3\.1 and Full v0\.3\.0/)).toBeVisible();
   await expect(
     page.getByText(/completion gate now covers all 1,079 released systems/),
   ).toBeVisible();
@@ -84,9 +82,8 @@ test("capture Fig. 7c from the v0.3.0 download and API surface", async ({
     "completion-summary gate currently blocks",
   );
   await expect(
-    page.getByText("Data licence pending author confirmation; code MIT."),
+    page.getByText("Data CC BY 4.0; repository code MIT."),
   ).toBeVisible();
-  await expect(page.locator("body")).not.toContainText("Data CC-BY 4.0");
   await expect(
     page.getByText("/api/systems.json", { exact: true }),
   ).toBeVisible();

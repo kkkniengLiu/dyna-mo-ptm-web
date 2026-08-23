@@ -33,9 +33,7 @@ const af3AssociationsPath = path.join(
 );
 const expectedMasterSha =
   "7509810e6febefad3b3d387cd5ee4bdd96b410d5ef683140fdbd99b29e68c965";
-const expectedZenodoUrl = process.env.ZENODO_DOI
-  ? `https://doi.org/${process.env.ZENODO_DOI}`
-  : null;
+const expectedZenodoUrl = "https://doi.org/10.5281/zenodo.22049767";
 const provenanceFields = [
   "input_component",
   "md_residue",
@@ -127,7 +125,7 @@ describe("v0.3.0 static release contract", () => {
       methyl_r_systems: 192,
       api_record_fields: 48,
       public_deployment_status: "deployed",
-      deposition_status: expectedZenodoUrl ? "available" : "pending",
+      deposition_status: "available",
     });
     expect(payload.stats).toMatchObject({
       systems: 1079,
@@ -214,14 +212,12 @@ describe("v0.3.0 static release contract", () => {
       ),
     ).toBe(true);
     expect(detailFiles).toHaveLength(1079);
-    expect(sitemap.match(/<url>/g) ?? []).toHaveLength(1082);
+    expect(sitemap.match(/<url>/g) ?? []).toHaveLength(1086);
     expect(sitemap).toContain("https://kkkniengliu.github.io/dyna-mo-ptm-web/");
     expect(publicText).not.toMatch(
       /__ZENODO_DOI__|__GITHUB_URL__|__PAPER_DOI__|example\.org/,
     );
-    expect(apiIndex.release.deposition_status).toBe(
-      expectedZenodoUrl ? "available" : "pending",
-    );
+    expect(apiIndex.release.deposition_status).toBe("available");
     expect(
       apiIndex.systems.every(
         (system: Row) => system.zenodo_url === expectedZenodoUrl,
