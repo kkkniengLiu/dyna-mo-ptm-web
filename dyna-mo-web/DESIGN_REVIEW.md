@@ -1,10 +1,10 @@
-# Dyna-MO PTM UI Design Review
+# DynaMo PTM UI Design Review
 
 Date: 2026-06-14
 
 ## Design Position
 
-Dyna-MO PTM should read as a scientific database resource for an NAR Database issue submission, not as a commercial SaaS dashboard or creative landing page. The interface should foreground search, dataset scope, provenance, download/citation paths, and per-system inspection.
+DynaMo PTM should read as a scientific database resource for an NAR Database issue submission, not as a commercial SaaS dashboard or creative landing page. The interface should foreground search, dataset scope, provenance, download/citation paths, and per-system inspection.
 
 ## Reference Patterns
 
@@ -33,7 +33,7 @@ Dyna-MO PTM should read as a scientific database resource for an NAR Database is
 
 1. Home page:
    - Use a light institutional hero.
-   - H1 should be the resource name: "Dyna-MO PTM".
+   - H1 should be the resource name: "DynaMo PTM".
    - Add short scientific subtitle and direct search.
    - Keep dataset scale metrics near the search.
    - Replace orbital visualization with release summary and PTM composition bar.
@@ -57,4 +57,4 @@ Dyna-MO PTM should read as a scientific database resource for an NAR Database is
 
 ## Acceptance Standard
 
-The site should feel closer to AlphaFold DB / UniProt / RCSB PDB than to a startup landing page. It can have Dyna-MO PTM-specific color identity, but the first impression must be "credible scientific database".
+The site should feel closer to AlphaFold DB / UniProt / RCSB PDB than to a startup landing page. It can have DynaMo PTM-specific color identity, but the first impression must be "credible scientific database".

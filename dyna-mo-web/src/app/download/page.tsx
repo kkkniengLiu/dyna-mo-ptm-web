@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "Download",
-  description: "Bulk download links and CSV metadata for Dyna-MO PTM.",
+  description: "Bulk download links and CSV metadata for DynaMo PTM.",
 };
 
 const tarballs = [

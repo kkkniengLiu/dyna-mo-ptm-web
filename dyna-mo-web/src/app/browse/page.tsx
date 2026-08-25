@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Browse Systems",
-  description: "Search, filter, sort, and export Dyna-MO PTM systems.",
+  description: "Search, filter, sort, and export DynaMo PTM systems.",
 };
 
 type BrowseSearchParams = {

@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Database Statistics",
-  description: "Interactive statistics dashboard for Dyna-MO PTM.",
+  description: "Interactive statistics dashboard for DynaMo PTM.",
 };
 
 export default function StatsPage() {

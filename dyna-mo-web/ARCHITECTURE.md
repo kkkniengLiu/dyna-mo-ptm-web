@@ -2,7 +2,7 @@
 
 ## Goal
 
-Dyna-MO PTM Web is a static scientific database interface for the 1,095-system
+DynaMo PTM Web is a static scientific database interface for the 1,095-system
 v2 descriptor release. It is built for GitHub Pages and avoids server runtime,
 SQLite, and bundled trajectory files.
 

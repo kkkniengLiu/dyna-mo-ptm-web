@@ -1,4 +1,4 @@
-name: Deploy Dyna-MO PTM Web
+name: Deploy DynaMo PTM Web
 
 on:
   push:

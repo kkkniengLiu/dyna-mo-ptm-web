@@ -19,7 +19,7 @@ export function SiteHeader() {
           <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-sm text-primary-foreground shadow-lg shadow-primary/20 transition-transform group-hover:-rotate-3">
             DM
           </span>
-          <span className="tracking-normal">Dyna-MO PTM</span>
+          <span className="tracking-normal">DynaMo PTM</span>
         </Link>
         <nav className="hidden items-center gap-1 rounded-full border bg-card/70 p-1 shadow-sm md:flex">
           {navItems.map((item) => (

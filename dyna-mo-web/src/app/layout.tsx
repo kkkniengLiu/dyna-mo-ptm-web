@@ -20,8 +20,8 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://dyna-mo-ptm.org"),
   title: {
-    default: "Dyna-MO PTM",
-    template: "%s | Dyna-MO PTM",
+    default: "DynaMo PTM",
+    template: "%s | DynaMo PTM",
   },
   description:
     "A systematic molecular dynamics database of post-translationally modified proteins.",
@@ -49,7 +49,7 @@ export default function RootLayout({
             <footer className="border-t bg-muted/30">
               <div className="container flex flex-col gap-2 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
                 <p>
-                  Dyna-MO PTM database interface. DOI placeholder pending
+                  DynaMo PTM database interface. DOI placeholder pending
                   publication.
                 </p>
                 <p>CHARMM36-jul2022, TIP3P, 310 K, 10 ns x 3 replicas.</p>

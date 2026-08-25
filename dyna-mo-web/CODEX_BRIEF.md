@@ -1,4 +1,4 @@
-# Codex brief — build the Dyna-MO PTM web interface
+# Codex brief — build the DynaMo PTM web interface
 
 > Hand this whole file to codex as the initial prompt. Everything codex needs to know to start is here.
 
@@ -6,7 +6,7 @@
 
 ## Context
 
-We are publishing **Dyna-MO PTM**, a molecular-dynamics database of 1,095 post-translationally modified proteins covering six PTM types: acetyl-K, methyl-K, methyl-R, phospho-S, phospho-T, phospho-Y. Total simulation time 32.85 μs. The submission target is *Nucleic Acids Research* Database issue, which requires the data to be accessible via an open web interface — that is what you are building. The paper draft, methods, and figures are already written and live in `submission/`.
+We are publishing **DynaMo PTM**, a molecular-dynamics database of 1,095 post-translationally modified proteins covering six PTM types: acetyl-K, methyl-K, methyl-R, phospho-S, phospho-T, phospho-Y. Total simulation time 32.85 μs. The submission target is *Nucleic Acids Research* Database issue, which requires the data to be accessible via an open web interface — that is what you are building. The paper draft, methods, and figures are already written and live in `submission/`.
 
 The project root is `C:\Users\lkn\Desktop\Dyna-MO PTM\`. A `dyna-mo-web/` directory was planned but never built (it is currently listed in `.gitignore`; you will be building it now). This brief lives at `dyna-mo-web/CODEX_BRIEF.md`.
 

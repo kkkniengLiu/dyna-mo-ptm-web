@@ -51,7 +51,7 @@ export default function Home() {
             </div>
             <div className="space-y-4">
               <h1 className="max-w-4xl text-4xl font-semibold tracking-normal md:text-5xl">
-                <span className="text-gradient">Dyna-MO PTM</span>
+                <span className="text-gradient">DynaMo PTM</span>
                 <span>
                   : systematic MD for post-translationally modified proteins
                 </span>
@@ -183,7 +183,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold">Citation</h2>
           <pre className="mt-4 overflow-auto rounded-md border bg-background/70 p-3 text-xs text-muted-foreground">
             {`@article{dynamoptm2026,
-  title = {Dyna-MO PTM: a molecular dynamics resource for post-translationally modified proteins},
+  title = {DynaMo PTM: a molecular dynamics resource for post-translationally modified proteins},
   author = {Liu, Kaining and Qian, Qiuting and Peng, Jiahua and Ma, Dongge and Chi, Ying},
   note = {Manuscript in preparation},
   year = {2026}

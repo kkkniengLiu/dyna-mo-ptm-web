@@ -1,4 +1,4 @@
-# Codex continuation brief — Dyna-MO PTM web interface, NAR submission grade
+# Codex continuation brief — DynaMo PTM web interface, NAR submission grade
 
 > **复制下面"开始 prompt"段直接喂给 codex.**
 > 上下文文件是 `dyna-mo-web/CODEX_BRIEF.md` (你之前发的初版规格), 工作区是 `C:\Users\lkn\Desktop\Dyna-MO PTM\dyna-mo-web\`.
@@ -10,7 +10,7 @@
 
 你好 codex.
 
-我现在要把 Dyna-MO PTM 这个网站推到 NAR Database issue 投稿可用的程度。你之前按 `dyna-mo-web/CODEX_BRIEF.md` 起的脚手架我没动过, 现在请你接着干。**第一件事先汇报当前实际状态**, 然后按下面 acceptance criteria 一项项补齐。
+我现在要把 DynaMo PTM 这个网站推到 NAR Database issue 投稿可用的程度。你之前按 `dyna-mo-web/CODEX_BRIEF.md` 起的脚手架我没动过, 现在请你接着干。**第一件事先汇报当前实际状态**, 然后按下面 acceptance criteria 一项项补齐。
 
 ### 1. 先汇报状态 (3 分钟, 写在 `dyna-mo-web/STATUS.md`)
 

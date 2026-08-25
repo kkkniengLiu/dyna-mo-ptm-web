@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build static web trajectory assets for Dyna-MO PTM.
+"""Build static web trajectory assets for DynaMo PTM.
 
 The script fetches rep1 GROMACS trajectories from the GPU server, aligns and
 subsets them with mdtraj when available, and writes browser-loadable

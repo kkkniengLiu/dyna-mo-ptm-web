@@ -31,7 +31,7 @@ export function generateMetadata({ params }: SystemPageProps): Metadata {
     title: system ? `${system.protein_name} ${system.site}` : "System Detail",
     description: system
       ? `${system.ptm_type} system ${system.protein_name} at ${system.site}`
-      : "Dyna-MO PTM system detail",
+      : "DynaMo PTM system detail",
   };
 }
 

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title: "Methods",
-  description: "Methods and data dictionary for Dyna-MO PTM.",
+  description: "Methods and data dictionary for DynaMo PTM.",
 };
 
 export default function AboutPage() {

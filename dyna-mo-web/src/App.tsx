@@ -256,7 +256,7 @@ function Header({
           <span className="grid h-9 w-9 place-items-center rounded-md bg-white text-sm font-bold text-[#10324a] shadow-sm">
             DM
           </span>
-          <span className="hidden sm:inline">Dyna-MO PTM</span>
+          <span className="hidden sm:inline">DynaMo PTM</span>
         </button>
         <nav className="hidden rounded-md border border-white/15 bg-white/[0.08] p-1 shadow-sm md:flex">
           {links.map((link) => (
@@ -389,7 +389,7 @@ function HomePage({
             </div>
             <div>
               <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] text-[#071827] md:text-6xl">
-                Dyna-MO PTM
+                DynaMo PTM
               </h1>
               <p className="mt-3 max-w-3xl text-2xl font-medium leading-9 text-[#17415a]">
                 Molecular dynamics resource for post-translationally modified
@@ -553,7 +553,7 @@ function HomePage({
               <p className="text-sm font-medium uppercase text-slate-500">
                 Citation export
               </p>
-              <h2 className="mt-2 text-2xl font-semibold">Cite Dyna-MO PTM</h2>
+              <h2 className="mt-2 text-2xl font-semibold">Cite DynaMo PTM</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
                 Published Lite dataset record. Cite the full record as well when
                 using trajectory files.
@@ -604,7 +604,7 @@ function HomePage({
         <div className="chromatic-card rounded-xl p-5">
           <h2 className="text-2xl font-semibold">Publication overview</h2>
           <p className="mt-3 leading-7 text-slate-600">
-            Dyna-MO PTM covers acetyl-lysine, methyl-lysine, methyl-arginine,
+            DynaMo PTM covers acetyl-lysine, methyl-lysine, methyl-arginine,
             phospho-serine, phospho-threonine and phospho-tyrosine. Each row
             records its preparation and descriptor provenance. The documented
             production design targets three nominal 10 ns replicas under
@@ -1026,10 +1026,10 @@ function SystemPage({
       name: `${system.id} ${system.ptm_label} molecular dynamics system`,
       identifier: system.id,
       url: systemUrl,
-      description: `Dyna-MO PTM descriptor row for ${system.uniprot} ${system.mod_residue}, a ${system.ptm_label} molecular dynamics system.`,
+      description: `DynaMo PTM descriptor row for ${system.uniprot} ${system.mod_residue}, a ${system.ptm_label} molecular dynamics system.`,
       isPartOf: {
         "@type": "Dataset",
-        name: "Dyna-MO PTM",
+        name: "DynaMo PTM",
       },
       keywords: [
         "post-translational modification",
@@ -1039,14 +1039,14 @@ function SystemPage({
       ],
       creator: {
         "@type": "Organization",
-        name: "Dyna-MO PTM",
+        name: "DynaMo PTM",
       },
       variableMeasured: Object.keys(system.raw),
       sameAs: [`https://www.uniprot.org/uniprotkb/${system.uniprot}`],
       distribution,
     });
     document.head.appendChild(script);
-    document.title = `${system.id} | Dyna-MO PTM`;
+    document.title = `${system.id} | DynaMo PTM`;
 
     return () => {
       script.remove();
@@ -1444,7 +1444,7 @@ function DocsPage({
       <p className="text-sm font-semibold uppercase tracking-wide text-[#0f766e]">
         Documentation
       </p>
-      <h1 className="mt-2 text-4xl font-semibold">Use Dyna-MO PTM</h1>
+      <h1 className="mt-2 text-4xl font-semibold">Use DynaMo PTM</h1>
       <p className="mt-4 max-w-3xl leading-7 text-slate-600">
         A practical route from dataset discovery to route-aware descriptor reuse
         and trajectory reanalysis.
@@ -1750,9 +1750,9 @@ function AboutPage({ dataset }: { dataset: StaticDataset }) {
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <div className="chromatic-card rounded-xl p-6">
-        <h1 className="text-4xl font-semibold">About Dyna-MO PTM</h1>
+        <h1 className="text-4xl font-semibold">About DynaMo PTM</h1>
         <p className="mt-5 leading-8 text-slate-600">
-          The Dyna-MO PTM descriptor schema v0.3.0 contains{" "}
+          The DynaMo PTM descriptor schema v0.3.0 contains{" "}
           {dataset.stats.systems.toLocaleString()} modified-protein systems
           covering acetyl-lysine, methyl-lysine, methyl-arginine,
           phospho-serine, phospho-threonine and phospho-tyrosine. The resource
@@ -1925,10 +1925,10 @@ ${dataset.release.site_url}/api/systems.json`}
           </div>
           <div className="rounded-lg border bg-white/75 p-4">
             <dt className="font-semibold">
-              How is Dyna-MO PTM related to ATLAS?
+              How is DynaMo PTM related to ATLAS?
             </dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
-              ATLAS is a broad protein flexibility resource. Dyna-MO PTM is a
+              ATLAS is a broad protein flexibility resource. DynaMo PTM is a
               PTM-focused complement with modified-residue descriptors and
               uniform short MD replicas.
             </dd>
@@ -1939,7 +1939,7 @@ ${dataset.release.site_url}/api/systems.json`}
             </dt>
             <dd className="mt-1 text-sm leading-6 text-slate-600">
               PhosphoSitePlus catalogues curated PTM sites and annotations.
-              Dyna-MO PTM adds structure-based and MD-derived descriptors for
+              DynaMo PTM adds structure-based and MD-derived descriptors for
               simulated modified protein systems.
             </dd>
           </div>
@@ -2095,7 +2095,7 @@ function PtmOrbit({ counts }: { counts: StaticDataset["stats"]["counts"] }) {
         <div>
           <p className="text-sm font-medium text-slate-500">Dataset release</p>
           <h2 className="mt-1 text-3xl font-semibold text-[#071827]">
-            Dyna-MO PTM descriptor schema v0.3.0
+            DynaMo PTM descriptor schema v0.3.0
           </h2>
           <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
             A synchronized interface for the Lite v0.3.1 descriptor and AF3
@@ -2398,7 +2398,7 @@ function Footer() {
   return (
     <footer className="border-t bg-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-sm text-slate-600 md:flex-row md:justify-between">
-        <span>Dyna-MO PTM · descriptor schema v0.3.0</span>
+        <span>DynaMo PTM · descriptor schema v0.3.0</span>
         <span className="flex flex-wrap gap-x-4 gap-y-1">
           <a className="underline underline-offset-4" href={LITE_URL}>
             Lite {LITE_DOI}
@@ -2419,7 +2419,7 @@ function LoadingShell() {
   return (
     <div className="grid min-h-screen place-items-center bg-slate-50">
       <div className="rounded-xl border bg-white p-6 shadow-sm">
-        Loading Dyna-MO PTM descriptor table...
+        Loading DynaMo PTM descriptor table...
       </div>
     </div>
   );

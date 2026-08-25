@@ -1,6 +1,6 @@
-# Dyna-MO PTM Web
+# DynaMo PTM Web
 
-Static Vite + React interface for the Dyna-MO PTM molecular dynamics database.
+Static Vite + React interface for the DynaMo PTM molecular dynamics database.
 The site is designed for GitHub Pages: no Node backend, no SQLite server, and
 all user-facing data is loaded from static assets under `public/`.
 

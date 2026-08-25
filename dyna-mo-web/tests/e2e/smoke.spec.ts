@@ -50,7 +50,7 @@ test("home to browse to system detail flow", async ({ page }, testInfo) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(
     page.getByRole("heading", {
-      name: "Dyna-MO PTM",
+      name: "DynaMo PTM",
       exact: true,
     }),
   ).toBeVisible();
@@ -310,7 +310,7 @@ test("academic navigation and mobile menu expose the release pages", async ({
   for (const [route, heading] of [
     ["/statistics", "Dataset overview"],
     ["/descriptors", "Descriptor dictionary"],
-    ["/docs", "Use Dyna-MO PTM"],
+    ["/docs", "Use DynaMo PTM"],
     ["/downloads", "Download and cite"],
   ]) {
     await page.goto(route, { waitUntil: "domcontentloaded" });
