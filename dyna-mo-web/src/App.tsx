@@ -201,6 +201,20 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f6f8fb] text-slate-950 antialiased">
       <Header page={page} navigate={navigate} />
+      <aside aria-label="Data version and correction notice" className="border-b border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-slate-950">
+        <div className="mx-auto max-w-7xl">
+          <strong>Historical data view.</strong>{" "}
+          This browser displays the original v0.3.0 descriptors. Corrected local measurements and the conservative reuse subset are supplied separately in the analysis companion.
+          <details className="mt-2">
+            <summary className="cursor-pointer font-medium underline underline-offset-4">Corrections and reuse guidance · 14 November 2026</summary>
+            <div className="mt-2 max-w-4xl space-y-2">
+              <p>The current analysis corrects phosphorylation coordinate–box pairing and includes terminal carboxylates in methyl-K/R contact selections. It also records periodic-image, artificial-endpoint, sequence-identity and input-geometry review flags. Historical table values and figures on this website have not been replaced.</p>
+              <p>The conservative selection contains 744 systems with three trajectories each. Its exported tables omit unvalidated PTM hydrogen-bond fields; the older diagnostic-only selection contains 988 systems. Membership reflects the specified screens and does not establish convergence or physical equivalence.</p>
+              <p>The updated companion is in an unpublished validation record for manuscript review. Reviewers can access it through the private link supplied with the manuscript; public access will follow release. The original <a className="underline underline-offset-4" href={LITE_URL}>Lite record</a> and <a className="underline underline-offset-4" href={FULL_URL}>trajectory record</a> carry public correction notices.</p>
+            </div>
+          </details>
+        </div>
+      </aside>
       {page === "browse" ? (
         <BrowsePage dataset={dataset} navigate={navigate} />
       ) : page === "statistics" ? (
