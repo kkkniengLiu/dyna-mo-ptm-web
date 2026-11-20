@@ -91,8 +91,9 @@ const LITE_DOI = "10.5281/zenodo.22059934";
 const FULL_DOI = "10.5281/zenodo.22049767";
 const LITE_URL = `https://doi.org/${LITE_DOI}`;
 const FULL_URL = `https://doi.org/${FULL_DOI}`;
-const GITHUB_URL = "https://github.com/kkkniengLiu/dyna-mo-ptm";
-const MANUSCRIPT_URL = `${GITHUB_URL}/blob/main/submission/manuscript_v3_SciData.pdf`;
+const GITHUB_URL = "https://github.com/kkkniengLiu/dyna-mo-ptm-web";
+const PREPRINT_DOI = "10.64898/2026.08.23.746532";
+const PREPRINT_URL = `https://doi.org/${PREPRINT_DOI}`;
 
 const DISPLAY_CITATION = `Liu K., Qian Q., Peng J., Ma D., Yao Y., Zhao J. & Chi Y. Molecular dynamics descriptors and retained starting structures for 1,079 post-translationally modified protein systems. Zenodo ${LITE_DOI} (2026).`;
 
@@ -608,8 +609,11 @@ function HomePage({
             {CITATION_TEXT[citationFormat]}
           </pre>
           <p className="mt-2 text-[9pt] leading-5 text-slate-500">
-            Manuscript citation metadata will be added only after a preprint or
-            journal DOI is assigned. The dataset DOI above is already citable.
+            The original resource is also described in our{" "}
+            <a className="underline underline-offset-4" href={PREPRINT_URL}>
+              bioRxiv preprint ({PREPRINT_DOI})
+            </a>
+            . Cite the dataset records for the data used.
           </p>
         </div>
       </section>
@@ -1723,14 +1727,16 @@ function DownloadsPage() {
         </a>
         <a
           className="feature-command"
-          href={MANUSCRIPT_URL}
+          href={PREPRINT_URL}
           target="_blank"
           rel="noreferrer"
         >
           <BookOpen className="h-5 w-5 text-[#0f766e]" />
-          <h2 className="mt-4 text-lg font-semibold">Author manuscript</h2>
+          <h2 className="mt-4 text-lg font-semibold">Public preprint</h2>
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            Submission manuscript without an assigned article or preprint DOI.
+            Molecular dynamics descriptors for 1,079 post-translationally modified
+            protein systems. bioRxiv (2026).
+            <span className="mt-2 block">DOI: {PREPRINT_DOI}</span>
           </p>
         </a>
       </section>
@@ -1746,8 +1752,11 @@ function DownloadsPage() {
         </pre>
         <p className="mt-3 text-sm leading-6 text-slate-500">
           Cite the Full record in addition to the Lite record when trajectory
-          files are used. A manuscript citation will be added only after an
-          article or preprint DOI is assigned.
+          files are used. For the original resource description, see the{" "}
+          <a className="underline underline-offset-4" href={PREPRINT_URL}>
+            bioRxiv preprint ({PREPRINT_DOI})
+          </a>
+          .
         </p>
       </section>
     </main>
@@ -2421,7 +2430,7 @@ function Footer() {
             Full {FULL_DOI}
           </a>
           <a className="underline underline-offset-4" href={GITHUB_URL}>
-            GitHub
+            Website source
           </a>
         </span>
       </div>
