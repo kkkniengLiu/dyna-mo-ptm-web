@@ -89,6 +89,8 @@ type DescriptorField = {
 
 const LITE_DOI = "10.5281/zenodo.22059934";
 const FULL_DOI = "10.5281/zenodo.22049767";
+const VALIDATION_DOI = "10.5281/zenodo.23494897";
+const VALIDATION_URL = `https://doi.org/${VALIDATION_DOI}`;
 const LITE_URL = `https://doi.org/${LITE_DOI}`;
 const FULL_URL = `https://doi.org/${FULL_DOI}`;
 const GITHUB_URL = "https://github.com/kkkniengLiu/dyna-mo-ptm-web";
@@ -205,13 +207,13 @@ export default function App() {
       <aside aria-label="Data version and correction notice" className="border-b border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-slate-950">
         <div className="mx-auto max-w-7xl">
           <strong>Historical data view.</strong>{" "}
-          This browser displays the original v0.3.0 descriptors. Corrected local measurements and the conservative reuse subset are supplied separately in the analysis companion.
+          This browser displays the original v0.3.0 descriptors. Corrected local measurements and reuse guidance are available in the{" "}<a className="font-medium underline underline-offset-4" href={VALIDATION_URL}>public analysis companion</a>.
           <details className="mt-2">
-            <summary className="cursor-pointer font-medium underline underline-offset-4">Corrections and reuse guidance · 14 November 2026</summary>
+            <summary className="cursor-pointer font-medium underline underline-offset-4">Corrections and reuse guidance · public access 20 November 2026</summary>
             <div className="mt-2 max-w-4xl space-y-2">
               <p>The current analysis corrects phosphorylation coordinate–box pairing and includes terminal carboxylates in methyl-K/R contact selections. It also records periodic-image, artificial-endpoint, sequence-identity and input-geometry review flags. Historical table values and figures on this website have not been replaced.</p>
               <p>The conservative selection contains 744 systems with three trajectories each. Its exported tables omit unvalidated PTM hydrogen-bond fields; the older diagnostic-only selection contains 988 systems. Membership reflects the specified screens and does not establish convergence or physical equivalence.</p>
-              <p>The updated companion is in an unpublished validation record for manuscript review. Reviewers can access it through the private link supplied with the manuscript; public access will follow release. The original <a className="underline underline-offset-4" href={LITE_URL}>Lite record</a> and <a className="underline underline-offset-4" href={FULL_URL}>trajectory record</a> carry public correction notices.</p>
+              <p>The <a className="underline underline-offset-4" href={VALIDATION_URL}>public validation record ({VALIDATION_DOI})</a> contains the corrected companion, terminal and nonbonded controls, 100 ns extension inputs and native phosphorylation coordinates. No account or review token is needed. The original <a className="underline underline-offset-4" href={LITE_URL}>Lite record</a> and <a className="underline underline-offset-4" href={FULL_URL}>trajectory record</a> remain public and carry correction notices.</p>
             </div>
           </details>
         </div>
@@ -1686,11 +1688,19 @@ function DownloadsPage() {
       </p>
       <h1 className="mt-2 text-4xl font-semibold">Download and cite</h1>
       <p className="mt-4 max-w-3xl leading-7 text-slate-600">
-        The release is split into a lightweight descriptor-and-structure record
-        and a full trajectory record. Both are public under CC BY 4.0.
+        Start with the corrected data and validation record for current local
+        measurements and reuse guidance. The two original records preserve the
+        historical release. All three are public under CC BY 4.0.
       </p>
 
-      <section className="mt-8 grid gap-6 lg:grid-cols-2">
+      <section className="mt-8 grid gap-6 lg:grid-cols-3">
+        <DownloadCard
+          title="Corrected data and validation"
+          version="Analysis 2026-10-20 · public 20 November 2026"
+          description="Corrected local measurements, reuse flags, control analyses and code, plus 17 raw-input TAR archives. Download analysis_companion.zip and SHA256SUMS.txt first."
+          doi={VALIDATION_DOI}
+          href={VALIDATION_URL}
+        />
         <DownloadCard
           title="Lite record"
           version="v0.3.1-lite · schema v0.3.0"
@@ -1751,7 +1761,11 @@ function DownloadsPage() {
           {CITATION_TEXT.bibtex}
         </pre>
         <p className="mt-3 text-sm leading-6 text-slate-500">
-          Cite the Full record in addition to the Lite record when trajectory
+          Cite the{" "}
+          <a className="underline underline-offset-4" href={VALIDATION_URL}>
+            corrected data and validation record ({VALIDATION_DOI})
+          </a>{" "}
+          when using its measurements or controls. Cite the Full record in addition to the Lite record when trajectory
           files are used. For the original resource description, see the{" "}
           <a className="underline underline-offset-4" href={PREPRINT_URL}>
             bioRxiv preprint ({PREPRINT_DOI})
