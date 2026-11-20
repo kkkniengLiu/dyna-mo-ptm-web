@@ -2489,7 +2489,7 @@ function getRoutePath() {
   const pathname = window.location.pathname;
   const stripped =
     base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
-  return stripped || "/";
+  return stripped.replace(/\/+$/, "") || "/";
 }
 
 function routeKey(path: string) {
